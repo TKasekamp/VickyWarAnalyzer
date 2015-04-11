@@ -1,113 +1,112 @@
 package gui;
 
-import static gui.GuiController.attackerUnitsTable;
-import static gui.GuiController.attackerUnitsTableContent;
-import static gui.GuiController.battleAttacker;
-import static gui.GuiController.battleAttackerArmySize;
-import static gui.GuiController.battleAttackerFlag;
-import static gui.GuiController.battleAttackerLeader;
-import static gui.GuiController.battleAttackerLosses;
-import static gui.GuiController.battleDate;
-import static gui.GuiController.battleDefender;
-import static gui.GuiController.battleDefenderArmySize;
-import static gui.GuiController.battleDefenderFlag;
-import static gui.GuiController.battleDefenderLeader;
-import static gui.GuiController.battleDefenderLosses;
-import static gui.GuiController.battleDetailsTab;
-import static gui.GuiController.battleLocation;
-import static gui.GuiController.battleName;
-import static gui.GuiController.battleResult;
-import static gui.GuiController.battleTotalLosses;
-import static gui.GuiController.battleType;
-import static gui.GuiController.colAttackerUnitNumber;
-import static gui.GuiController.colAttackerUnitType;
-import static gui.GuiController.colDefenderUnitNumber;
-import static gui.GuiController.colDefenderUnitType;
-import static gui.GuiController.defenderUnitsTable;
-import static gui.GuiController.defenderUnitsTableContent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import main.Battle;
 import main.Country;
 import main.Reference;
 import main.Unit;
 
-/** Handles stuff in the battle details tab.
- * Works similar to WarDetailsTabContent*/
+/**
+ * Handles stuff in the battle details tab. Works similar to
+ * WarDetailsTabContent
+ */
 public class BattleDetailsTabContent {
 	private static Battle battle;
-	
-	
-	/** Uses the battle from war details tab to give values to labels and tables
+	private GuiController controller;
+
+	public BattleDetailsTabContent(GuiController controller) {
+		this.controller = controller;
+	}
+
+	/**
+	 * Uses the battle from war details tab to give values to labels and tables
 	 * 
 	 * @param battle
 	 */
-	public static void battleDetailsTabPopulate(Battle b) {
+	public void battleDetailsTabPopulate(Battle b) {
 		battle = b;
 		/* Giving values to tab and center info box */
-		battleDetailsTab.setText("Battle of " +battle.getName());
-		battleName.setText("Battle of " +battle.getName());
-		battleDate.setText(battle.getDate());
-		battleType.setText(battle.getBattleType().toString());
-		battleLocation.setText(Integer.toString(battle.getLocation()));
-		battleResult.setText(battle.getRes().toString());
-		battleAttackerLeader.setText(battle.getLeaderAttacker());
-		battleDefenderLeader.setText(battle.getLeaderDefender());
-		battleTotalLosses.setText(Integer.toString(battle.getTotalLosses()));
-		
+		controller.getBattleDetailsTab().setText(
+				"Battle of " + battle.getName());
+		controller.getBattleName().setText("Battle of " + battle.getName());
+		controller.getBattleDate().setText(battle.getDate());
+		controller.getBattleType().setText(battle.getBattleType().toString());
+		controller.getBattleLocation().setText(
+				Integer.toString(battle.getLocation()));
+		controller.getBattleResult().setText(battle.getRes().toString());
+		controller.getBattleAttackerLeader()
+				.setText(battle.getLeaderAttacker());
+		controller.getBattleDefenderLeader()
+				.setText(battle.getLeaderDefender());
+		controller.getBattleTotalLosses().setText(
+				Integer.toString(battle.getTotalLosses()));
+
 		attackerPopulate();
 		defenderPopulate();
-		
+
 	}
-	private static void attackerPopulate() {
+
+	private void attackerPopulate() {
 		/* Finding the main flag */
 		for (Country country : Reference.countryList) {
 			if (battle.getAttacker().equals(country.getTag())) {
-				battleAttackerFlag.setImage(country.getFlag());
+				controller.getBattleAttackerFlag().setImage(country.getFlag());
 			}
 		}
-		battleAttacker.setText(battle.getAttackerOfficial());
+		controller.getBattleAttacker().setText(battle.getAttackerOfficial());
 		/* Clearing table contents */
-		attackerUnitsTableContent.clear();
-		/* Army size and adding to table list*/
+		controller.getAttackerUnitsTableContent().clear();
+		/* Army size and adding to table list */
 		int size = 0;
-		for (Unit unit: battle.getAttackerUnits()) {
-			size+= unit.getNumber();
-			attackerUnitsTableContent.add(unit);
+		for (Unit unit : battle.getAttackerUnits()) {
+			size += unit.getNumber();
+			controller.getAttackerUnitsTableContent().add(unit);
 		}
-		battleAttackerArmySize.setText(Integer.toString(size));
-		battleAttackerLosses.setText(Integer.toString(battle.getAttackerLosses()));
-		
-		attackerUnitsTable.setItems(attackerUnitsTableContent);
+		controller.getBattleAttackerArmySize().setText(Integer.toString(size));
+		controller.getBattleAttackerLosses().setText(
+				Integer.toString(battle.getAttackerLosses()));
+
+		controller.getAttackerUnitsTable().setItems(
+				controller.getAttackerUnitsTableContent());
 	}
-	private static void defenderPopulate() {
+
+	private void defenderPopulate() {
 		/* Finding the main flag */
 		for (Country country : Reference.countryList) {
 			if (battle.getDefender().equals(country.getTag())) {
-				battleDefenderFlag.setImage(country.getFlag());
+				controller.getBattleDefenderFlag().setImage(country.getFlag());
 			}
 		}
-		battleDefender.setText(battle.getDefenderOfficial());
+		controller.getBattleDefender().setText(battle.getDefenderOfficial());
 		/* Clearing table contents */
-		defenderUnitsTableContent.clear();
-		/* Army size and adding to table list*/
+		controller.getDefenderUnitsTableContent().clear();
+		/* Army size and adding to table list */
 		int size = 0;
-		for (Unit unit: battle.getDefenderUnits()) {
-			size+= unit.getNumber();
-			defenderUnitsTableContent.add(unit);
+		for (Unit unit : battle.getDefenderUnits()) {
+			size += unit.getNumber();
+			controller.getDefenderUnitsTableContent().add(unit);
 		}
-		battleDefenderArmySize.setText(Integer.toString(size));
-		battleDefenderLosses.setText(Integer.toString(battle.getDefenderLosses()));
-		
-		defenderUnitsTable.setItems(defenderUnitsTableContent);
+		controller.getBattleDefenderArmySize().setText(Integer.toString(size));
+		controller.getBattleDefenderLosses().setText(
+				Integer.toString(battle.getDefenderLosses()));
+
+		controller.getDefenderUnitsTable().setItems(
+				controller.getDefenderUnitsTableContent());
 	}
-	/** Defines columns in attackerUnitTable and defenderUnitTable 
+
+	/**
+	 * Defines columns in attackerUnitTable and defenderUnitTable
 	 */
-	public static void setColumnValues() {
+	public void setColumnValues() {
 		/* Attacker side */
-		colAttackerUnitType.setCellValueFactory(new PropertyValueFactory<Unit, String>("type"));
-		colAttackerUnitNumber.setCellValueFactory(new PropertyValueFactory<Unit, Integer>("number"));
+		controller.getColAttackerUnitType().setCellValueFactory(
+				new PropertyValueFactory<Unit, String>("type"));
+		controller.getColAttackerUnitNumber().setCellValueFactory(
+				new PropertyValueFactory<Unit, Integer>("number"));
 		/* Defender side */
-		colDefenderUnitType.setCellValueFactory(new PropertyValueFactory<Unit, String>("type"));
-		colDefenderUnitNumber.setCellValueFactory(new PropertyValueFactory<Unit, Integer>("number"));
+		controller.getColDefenderUnitType().setCellValueFactory(
+				new PropertyValueFactory<Unit, String>("type"));
+		controller.getColDefenderUnitNumber().setCellValueFactory(
+				new PropertyValueFactory<Unit, Integer>("number"));
 	}
 }

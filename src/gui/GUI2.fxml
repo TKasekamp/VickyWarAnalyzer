@@ -55,7 +55,7 @@
                         <Label ellipsisString="" prefHeight="81.0" prefWidth="527.0" text="The save game reader has been tested to work with the base version of the game, AHD and HoD. This tool works as long as the save game stucture remains the same.  The flags of the  new HoD dominions are not used. " textAlignment="JUSTIFY" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <HBox id="HBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="3" GridPane.rowIndex="0">
                           <children>
-                            <Label contentDisplay="RIGHT" prefWidth="73.0" styleClass="label-dark" text="Version 1.01" wrapText="true" />
+                            <Label contentDisplay="RIGHT" prefWidth="73.0" styleClass="label-dark" text="Version 1.1.0" wrapText="true" />
                           </children>
                         </HBox>
                         <HBox id="HBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="3" GridPane.rowIndex="2">

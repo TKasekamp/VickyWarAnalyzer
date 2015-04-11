@@ -1,0 +1,116 @@
+<project name="VickyWarGame" default="Compile Sources" basedir=".">
+	<!-- set global properties for this build -->
+	<property environment="env" />
+	<property name="src" location="src" />
+	<property name="build" location="bindist" />
+	<property name="lib" location="lib" />
+	<property name="dist" location="dist" />
+	<property name="release" location="latestrelease" />
+	<property name="version" value="1.1.${env.BUILD_NUMBER}" />
+	<property name="project" value="VickyWarGame" />
+
+	<!-- Set the os to win32, win64, lin32, lin64, mac, or all -->
+	<property name="os" value="all" />
+
+	<!-- Compilation macro
+		 This Macro compiles the sources is one ${src}-... folder.
+	 The sources are compiled into the ${build} folder.
+		 -->
+
+	<path id="classpath">
+		<pathelement path="${build}" />
+		<pathelement path="${java.class.path}" />
+		<fileset dir=".">
+			<include name="lib/**/*.jar" />
+			<include name="stdlib/**/*.jar" />
+			<include name="packagelib/**/*.jar" />
+		</fileset>
+	</path>
+
+	<macrodef name="compile">
+		<sequential>
+			<!-- Compile the java code from ${src}-@{module} into ${build} -->
+			<javac srcdir="${src}" classpathref="classpath" destdir="${build}" nowarn="false" verbose="no" debug="true" debuglevel="lines,vars,source" deprecation="yes" source="1.8" target="1.8">
+				<!-- Check for unsafe operations -->
+				<compilerarg value="-Xlint:unchecked" />
+			</javac>
+		</sequential>
+	</macrodef>
+
+	<!-- Jar macro
+
+		This Macro builds a jar file from compiled sources in the ${dist} folder.
+		-->
+	<macrodef name="makejar">
+		<sequential>
+			<!-- Create the distribution directory -->
+			<!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
+			<jar jarfile="${dist}/${project}-${DSTAMP}.jar">
+				<fileset dir="${build}">
+					<include name="**" />
+					<exclude name="test**" />
+				</fileset>
+				<fileset dir="${src}">
+					<include name="**" />
+					<exclude name="test**" />
+				</fileset>
+				<manifest>
+					<attribute name="Built-By" value="${user.name}" />
+					<attribute name="Specification-Title" value="${project}-@{module}" />
+					<attribute name="Specification-Version" value="${version}" />
+					<attribute name="Implementation-Title" value="${project}" />
+					<attribute name="Implementation-Version" value="${version} ${TODAY}" />
+					<attribute name="Sealed" value="false" />
+				</manifest>
+			</jar>
+			<copy file="${dist}/${project}-${DSTAMP}.jar" tofile="${dist}/${project}.jar" overwrite="true" />
+		</sequential>
+	</macrodef>
+
+
+	<!-- clean all binaries and distributions -->
+	<target name="Clean build and dist folders" description="clean up" id="1">
+		<!-- Delete the ${build} and ${dist} directory trees -->
+		<delete dir="${build}" />
+		<delete dir="${dist}" />
+	</target>
+
+	<!-- export distribution archive -->
+	<target name="Create downloadable archive" depends="Compile Sources">
+		<echo message="Building zip file packaging this project" />
+		<sequential>
+			<zip destfile="${release}/${project}-${version}-${os}.zip">
+				<zipfileset dir="${lib}" prefix="lib">
+					<include name="**" />
+				</zipfileset>
+				<zipfileset dir="${dist}" prefix="">
+					<include name="${project}.jar" />
+				</zipfileset>
+			</zip>
+			<copy file="${dist}/${project}.jar" tofile="${release}/${project}.jar" overwrite="true" />
+			<delete includeEmptyDirs="true" quiet="true">
+				<fileset dir="${release}/lib" includes="**/*" />
+			</delete>
+			<mkdir dir="${release}/lib" />
+			<copy todir="${release}/lib" overwrite="true">
+				<fileset dir="${lib}" />
+			</copy>
+		</sequential>
+	</target>
+
+	<target name="Compile Sources">
+		<!-- Create the build directory structure used by compile -->
+		<!-- Create the time stamp -->
+		<tstamp />
+		<mkdir dir="${build}" />
+		<mkdir dir="${dist}" />
+		<echo message="Compiling the sources" />
+		<compile />
+		<echo message="Making jar" />
+		<makejar />
+	</target>
+
+
+</project>
+
+

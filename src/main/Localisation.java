@@ -1,5 +1,7 @@
 package main;
 
+import gui.GuiController;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,8 +15,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import static main.Reference.countryList;
-import static gui.GuiController.getErrorLabel;
-import static gui.GuiController.getLocalisationCheck;
+
 /** Handles the localisation. I wanted it to only read from files which I knew had country tags, but 
  * that proved a bit difficult to implement. So now it reads all the .csv files in the localisation folder. 
  * It is not as cleaned up as the other ones.
@@ -24,8 +25,12 @@ public class Localisation {
 	// Creating a Map so that the number of countries and therefore the number of checks decreases as more countries get names
 	private static Map<String, String> countryMap = new HashMap<String, String>(); // TAG and officialname. Like EST and Estonia
 	
+	private GuiController controller;
+	public Localisation(GuiController controller) {
+		this.controller = controller;
+	}
 	/** Main method of this class. Manages the reading from csv */
-	public static void LocalisationReader() {
+	public void readLocalisation() {
 		// Emptying the countryMap so all a new savegame is read only with that file's countries in map
 		countryMap.clear();
 		// Adding the countries to map
@@ -35,7 +40,7 @@ public class Localisation {
 //		countryMapTemp = new HashMap<countryMap;
 		/* Checking if checkbutton is selected. if it is, read localisation */
 
-		if (getLocalisationCheck().isSelected()) {
+		if (controller.getLocalisationCheck().isSelected()) {
 			try {
 				List<String> loclist = ListFiles(Reference.INSTALLPATH);
 //				CSVReader(Reference.INSTALLPATH + "/localisation/text.csv");
@@ -49,7 +54,7 @@ public class Localisation {
 				}
 				
 			} catch (NullPointerException | IOException e) {
-				getErrorLabel().setText(getErrorLabel().getText() + " Some or all the of the localisation files could not be found. ");
+				controller.getErrorLabel().setText(controller.getErrorLabel().getText() + " Some or all the of the localisation files could not be found. ");
 			}   
 		}
 		

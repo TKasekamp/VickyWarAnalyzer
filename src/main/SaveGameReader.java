@@ -1,5 +1,7 @@
 package main;
 
+import gui.GuiController;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -7,7 +9,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import main.Battle.Result;
-import static gui.GuiController.getErrorLabel;
 
 /** Readers in order of activation in a typical save game:
  *   saveGameReader
@@ -51,6 +52,12 @@ public class SaveGameReader  {
 	static private int bracketCounter = 0; // bracketCounter is uses to check if all data from the war has been read in
 	static public Reference saveGameData = new Reference(); // public so it can be used by all methods
 	
+	private GuiController controller;
+	public SaveGameReader(GuiController controller) {
+		this.controller = controller;
+	}
+	
+	
 	/** This is the main reader. It gets a path and reads line by line from it.
 	 * If it find a line with a specific keyword, it passes it on to the other readers in this class.
 	 * When reading a war, battle or wargoal, the Processing is set true and all lines are passed to that specific reader until
@@ -59,7 +66,7 @@ public class SaveGameReader  {
 	 * @return ArrayList<War>
 	 * @throws IOException
 	 */
-	static public ArrayList<War> Reader(String saveGamePath) throws IOException {
+	public ArrayList<War> read(String saveGamePath) throws IOException {
 		/* Resetting values for when user loads multiple files during a session 
 		 * Might not be necessary but doing it just in case. */
 		saveGameData = new Reference();
@@ -257,7 +264,7 @@ public class SaveGameReader  {
 	 * Since the attacker is always first, it is only required to check if the attacker already has the data
 	 * 
 	 * */
-	public static void battleReader(String line) {
+	public void battleReader(String line) {
 		if (line.startsWith("name")) {
 			line = nameExtractor(line, 6, true);
 			Battle b = new Battle(dateBuffer, line);
@@ -347,7 +354,7 @@ public class SaveGameReader  {
 				unitList.add(new Unit(pieces[0], losses));
 			} catch (NumberFormatException e) {
 				// Mainly debug if the lines which come here aren't integers
-			getErrorLabel().setText(getErrorLabel().getText() + "Problem with reading: " + line);
+				controller.getErrorLabel().setText(controller.getErrorLabel().getText() + "Problem with reading: " + line);
 			}
 			
 		}

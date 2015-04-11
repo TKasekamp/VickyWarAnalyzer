@@ -1,5 +1,7 @@
 package main;
 
+import gui.GuiController;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -9,17 +11,21 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
-import static gui.GuiController.getErrorLabel;
-
 /** Class for handling savegame path reading, finding and loading from a file 
  */
 public class PathLoader {
+	private GuiController controller;
+	
+	public PathLoader(GuiController controller) {
+		this.controller = controller;
+	}
+	
 	
 	/** Checking if the path file exists. If not, attempts to construct 
 	 * the default save game paths. If the file exist, reads from it.
 	 * 
 	 */
-	public static void pathLoader() {
+	public void pathLoader() {
 		if ((new File("./paths.txt")).exists()) {
 			readPaths();
 		}
@@ -93,7 +99,7 @@ public class PathLoader {
 	 * to choose the file every time. Saved after every loading of a savefile
 	 * in GuiController.startIssueFired
 	 */
-	public static void savePaths() {
+	public void savePaths() {
 			try {
 //				FileWriter out = new FileWriter("paths.txt");
 				BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("paths.txt"),"UTF-8"));
@@ -102,14 +108,14 @@ public class PathLoader {
 				out.write(Reference.INSTALLPATH);
 				out.close();
 			} catch (IOException e) {
-				getErrorLabel().setText(getErrorLabel().getText() + " Could not save the paths.txt.");
+				 controller.getErrorLabel().setText(controller.getErrorLabel().getText() + " Could not save the paths.txt.");
 			}
 			
 	}
 	/** Reads file ./paths.txt.
 	 * First line is the SAVEGAMEPATH, second the INSTALLPATH
 	 */
-	private static void readPaths() {
+	private void readPaths() {
 		try {
 			/* Lifted from saveGameReader */
 			InputStreamReader reader = new InputStreamReader(new FileInputStream("./paths.txt"), "UTF-8"); // This encoding seems to work for õ
@@ -127,7 +133,7 @@ public class PathLoader {
 			}
 			scanner.close();
 		} catch (NullPointerException | IOException e) {
-			getErrorLabel().setText(getErrorLabel().getText() + " Could not read paths.txt. ");
+			controller.getErrorLabel().setText(controller.getErrorLabel().getText() + " Could not read paths.txt. ");
 		}
 	}
 

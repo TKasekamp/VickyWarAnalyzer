@@ -1,9 +1,5 @@
 package gui;
 
-
-
-import static gui.WarDetailsTabContent.warDetailsTabPopulate;
-
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -29,8 +25,10 @@ import javafx.stage.FileChooser;
 import main.Battle;
 import main.Battle.Result;
 import main.Battle.Type;
+import main.Localisation;
 import main.PathLoader;
 import main.Reference;
+import main.SaveGameReader;
 import main.Unit;
 import main.War;
 import main.WarGoal;
@@ -52,216 +50,232 @@ public class GuiController implements Initializable {
 	 * ABOUT NAMES: THE NAMING SYSTEM IS NOT ALWAYS CORRECT NOR CONSISTENT.
 	 */
 	/* All settings tab buttons */
-    @FXML static Button directoryIssue;
-    @FXML static Button saveGameIssue;
-    @FXML static Button startIssue;
+    @FXML private Button directoryIssue;
+    @FXML private Button saveGameIssue;
+    @FXML private Button startIssue;
     /* Settings tab labels */
-    @FXML static Label errorLabel;
+    @FXML private Label errorLabel;
     /* Settings tab textfields */
-    @FXML static TextField installTextField;
-    @FXML static TextField saveGameTextField;
-    @FXML static CheckBox localisationCheck; // Checked in Localisation
+    @FXML private TextField installTextField;
+    @FXML private TextField saveGameTextField;
+    @FXML private CheckBox localisationCheck; // Checked in Localisation
     
     /* Saveame tab labels */
     @FXML
-    static Label playerLabel;
+    private Label playerLabel;
     @FXML
-    static Label startDateLabel;
+    private Label startDateLabel;
     @FXML
-    static Label currentDateLabel;
+    private Label currentDateLabel;
     /* Savegame tab toolbar buttons */
     @FXML
-    static Button showAllWarsIssue;
+    private Button showAllWarsIssue;
     @FXML
-    static Button showPreviousWarsIssue;
+    private Button showPreviousWarsIssue;
     @FXML
-    static Button showActiveWarsIssue;    
+    private Button showActiveWarsIssue;    
     @FXML
-    static Button showMyWarsIssue;
+    private Button showMyWarsIssue;
 
     @FXML
-    static ListView<Label> selectCountryIssue;
+    private ListView<Label> selectCountryIssue;
     
     /* Savegame tab war table */
     @FXML
-    static TableView<War> warTable;
+    private TableView<War> warTable;
     @FXML
-    static TableColumn<War, String> colNameWar;
+    private TableColumn<War, String> colNameWar;
     @FXML
-    static TableColumn<War, String> colAttackerWar;
+    private TableColumn<War, String> colAttackerWar;
     @FXML
-    static TableColumn<War, String> colDefenderWar;
+    private TableColumn<War, String> colDefenderWar;
     @FXML
-    static TableColumn<War, String> colCasusBelliWar;
+    private TableColumn<War, String> colCasusBelliWar;
     @FXML
-    static TableColumn<War, String> colStartDateWar;
+    private TableColumn<War, String> colStartDateWar;
     @FXML
-    static TableColumn<War, String> colEndDateWar;
-    static final ObservableList<War> warTableContent = FXCollections.observableArrayList();
+    private TableColumn<War, String> colEndDateWar;
+    private final ObservableList<War> warTableContent = FXCollections.observableArrayList();
        
     /* War details tab */
     @FXML
-    static Tab warDetailsTab;
+    private Tab warDetailsTab;
     /* Center box labels */
     @FXML
-    static Label warNameLabel;
+    private Label warNameLabel;
     @FXML
-    static Label warStartDateLabel;
+    private Label warStartDateLabel;
     @FXML
-    static Label warEndDateLabel;
+    private Label warEndDateLabel;
     @FXML
-    static Label warActionLabel;
+    private Label warActionLabel;
     @FXML
-    static Label warTotalLossesLabel;
+    private Label warTotalLossesLabel;
     @FXML
-    static Label warTotalShipLossesLabel;
+    private Label warTotalShipLossesLabel;
     @FXML
-    static Label warHasEndedLabel;
+    private Label warHasEndedLabel;
     /* Original wargoal */
-    @FXML static Label warGoalActorLabel;
-    @FXML static Label warGoalReceiverLabel;
-    @FXML static Label warGoalCBLabel; //Casus belli
-    @FXML static Label warGoalStateLabel;
-    @FXML static Label warGoalCountryLabel;
-    @FXML static Label warGoalDateLabel;
-    @FXML static Label warGoalScoreLabel;
-    @FXML static Label warGoalChangeLabel;
-    @FXML static Label warGoalFulfilledLabel;
+    @FXML private Label warGoalActorLabel;
+    @FXML private Label warGoalReceiverLabel;
+    @FXML private Label warGoalCBLabel; //Casus belli
+    @FXML private Label warGoalStateLabel;
+    @FXML private Label warGoalCountryLabel;
+    @FXML private Label warGoalDateLabel;
+    @FXML private Label warGoalScoreLabel;
+    @FXML private Label warGoalChangeLabel;
+    @FXML private Label warGoalFulfilledLabel;
     
-    @FXML static Label warGoalDateHelper;
-    @FXML static Label warGoalScoreHelper;
-    @FXML static Label warGoalChangeHelper;
-    @FXML static Label warGoalFulfilledHelper;
+    @FXML private Label warGoalDateHelper;
+    @FXML private Label warGoalScoreHelper;
+    @FXML private Label warGoalChangeHelper;
+    @FXML private Label warGoalFulfilledHelper;
     
 
     /* Attacker box */
-    @FXML static ImageView attackerFlag; 
-    @FXML static Label warAttacker;
-    @FXML static Label warAttackerHelper; // This is not changed, only hidden 
-    @FXML static Label originalAttackerLabel;
+    @FXML private ImageView attackerFlag; 
+    @FXML private Label warAttacker;
+    @FXML private Label warAttackerHelper; // This is not changed, only hidden 
+    @FXML private Label originalAttackerLabel;
     @FXML
-    static Label attackerTotalLossesLabel;
+    private Label attackerTotalLossesLabel;
     @FXML
-    static Label attackerTotalShipLossesLabel;  
+    private Label attackerTotalShipLossesLabel;  
     @FXML
-    static TableView<ObservableJoinedCountry> attackerTable;
+    private TableView<ObservableJoinedCountry> attackerTable;
     @FXML
-    static TableColumn<ObservableJoinedCountry, String> colAttackerName;
+    private TableColumn<ObservableJoinedCountry, String> colAttackerName;
     @FXML
-    static TableColumn<ObservableJoinedCountry, ImageView> colAttackerFlag;
+    private TableColumn<ObservableJoinedCountry, ImageView> colAttackerFlag;
     @FXML
-    static TableColumn<ObservableJoinedCountry, String> colAttackerStartDate; // Join and start are the same
+    private TableColumn<ObservableJoinedCountry, String> colAttackerStartDate; // Join and start are the same
     @FXML
-    static TableColumn<ObservableJoinedCountry, String> colAttackerEndDate;   
-    static final ObservableList<ObservableJoinedCountry> attackerTableContent = FXCollections.observableArrayList(); // List managing the attackerTable
+    private TableColumn<ObservableJoinedCountry, String> colAttackerEndDate;   
+    private final ObservableList<ObservableJoinedCountry> attackerTableContent = FXCollections.observableArrayList(); // List managing the attackerTable
     
     /* Defender box */
     @FXML
-    static ImageView defenderFlag;   
-    @FXML static Label warDefender;
-    @FXML static Label warDefenderHelper; // This is not changed, only hidden 
+    private ImageView defenderFlag;   
+    @FXML private Label warDefender;
+    @FXML private Label warDefenderHelper; // This is not changed, only hidden 
     @FXML
-    static Label originalDefenderLabel;
+    private Label originalDefenderLabel;
     @FXML
-    static Label defenderTotalLossesLabel;
+    private Label defenderTotalLossesLabel;
     @FXML
-    static Label defenderTotalShipLossesLabel;  
+    private Label defenderTotalShipLossesLabel;  
     @FXML
-    static TableView<ObservableJoinedCountry> defenderTable;
+    private TableView<ObservableJoinedCountry> defenderTable;
     @FXML
-    static TableColumn<ObservableJoinedCountry, String> colDefenderName;
+    private TableColumn<ObservableJoinedCountry, String> colDefenderName;
     @FXML
-    static TableColumn<ObservableJoinedCountry, ImageView> colDefenderFlag;
+    private TableColumn<ObservableJoinedCountry, ImageView> colDefenderFlag;
     @FXML
-    static TableColumn<ObservableJoinedCountry, String> colDefenderStartDate;
+    private TableColumn<ObservableJoinedCountry, String> colDefenderStartDate;
     @FXML
-    static TableColumn<ObservableJoinedCountry, String> colDefenderEndDate;  
-    static final ObservableList<ObservableJoinedCountry> defenderTableContent = FXCollections.observableArrayList(); // List managing the attackerTable
+    private TableColumn<ObservableJoinedCountry, String> colDefenderEndDate;  
+    private final ObservableList<ObservableJoinedCountry> defenderTableContent = FXCollections.observableArrayList(); // List managing the attackerTable
     
     /* WAR_NAME details tab battle table */
     @FXML
-    static TableView<Battle> battleTable;
+    private TableView<Battle> battleTable;
     @FXML
-    static TableColumn<Battle, String> colNameBattle;
+    private TableColumn<Battle, String> colNameBattle;
     @FXML
-    static TableColumn<Battle, String> colAttackerBattle;
+    private TableColumn<Battle, String> colAttackerBattle;
     @FXML
-    static TableColumn<Battle, String> colDefenderBattle;
+    private TableColumn<Battle, String> colDefenderBattle;
     @FXML
-    static TableColumn<Battle, String> colDateBattle;
+    private TableColumn<Battle, String> colDateBattle;
     @FXML
-    static TableColumn<Battle, Type> colTypeBattle; 
+    private TableColumn<Battle, Type> colTypeBattle; 
     @FXML
-    static TableColumn<Battle, Integer> colBattleTotalLosses;
-    @FXML static TableColumn<Battle, Result> colBattleResult; 
-	static final ObservableList<Battle> battleTableContent = FXCollections.observableArrayList();
+    private TableColumn<Battle, Integer> colBattleTotalLosses;
+    @FXML private TableColumn<Battle, Result> colBattleResult; 
+    private final ObservableList<Battle> battleTableContent = FXCollections.observableArrayList();
 	
 	/* Battle details tab */
-    @FXML static Tab battleDetailsTab;
+    @FXML private Tab battleDetailsTab;
     
 	/* Attacker side */
-	@FXML static ImageView battleAttackerFlag;
-    @FXML static Label battleAttacker;
-    @FXML static Label battleAttackerArmySize;
-    @FXML static Label battleAttackerLosses;
-    @FXML static TableView<Unit> attackerUnitsTable;
-    @FXML static TableColumn<Unit, String> colAttackerUnitType; 
-    @FXML static TableColumn<Unit, Integer> colAttackerUnitNumber; 
-	static final ObservableList<Unit> attackerUnitsTableContent = FXCollections.observableArrayList();
+	@FXML private ImageView battleAttackerFlag;
+    @FXML private Label battleAttacker;
+    @FXML private Label battleAttackerArmySize;
+    @FXML private Label battleAttackerLosses;
+    @FXML private TableView<Unit> attackerUnitsTable;
+    @FXML private TableColumn<Unit, String> colAttackerUnitType; 
+    @FXML private TableColumn<Unit, Integer> colAttackerUnitNumber; 
+    private final ObservableList<Unit> attackerUnitsTableContent = FXCollections.observableArrayList();
 	
 	/* Defender side */
-	@FXML static ImageView battleDefenderFlag;
-    @FXML static Label battleDefender;
-    @FXML static Label battleDefenderArmySize;
-    @FXML static Label battleDefenderLosses;
-    @FXML static TableView<Unit> defenderUnitsTable;
-    @FXML static TableColumn<Unit, String> colDefenderUnitType; 
-    @FXML static TableColumn<Unit, Integer> colDefenderUnitNumber; 
-	static final ObservableList<Unit> defenderUnitsTableContent = FXCollections.observableArrayList();  
+	@FXML private ImageView battleDefenderFlag;
+    @FXML private Label battleDefender;
+    @FXML private Label battleDefenderArmySize;
+    @FXML private Label battleDefenderLosses;
+    @FXML private TableView<Unit> defenderUnitsTable;
+    @FXML private TableColumn<Unit, String> colDefenderUnitType; 
+    @FXML private TableColumn<Unit, Integer> colDefenderUnitNumber; 
+    private final ObservableList<Unit> defenderUnitsTableContent = FXCollections.observableArrayList();  
 	
 	/* Center panel with other information */
-	@FXML static Label battleName;
-	@FXML static Label battleDate;
-	@FXML static Label battleType;
-	@FXML static Label battleLocation;
-	@FXML static Label battleResult;
-    @FXML static Label battleAttackerLeader;
-    @FXML static Label battleDefenderLeader;
-	@FXML static Label battleTotalLosses;
+	@FXML private Label battleName;
+	@FXML private Label battleDate;
+	@FXML private Label battleType;
+	@FXML private Label battleLocation;
+	@FXML private Label battleResult;
+    @FXML private Label battleAttackerLeader;
+    @FXML private Label battleDefenderLeader;
+	@FXML private Label battleTotalLosses;
 	
 	/* Wargoal tab */
-    @FXML static Tab warGoalTab;
-    @FXML static Label warName2;
+    @FXML private Tab warGoalTab;
+    @FXML private Label warName2;
     
     /* War goal table */
-    @FXML static TableView<WarGoal> warGoalTable;
-    @FXML static TableColumn<WarGoal, String> colWarGoalActor;
-    @FXML static TableColumn<WarGoal, String> colWarGoalReceiver;
-    @FXML static TableColumn<WarGoal, String> colWarGoalCasusBelli; // Join and start are the same
-    @FXML static TableColumn<WarGoal, Integer> colWarGoalStateID;  
-    @FXML static TableColumn<WarGoal, String> colWarGoalCountry; 
-    @FXML static TableColumn<WarGoal, Double> colWarGoalScore;
-    @FXML static TableColumn<WarGoal, Double> colWarGoalChange;
-    @FXML static TableColumn<WarGoal, String> colWarGoalDate;
-    @FXML static TableColumn<WarGoal, Result> colWarGoalFulfilled;
+    @FXML private TableView<WarGoal> warGoalTable;
+    @FXML private TableColumn<WarGoal, String> colWarGoalActor;
+    @FXML private TableColumn<WarGoal, String> colWarGoalReceiver;
+    @FXML private TableColumn<WarGoal, String> colWarGoalCasusBelli; // Join and start are the same
+    @FXML private TableColumn<WarGoal, Integer> colWarGoalStateID;  
+    @FXML private TableColumn<WarGoal, String> colWarGoalCountry; 
+    @FXML private TableColumn<WarGoal, Double> colWarGoalScore;
+    @FXML private TableColumn<WarGoal, Double> colWarGoalChange;
+    @FXML private TableColumn<WarGoal, String> colWarGoalDate;
+    @FXML private TableColumn<WarGoal, Result> colWarGoalFulfilled;
     
-    static final ObservableList<WarGoal> warGoalTableContent = FXCollections.observableArrayList(); // List manging the warGoalTable 
+    private final ObservableList<WarGoal> warGoalTableContent = FXCollections.observableArrayList(); // List manging the warGoalTable 
     
+    // The tabs
+    private BattleDetailsTabContent battleTab;
+    private FileLoader fileLoader;
+    private WarDetailsTabContent detailsTab;
+    private Localisation loc;
+    private PathLoader pathLoader;
+    private SaveGameReader reader;
     
-    @Override // This method is called by the FXMLLoader when initialization is complete
+//	public static GuiController getController() {
+//		return this;
+//	}
+	@Override // This method is called by the FXMLLoader when initialization is complete
     public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
-    	
+		battleTab = new BattleDetailsTabContent(this);
+		fileLoader = new FileLoader(this);
+		detailsTab = new WarDetailsTabContent(this);
+		loc = new Localisation(this);
+		pathLoader = new PathLoader(this);
+		reader = new SaveGameReader(this);
+		
     	/* Checking if paths exist */
-    	PathLoader.pathLoader();
+		pathLoader.pathLoader();
     	setSettingsTextFields();
     	
-        /* Listening to selections in list */
+//        /* Listening to selections in list */
         selectCountryIssue.getSelectionModel().selectedItemProperty().addListener(new javafx.beans.value.ChangeListener<Label>() {
 
 			@Override
 			public void changed(ObservableValue<? extends Label> arg0,
 					Label arg1, Label arg2) {
-				FileLoader.warTableShowCountry(arg2.getText());
+				fileLoader.warTableShowCountry(arg2.getText());
 			}
         });
 
@@ -276,9 +290,9 @@ public class GuiController implements Initializable {
         warGoalTab.setDisable(true);
         
         /* Defining columns for the tables in those tabs*/
-        FileLoader.setWarTableColumnValues();
-        WarDetailsTabContent.setColumnValues();
-        BattleDetailsTabContent.setColumnValues();
+        fileLoader.setWarTableColumnValues();
+        detailsTab.setColumnValues();
+        battleTab.setColumnValues();
     
     }
 	/**
@@ -347,13 +361,13 @@ public class GuiController implements Initializable {
     public final void startIssueFired(ActionEvent event) {
     	newGameReadCleanUp(); // Resetting fields
     	// All the action happens in readLauncher to make this method as small as possible
-    	FileLoader.readLauncher();
+    	fileLoader.readLauncher();
     	
     	/* Saving the used directories to a file. Starting in a new thread because this is what I'm learning at the moment.  */
     	Thread thread = new Thread(new Runnable() {
     		public void run()
     		{
-    			PathLoader.savePaths();
+    			pathLoader.savePaths();
     		}
     	});
     	// start the thread
@@ -361,26 +375,26 @@ public class GuiController implements Initializable {
 
     	/* Setting wargoal table values. It must be done AFTER the file has been read as the column values are dependent on the version
     	 * of the game */
-    	WarDetailsTabContent.setWarGoalTabColumnValues();
+    	detailsTab.setWarGoalTabColumnValues();
     	
 
     }
     /* War tab Button actions */
     public final void showAllWarsIssue(ActionEvent event) {
-    	FileLoader.warTablePopulateAll();
+    	fileLoader.warTablePopulateAll();
     }
     public final void showActiveWarsIssue(ActionEvent event) {
     	// All the action happens in readLauncher to make this method as small as possible
-    	FileLoader.warTableShowActive();
+    	fileLoader.warTableShowActive();
     }
     
     public final void showPreviousWarsIssue(ActionEvent event) {
     	// All the action happens in readLauncher to make this method as small as possible
-    	FileLoader.warTableShowPrevious();
+    	fileLoader.warTableShowPrevious();
     }
     public final void showMyWarsIssue(ActionEvent event) {
     	// All the action happens in readLauncher to make this method as small as possible
-    	FileLoader.warTableShowMyWars();
+    	fileLoader.warTableShowMyWars();
     }
     /** warTable selection listener */
     private final ListChangeListener<War> tableSelectionChanged = new ListChangeListener<War>() {
@@ -389,7 +403,7 @@ public class GuiController implements Initializable {
                 	// At the moment does nothing as I don't know how to get mouse doubleclick on row
                 	// But it is used by showMoreDetailsWarIssue
                 	if (!warTable.getSelectionModel().getSelectedItems().isEmpty()) {
-                		warDetailsTabPopulate((War)warTable.getSelectionModel().getSelectedItems().toArray()[0]);
+                		detailsTab.warDetailsTabPopulate((War)warTable.getSelectionModel().getSelectedItems().toArray()[0]);
                 		} 
                 	}             	
                 
@@ -401,7 +415,7 @@ public class GuiController implements Initializable {
     	public void onChanged(Change<? extends Battle> c) {
     		if (!battleTable.getSelectionModel().getSelectedItems().isEmpty()) {
     			battleDetailsTab.setDisable(false);
-        		BattleDetailsTabContent.battleDetailsTabPopulate((Battle)battleTable.getSelectionModel().getSelectedItems().toArray()[0]);    			
+        		battleTab.battleDetailsTabPopulate((Battle)battleTable.getSelectionModel().getSelectedItems().toArray()[0]);    			
     		}
     	}             	
     };
@@ -414,223 +428,374 @@ public class GuiController implements Initializable {
         warGoalTab.setDisable(true);
 
     }
-    
-    /* Somw of these are used, some aren't. Some static fields don't have getters. */
-	public static Button getDirectoryIssue() {
+	public Button getDirectoryIssue() {
 		return directoryIssue;
 	}
-	public static Button getSaveGameIssue() {
+	public Button getSaveGameIssue() {
 		return saveGameIssue;
 	}
-	public static Button getStartIssue() {
+	public Button getStartIssue() {
 		return startIssue;
 	}
-	public static Label getErrorLabel() {
+	public Label getErrorLabel() {
 		return errorLabel;
 	}
-	public static TextField getInstallTextField() {
+	public TextField getInstallTextField() {
 		return installTextField;
 	}
-	public static TextField getSaveGameTextField() {
+	public TextField getSaveGameTextField() {
 		return saveGameTextField;
 	}
-	public static Label getPlayerLabel() {
+	public CheckBox getLocalisationCheck() {
+		return localisationCheck;
+	}
+	public Label getPlayerLabel() {
 		return playerLabel;
 	}
-	public static Label getStartDateLabel() {
+	public Label getStartDateLabel() {
 		return startDateLabel;
 	}
-	public static Label getCurrentDateLabel() {
+	public Label getCurrentDateLabel() {
 		return currentDateLabel;
 	}
-	public static Button getShowAllWarsIssue() {
+	public Button getShowAllWarsIssue() {
 		return showAllWarsIssue;
 	}
-	public static Button getShowPreviousWarsIssue() {
+	public Button getShowPreviousWarsIssue() {
 		return showPreviousWarsIssue;
 	}
-	public static Button getShowActiveWarsIssue() {
+	public Button getShowActiveWarsIssue() {
 		return showActiveWarsIssue;
 	}
-	public static Button getShowMyWarsIssue() {
+	public Button getShowMyWarsIssue() {
 		return showMyWarsIssue;
 	}
-	public static ListView<Label> getSelectCountryIssue() {
+	public ListView<Label> getSelectCountryIssue() {
 		return selectCountryIssue;
 	}
-	public static TableView<War> getWarTable() {
+	public TableView<War> getWarTable() {
 		return warTable;
 	}
-	public static TableColumn<War, String> getColNameWar() {
+	public TableColumn<War, String> getColNameWar() {
 		return colNameWar;
 	}
-	public static TableColumn<War, String> getColAttackerWar() {
+	public TableColumn<War, String> getColAttackerWar() {
 		return colAttackerWar;
 	}
-	public static TableColumn<War, String> getColDefenderWar() {
+	public TableColumn<War, String> getColDefenderWar() {
 		return colDefenderWar;
 	}
-	public static TableColumn<War, String> getColCasusBelliWar() {
+	public TableColumn<War, String> getColCasusBelliWar() {
 		return colCasusBelliWar;
 	}
-	public static TableColumn<War, String> getColStartDateWar() {
+	public TableColumn<War, String> getColStartDateWar() {
 		return colStartDateWar;
 	}
-	public static TableColumn<War, String> getColEndDateWar() {
+	public TableColumn<War, String> getColEndDateWar() {
 		return colEndDateWar;
 	}
-	public static ObservableList<War> getWarTableContent() {
+	public ObservableList<War> getWarTableContent() {
 		return warTableContent;
 	}
-	public static Tab getWarDetailsTab() {
+	public Tab getWarDetailsTab() {
 		return warDetailsTab;
 	}
-	public static Label getWarNameLabel() {
+	public Label getWarNameLabel() {
 		return warNameLabel;
 	}
-	public static Label getWarStartDateLabel() {
+	public Label getWarStartDateLabel() {
 		return warStartDateLabel;
 	}
-	public static Label getWarEndDateLabel() {
+	public Label getWarEndDateLabel() {
 		return warEndDateLabel;
 	}
-	public static Label getWarActionLabel() {
+	public Label getWarActionLabel() {
 		return warActionLabel;
 	}
-	public static Label getWarTotalLossesLabel() {
+	public Label getWarTotalLossesLabel() {
 		return warTotalLossesLabel;
 	}
-	public static Label getWarTotalShipLossesLabel() {
+	public Label getWarTotalShipLossesLabel() {
 		return warTotalShipLossesLabel;
 	}
-	public static ImageView getAttackerFlag() {
+	public Label getWarHasEndedLabel() {
+		return warHasEndedLabel;
+	}
+	public Label getWarGoalActorLabel() {
+		return warGoalActorLabel;
+	}
+	public Label getWarGoalReceiverLabel() {
+		return warGoalReceiverLabel;
+	}
+	public Label getWarGoalCBLabel() {
+		return warGoalCBLabel;
+	}
+	public Label getWarGoalStateLabel() {
+		return warGoalStateLabel;
+	}
+	public Label getWarGoalCountryLabel() {
+		return warGoalCountryLabel;
+	}
+	public Label getWarGoalDateLabel() {
+		return warGoalDateLabel;
+	}
+	public Label getWarGoalScoreLabel() {
+		return warGoalScoreLabel;
+	}
+	public Label getWarGoalChangeLabel() {
+		return warGoalChangeLabel;
+	}
+	public Label getWarGoalFulfilledLabel() {
+		return warGoalFulfilledLabel;
+	}
+	public Label getWarGoalDateHelper() {
+		return warGoalDateHelper;
+	}
+	public Label getWarGoalScoreHelper() {
+		return warGoalScoreHelper;
+	}
+	public Label getWarGoalChangeHelper() {
+		return warGoalChangeHelper;
+	}
+	public Label getWarGoalFulfilledHelper() {
+		return warGoalFulfilledHelper;
+	}
+	public ImageView getAttackerFlag() {
 		return attackerFlag;
 	}
-	public static Label getOriginalAttackerLabel() {
+	public Label getWarAttacker() {
+		return warAttacker;
+	}
+	public Label getWarAttackerHelper() {
+		return warAttackerHelper;
+	}
+	public Label getOriginalAttackerLabel() {
 		return originalAttackerLabel;
 	}
-	public static Label getAttackerTotalLossesLabel() {
+	public Label getAttackerTotalLossesLabel() {
 		return attackerTotalLossesLabel;
 	}
-	public static Label getAttackerTotalShipLossesLabel() {
+	public Label getAttackerTotalShipLossesLabel() {
 		return attackerTotalShipLossesLabel;
 	}
-	public static ImageView getDefenderFlag() {
+	public TableView<ObservableJoinedCountry> getAttackerTable() {
+		return attackerTable;
+	}
+	public TableColumn<ObservableJoinedCountry, String> getColAttackerName() {
+		return colAttackerName;
+	}
+	public TableColumn<ObservableJoinedCountry, ImageView> getColAttackerFlag() {
+		return colAttackerFlag;
+	}
+	public TableColumn<ObservableJoinedCountry, String> getColAttackerStartDate() {
+		return colAttackerStartDate;
+	}
+	public TableColumn<ObservableJoinedCountry, String> getColAttackerEndDate() {
+		return colAttackerEndDate;
+	}
+	public ObservableList<ObservableJoinedCountry> getAttackerTableContent() {
+		return attackerTableContent;
+	}
+	public ImageView getDefenderFlag() {
 		return defenderFlag;
 	}
-	public static Label getOriginalDefenderLabel() {
+	public Label getWarDefender() {
+		return warDefender;
+	}
+	public Label getWarDefenderHelper() {
+		return warDefenderHelper;
+	}
+	public Label getOriginalDefenderLabel() {
 		return originalDefenderLabel;
 	}
-	public static Label getDefenderTotalLossesLabel() {
+	public Label getDefenderTotalLossesLabel() {
 		return defenderTotalLossesLabel;
 	}
-	public static Label getDefenderTotalShipLossesLabel() {
+	public Label getDefenderTotalShipLossesLabel() {
 		return defenderTotalShipLossesLabel;
 	}
-	public static TableView<Battle> getBattleTable() {
+	public TableView<ObservableJoinedCountry> getDefenderTable() {
+		return defenderTable;
+	}
+	public TableColumn<ObservableJoinedCountry, String> getColDefenderName() {
+		return colDefenderName;
+	}
+	public TableColumn<ObservableJoinedCountry, ImageView> getColDefenderFlag() {
+		return colDefenderFlag;
+	}
+	public TableColumn<ObservableJoinedCountry, String> getColDefenderStartDate() {
+		return colDefenderStartDate;
+	}
+	public TableColumn<ObservableJoinedCountry, String> getColDefenderEndDate() {
+		return colDefenderEndDate;
+	}
+	public ObservableList<ObservableJoinedCountry> getDefenderTableContent() {
+		return defenderTableContent;
+	}
+	public TableView<Battle> getBattleTable() {
 		return battleTable;
 	}
-	public static TableColumn<Battle, String> getColNameBattle() {
+	public TableColumn<Battle, String> getColNameBattle() {
 		return colNameBattle;
 	}
-	public static TableColumn<Battle, String> getColAttackerBattle() {
+	public TableColumn<Battle, String> getColAttackerBattle() {
 		return colAttackerBattle;
 	}
-	public static TableColumn<Battle, String> getColDefenderBattle() {
+	public TableColumn<Battle, String> getColDefenderBattle() {
 		return colDefenderBattle;
 	}
-	public static TableColumn<Battle, String> getColDateBattle() {
+	public TableColumn<Battle, String> getColDateBattle() {
 		return colDateBattle;
 	}
-	public static TableColumn<Battle, Type> getColTypeBattle() {
+	public TableColumn<Battle, Type> getColTypeBattle() {
 		return colTypeBattle;
 	}
-	public static TableColumn<Battle, Integer> getColBattleTotalLosses() {
+	public TableColumn<Battle, Integer> getColBattleTotalLosses() {
 		return colBattleTotalLosses;
 	}
-	public static ObservableList<Battle> getBattleTableContent() {
+	public TableColumn<Battle, Result> getColBattleResult() {
+		return colBattleResult;
+	}
+	public ObservableList<Battle> getBattleTableContent() {
 		return battleTableContent;
+	}
+	public Tab getBattleDetailsTab() {
+		return battleDetailsTab;
+	}
+	public ImageView getBattleAttackerFlag() {
+		return battleAttackerFlag;
+	}
+	public Label getBattleAttacker() {
+		return battleAttacker;
+	}
+	public Label getBattleAttackerArmySize() {
+		return battleAttackerArmySize;
+	}
+	public Label getBattleAttackerLosses() {
+		return battleAttackerLosses;
+	}
+	public TableView<Unit> getAttackerUnitsTable() {
+		return attackerUnitsTable;
+	}
+	public TableColumn<Unit, String> getColAttackerUnitType() {
+		return colAttackerUnitType;
+	}
+	public TableColumn<Unit, Integer> getColAttackerUnitNumber() {
+		return colAttackerUnitNumber;
+	}
+	public ObservableList<Unit> getAttackerUnitsTableContent() {
+		return attackerUnitsTableContent;
+	}
+	public ImageView getBattleDefenderFlag() {
+		return battleDefenderFlag;
+	}
+	public Label getBattleDefender() {
+		return battleDefender;
+	}
+	public Label getBattleDefenderArmySize() {
+		return battleDefenderArmySize;
+	}
+	public Label getBattleDefenderLosses() {
+		return battleDefenderLosses;
+	}
+	public TableView<Unit> getDefenderUnitsTable() {
+		return defenderUnitsTable;
+	}
+	public TableColumn<Unit, String> getColDefenderUnitType() {
+		return colDefenderUnitType;
+	}
+	public TableColumn<Unit, Integer> getColDefenderUnitNumber() {
+		return colDefenderUnitNumber;
+	}
+	public ObservableList<Unit> getDefenderUnitsTableContent() {
+		return defenderUnitsTableContent;
+	}
+	public Label getBattleName() {
+		return battleName;
+	}
+	public Label getBattleDate() {
+		return battleDate;
+	}
+	public Label getBattleType() {
+		return battleType;
+	}
+	public Label getBattleLocation() {
+		return battleLocation;
+	}
+	public Label getBattleResult() {
+		return battleResult;
+	}
+	public Label getBattleAttackerLeader() {
+		return battleAttackerLeader;
+	}
+	public Label getBattleDefenderLeader() {
+		return battleDefenderLeader;
+	}
+	public Label getBattleTotalLosses() {
+		return battleTotalLosses;
+	}
+	public Tab getWarGoalTab() {
+		return warGoalTab;
+	}
+	public Label getWarName2() {
+		return warName2;
+	}
+	public TableView<WarGoal> getWarGoalTable() {
+		return warGoalTable;
+	}
+	public TableColumn<WarGoal, String> getColWarGoalActor() {
+		return colWarGoalActor;
+	}
+	public TableColumn<WarGoal, String> getColWarGoalReceiver() {
+		return colWarGoalReceiver;
+	}
+	public TableColumn<WarGoal, String> getColWarGoalCasusBelli() {
+		return colWarGoalCasusBelli;
+	}
+	public TableColumn<WarGoal, Integer> getColWarGoalStateID() {
+		return colWarGoalStateID;
+	}
+	public TableColumn<WarGoal, String> getColWarGoalCountry() {
+		return colWarGoalCountry;
+	}
+	public TableColumn<WarGoal, Double> getColWarGoalScore() {
+		return colWarGoalScore;
+	}
+	public TableColumn<WarGoal, Double> getColWarGoalChange() {
+		return colWarGoalChange;
+	}
+	public TableColumn<WarGoal, String> getColWarGoalDate() {
+		return colWarGoalDate;
+	}
+	public TableColumn<WarGoal, Result> getColWarGoalFulfilled() {
+		return colWarGoalFulfilled;
+	}
+	public ObservableList<WarGoal> getWarGoalTableContent() {
+		return warGoalTableContent;
 	}
 	public ListChangeListener<War> getTableSelectionChanged() {
 		return tableSelectionChanged;
 	}
-	public static Label getWarHasEndedLabel() {
-		return warHasEndedLabel;
+	public ListChangeListener<Battle> getBattleTableSelectionChanged() {
+		return battleTableSelectionChanged;
 	}
-	public static TableView<ObservableJoinedCountry> getAttackerTable() {
-		return attackerTable;
+	public BattleDetailsTabContent getBattleTab() {
+		return battleTab;
 	}
-	public static TableColumn<ObservableJoinedCountry, String> getColAttackerName() {
-		return colAttackerName;
+	public FileLoader getFileLoader() {
+		return fileLoader;
 	}
-	public static TableColumn<ObservableJoinedCountry, ImageView> getColAttackerFlag() {
-		return colAttackerFlag;
+	public WarDetailsTabContent getDetailsTab() {
+		return detailsTab;
 	}
-	public static TableColumn<ObservableJoinedCountry, String> getColAttackerStartDate() {
-		return colAttackerStartDate;
+	public Localisation getLoc() {
+		return loc;
 	}
-	public static TableColumn<ObservableJoinedCountry, String> getColAttackerEndDate() {
-		return colAttackerEndDate;
+	public PathLoader getPathLoader() {
+		return pathLoader;
 	}
-	public static ObservableList<ObservableJoinedCountry> getAttackerTableContent() {
-		return attackerTableContent;
-	}
-	public static TableView<ObservableJoinedCountry> getDefenderTable() {
-		return defenderTable;
-	}
-	public static TableColumn<ObservableJoinedCountry, String> getColDefenderName() {
-		return colDefenderName;
-	}
-	public static TableColumn<ObservableJoinedCountry, ImageView> getColDefenderFlag() {
-		return colDefenderFlag;
-	}
-	public static TableColumn<ObservableJoinedCountry, String> getColDefenderStartDate() {
-		return colDefenderStartDate;
-	}
-	public static TableColumn<ObservableJoinedCountry, String> getColDefenderEndDate() {
-		return colDefenderEndDate;
-	}
-	public static ObservableList<ObservableJoinedCountry> getDefenderTableContent() {
-		return defenderTableContent;
-	}
-	public static TableView<WarGoal> getWarGoalTable() {
-		return warGoalTable;
-	}
-	public static TableColumn<WarGoal, String> getColWarGoalActor() {
-		return colWarGoalActor;
-	}
-	public static TableColumn<WarGoal, String> getColWarGoalCasusBelli() {
-		return colWarGoalCasusBelli;
-	}
-	public static TableColumn<WarGoal, String> getColWarGoalCountry() {
-		return colWarGoalCountry;
-	}
-	public static ObservableList<WarGoal> getWarGoalTableContent() {
-		return warGoalTableContent;
-	}
-	public static TableColumn<WarGoal, String> getColWarGoalReceiver() {
-		return colWarGoalReceiver;
-	}
-	public static TableColumn<WarGoal, Integer> getColWarGoalStateID() {
-		return colWarGoalStateID;
-	}
-    public static TableColumn<Battle, Result> getColBattleResult() {
-		return colBattleResult;
-	}
-	public static TableColumn<WarGoal, Double> getColWarGoalScore() {
-		return colWarGoalScore;
-	}
-	public static TableColumn<WarGoal, Double> getColWarGoalChange() {
-		return colWarGoalChange;
-	}
-	public static TableColumn<WarGoal, String> getColWarGoalDate() {
-		return colWarGoalDate;
-	}
-	public static TableColumn<WarGoal, Result> getColWarGoalFulfilled() {
-		return colWarGoalFulfilled;
-	}
-	public static CheckBox getLocalisationCheck() {
-		return localisationCheck;
+	public SaveGameReader getReader() {
+		return reader;
 	}
 
 }
