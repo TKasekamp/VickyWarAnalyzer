@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="ASCII"?>
-<anttasks:AntTask xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:anttasks="http://at.bestsolution.efxclipse.tooling.jdt/1.0" buildDirectory="${project}/build">
-  <deploy>
-    <application name="Victoria II save game war analyzer" mainclass="ee.tkasekamp.vickywargame.gui.GUI" version="1.1.0"/>
-    <info vendor="T&#xf5;nis Kasekamp"/>
-  </deploy>
-  <signjar/>
-</anttasks:AntTask>

@@ -12,10 +12,11 @@
 hs_err_pid*
 /bin/
 
-# Build folder
-/bindist/
-/build/project/
-/build/build/
+
+.settings/
+.project
+.classpath
+target/
 
 paths.txt
-/build/dist/paths.txt
+
