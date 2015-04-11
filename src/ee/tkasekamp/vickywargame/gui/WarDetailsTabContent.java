@@ -1,16 +1,16 @@
-package gui;
+package ee.tkasekamp.vickywargame.gui;
 
-import static gui.GuiController.*;
+import static ee.tkasekamp.vickywargame.core.Country.findOfficalName;
+import static ee.tkasekamp.vickywargame.gui.GuiController.*;
+import ee.tkasekamp.vickywargame.core.Battle;
+import ee.tkasekamp.vickywargame.core.Country;
+import ee.tkasekamp.vickywargame.core.War;
+import ee.tkasekamp.vickywargame.core.WarGoal;
+import ee.tkasekamp.vickywargame.core.Battle.Result;
+import ee.tkasekamp.vickywargame.core.Battle.Type;
+import ee.tkasekamp.vickywargame.util.Reference;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
-import main.Battle;
-import main.Battle.Result;
-import main.Battle.Type;
-import main.Country;
-import static main.Country.findOfficalName;
-import main.Reference;
-import main.War;
-import main.WarGoal;
 
 public class WarDetailsTabContent {
 	static private War war;

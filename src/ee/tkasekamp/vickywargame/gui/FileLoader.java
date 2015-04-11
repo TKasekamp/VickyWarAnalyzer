@@ -1,6 +1,6 @@
-package gui;
+package ee.tkasekamp.vickywargame.gui;
 
-import static main.Country.findOfficalName;
+import static ee.tkasekamp.vickywargame.core.Country.findOfficalName;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -10,17 +10,17 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import ee.tkasekamp.vickywargame.core.Battle;
+import ee.tkasekamp.vickywargame.core.Country;
+import ee.tkasekamp.vickywargame.core.JoinedCountry;
+import ee.tkasekamp.vickywargame.core.War;
+import ee.tkasekamp.vickywargame.parser.Parser;
+import ee.tkasekamp.vickywargame.util.Reference;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import main.Battle;
-import main.Country;
-import main.JoinedCountry;
-import main.Reference;
-import main.SaveGameReader;
-import main.War;
 
 /**
  * This class starts the whole process. First the war is read from the save
@@ -58,11 +58,11 @@ public class FileLoader {
 			}
 			/* Setting the basic info panel */
 			controller.getPlayerLabel().setText(
-					findOfficalName(SaveGameReader.saveGameData.getPlayer()));
+					findOfficalName(Parser.saveGameData.getPlayer()));
 			controller.getCurrentDateLabel().setText(
-					SaveGameReader.saveGameData.getDate());
+					Parser.saveGameData.getDate());
 			controller.getStartDateLabel().setText(
-					SaveGameReader.saveGameData.getStart_date());
+					Parser.saveGameData.getStart_date());
 
 			/* Filling the warTable */
 
@@ -127,7 +127,7 @@ public class FileLoader {
 		for (War item : warList) {
 			for (JoinedCountry country : item.getCountryList()) {
 				if (country.getTag().equals(
-						SaveGameReader.saveGameData.getPlayer())) {
+						Parser.saveGameData.getPlayer())) {
 					controller.getWarTableContent().add(item);
 				}
 			}

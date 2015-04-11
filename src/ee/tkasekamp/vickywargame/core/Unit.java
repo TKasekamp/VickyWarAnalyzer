@@ -1,4 +1,4 @@
-package main;
+package ee.tkasekamp.vickywargame.core;
 
 /**
  * Everything from infantry to ships

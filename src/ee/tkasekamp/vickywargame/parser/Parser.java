@@ -1,14 +1,19 @@
-package main;
+package ee.tkasekamp.vickywargame.parser;
 
-import gui.GuiController;
+import ee.tkasekamp.vickywargame.core.Battle;
+import ee.tkasekamp.vickywargame.core.JoinedCountry;
+import ee.tkasekamp.vickywargame.core.Unit;
+import ee.tkasekamp.vickywargame.core.War;
+import ee.tkasekamp.vickywargame.core.WarGoal;
+import ee.tkasekamp.vickywargame.core.Battle.Result;
+import ee.tkasekamp.vickywargame.gui.GuiController;
+import ee.tkasekamp.vickywargame.util.Reference;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-
-import main.Battle.Result;
 
 /** Readers in order of activation in a typical save game:
  *   saveGameReader
@@ -29,7 +34,7 @@ import main.Battle.Result;
  *  ...
  *
  */
-public class SaveGameReader  {
+public class Parser  {
 	/*Everything to read in wars */
 	private ArrayList<War> warList= new ArrayList<War>(); // Stores all wars in the save game
 	private boolean warProcessing = false; // True when previous or active war has been found
@@ -53,7 +58,7 @@ public class SaveGameReader  {
 	static public Reference saveGameData = new Reference(); // public so it can be used by all methods
 	
 	private GuiController controller;
-	public SaveGameReader(GuiController controller) {
+	public Parser(GuiController controller) {
 		this.controller = controller;
 	}
 	

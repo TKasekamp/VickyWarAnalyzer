@@ -1,4 +1,4 @@
-package gui;
+package ee.tkasekamp.vickywargame.gui;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

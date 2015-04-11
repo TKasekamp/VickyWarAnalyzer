@@ -1,6 +1,6 @@
-package main;
+package ee.tkasekamp.vickywargame.core;
 
-import static main.Reference.countryList;
+import static ee.tkasekamp.vickywargame.util.Reference.countryList;
 import javafx.scene.image.Image;
 
 /** Holds the flag and a longer name than just three letters.   

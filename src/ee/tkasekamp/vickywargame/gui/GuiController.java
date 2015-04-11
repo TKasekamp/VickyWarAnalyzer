@@ -1,9 +1,19 @@
-package gui;
+package ee.tkasekamp.vickywargame.gui;
 
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import ee.tkasekamp.vickywargame.core.Battle;
+import ee.tkasekamp.vickywargame.core.Unit;
+import ee.tkasekamp.vickywargame.core.War;
+import ee.tkasekamp.vickywargame.core.WarGoal;
+import ee.tkasekamp.vickywargame.core.Battle.Result;
+import ee.tkasekamp.vickywargame.core.Battle.Type;
+import ee.tkasekamp.vickywargame.parser.Parser;
+import ee.tkasekamp.vickywargame.util.Localisation;
+import ee.tkasekamp.vickywargame.util.PathLoader;
+import ee.tkasekamp.vickywargame.util.Reference;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -22,16 +32,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
-import main.Battle;
-import main.Battle.Result;
-import main.Battle.Type;
-import main.Localisation;
-import main.PathLoader;
-import main.Reference;
-import main.SaveGameReader;
-import main.Unit;
-import main.War;
-import main.WarGoal;
 
 /** This class handles the events passed on by the interface.
  * All the labels, buttons, tables and such are defined here.
@@ -251,7 +251,7 @@ public class GuiController implements Initializable {
     private WarDetailsTabContent detailsTab;
     private Localisation loc;
     private PathLoader pathLoader;
-    private SaveGameReader reader;
+    private Parser reader;
     
 //	public static GuiController getController() {
 //		return this;
@@ -263,7 +263,7 @@ public class GuiController implements Initializable {
 		detailsTab = new WarDetailsTabContent(this);
 		loc = new Localisation(this);
 		pathLoader = new PathLoader(this);
-		reader = new SaveGameReader(this);
+		reader = new Parser(this);
 		
     	/* Checking if paths exist */
 		pathLoader.pathLoader();
@@ -794,7 +794,7 @@ public class GuiController implements Initializable {
 	public PathLoader getPathLoader() {
 		return pathLoader;
 	}
-	public SaveGameReader getReader() {
+	public Parser getReader() {
 		return reader;
 	}
 

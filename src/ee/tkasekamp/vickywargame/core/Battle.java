@@ -1,7 +1,12 @@
-package main;
+package ee.tkasekamp.vickywargame.core;
 
 import java.util.Arrays;
 //import static gui.GuiController.getErrorLabel;
+
+
+
+
+import ee.tkasekamp.vickywargame.util.Reference;
 
 public class Battle {
 	private String date = "";

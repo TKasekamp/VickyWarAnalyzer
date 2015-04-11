@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1400.0" styleClass="background" xmlns:fx="http://javafx.com/fxml" fx:controller="gui.GuiController">
+<AnchorPane prefHeight="700.0" prefWidth="1400.0" styleClass="background" xmlns:fx="http://javafx.com/fxml" fx:controller="ee.tkasekamp.vickywargame.gui.GuiController">
   <!-- Better use scene builder to edit this
   Entirely built by Tonis Kasekamp -->
   <children>

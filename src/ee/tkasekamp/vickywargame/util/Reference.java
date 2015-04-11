@@ -1,6 +1,8 @@
-package main;
+package ee.tkasekamp.vickywargame.util;
 
 import java.util.ArrayList;
+
+import ee.tkasekamp.vickywargame.core.Country;
 
 
 /** This class holds all sorts of info, like the paths to savegames and images. It has also a constructor for some basic data about the save game */

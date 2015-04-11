@@ -1,6 +1,7 @@
-package main;
+package ee.tkasekamp.vickywargame.core;
 
-import main.Battle.Result;
+import ee.tkasekamp.vickywargame.core.Battle.Result;
+
 
 public class WarGoal {
 	/* Definitions are directly from save file */

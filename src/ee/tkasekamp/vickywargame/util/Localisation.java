@@ -1,6 +1,7 @@
-package main;
+package ee.tkasekamp.vickywargame.util;
 
-import gui.GuiController;
+import ee.tkasekamp.vickywargame.core.Country;
+import ee.tkasekamp.vickywargame.gui.GuiController;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -14,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import static main.Reference.countryList;
+import static ee.tkasekamp.vickywargame.util.Reference.countryList;
 
 /** Handles the localisation. I wanted it to only read from files which I knew had country tags, but 
  * that proved a bit difficult to implement. So now it reads all the .csv files in the localisation folder. 
