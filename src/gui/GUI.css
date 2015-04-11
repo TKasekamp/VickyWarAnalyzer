@@ -75,20 +75,20 @@ Tonis Kasekamp
 }
 
 .label {
-    -fx-font-size: 12pt; /* previously 11pt */
+    -fx-font-size: 11pt; /* previously 11pt */
     -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: white;
     -fx-opacity: 1; 
 }
 .label-dark {
-    -fx-font-size: 12pt; /* previously 11pt */
+    -fx-font-size: 11pt; /* previously 11pt */
     -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: white;
     -fx-opacity: 0.6; 
 }
 
 .label-header {
-    -fx-font-size: 32pt;
+    -fx-font-size: 30pt;
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill: white;
     -fx-opacity: 1;
@@ -119,7 +119,7 @@ Tonis Kasekamp
 }
 
 .table-view .column-header .label {
-    -fx-font-size: 20pt;
+    -fx-font-size: 14pt;
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill: white;
     -fx-alignment: center-left;

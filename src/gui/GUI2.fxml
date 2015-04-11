@@ -66,7 +66,7 @@
                             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
                           </padding>
                         </HBox>
-                        <Label styleClass="label-dark" text="Tõnis Kasekamp, University of Tartu, 2013" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <Label styleClass="label-dark" text="Tõnis Kasekamp, University of Tartu, 2013-2015" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                         <CheckBox fx:id="localisationCheck" mnemonicParsing="false" selected="true" styleClass="label" text="Use localisation (if unselected, country tags will be displayed as names)" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                       </children>
                       <columnConstraints>

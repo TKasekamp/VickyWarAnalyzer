@@ -31,25 +31,25 @@ import main.Battle.Result;
  */
 public class SaveGameReader  {
 	/*Everything to read in wars */
-	static private ArrayList<War> warList= new ArrayList<War>(); // Stores all wars in the save game
-	static private boolean warProcessing = false; // True when previous or active war has been found
-	static private int WAR_COUNTER = 0; // Used to count the list in allWars
+	private ArrayList<War> warList= new ArrayList<War>(); // Stores all wars in the save game
+	private boolean warProcessing = false; // True when previous or active war has been found
+	private int WAR_COUNTER = 0; // Used to count the list in allWars
 	/* War details */
-	static private String dateBuffer = ""; // Stores the last date for JoinedCountry or Battle dates
-	static private ArrayList<JoinedCountry> countryList = new ArrayList<JoinedCountry>();  // Stores temporarily to give to war
-	static private ArrayList<Battle> battleList = new ArrayList<Battle>();  // Stores temporarily to give to war
-	static private ArrayList<WarGoal> warGoalList = new ArrayList<WarGoal>();
+	private String dateBuffer = ""; // Stores the last date for JoinedCountry or Battle dates
+	private ArrayList<JoinedCountry> countryList = new ArrayList<JoinedCountry>();  // Stores temporarily to give to war
+	private ArrayList<Battle> battleList = new ArrayList<Battle>();  // Stores temporarily to give to war
+	private ArrayList<WarGoal> warGoalList = new ArrayList<WarGoal>();
 	/* Battle details */
-	static private ArrayList<Unit> unitList = new ArrayList<Unit>();  // Stores temporarily to give to battle. Used by both attacker and defender. 
-	static private boolean battleProcessing; // True so all new lines will be read into battleReader
-	static private int BATTLE_COUNTER = 0; // Used to change the current battle in battleList
-	static private boolean attackerDefender; // True is attacker, false is defender. Changed while reading a battle as the first units are attackers, the rest defenders
+	private ArrayList<Unit> unitList = new ArrayList<Unit>();  // Stores temporarily to give to battle. Used by both attacker and defender. 
+	private boolean battleProcessing; // True so all new lines will be read into battleReader
+	private int BATTLE_COUNTER = 0; // Used to change the current battle in battleList
+	private boolean attackerDefender; // True is attacker, false is defender. Changed while reading a battle as the first units are attackers, the rest defenders
 	/* WarGoal details */
-	static private boolean warGoalProcessing; // True so all new lines will be read into warGoalReader
-	static private int WARGOAL_COUNTER = 0;
-	static private boolean originalWarGoalProcessing; // New for Hod. Has the same function as warGoalProcessing
+	private boolean warGoalProcessing; // True so all new lines will be read into warGoalReader
+	private int WARGOAL_COUNTER = 0;
+	private boolean originalWarGoalProcessing; // New for Hod. Has the same function as warGoalProcessing
 	/* Various */
-	static private int bracketCounter = 0; // bracketCounter is uses to check if all data from the war has been read in
+	private int bracketCounter = 0; // bracketCounter is uses to check if all data from the war has been read in
 	static public Reference saveGameData = new Reference(); // public so it can be used by all methods
 	
 	private GuiController controller;
@@ -167,7 +167,7 @@ public class SaveGameReader  {
 	 * 
 	 * @param line
 	 */
-	public static void warReader(String line) {
+	public void warReader(String line) {
 		if (line.startsWith("name") && (warList.get(WAR_COUNTER).getName().equals(""))) { // Name check required so it is not overwritten
 			line = nameExtractor(line, 6, true);
 			warList.get(WAR_COUNTER).setName(line);
@@ -362,7 +362,7 @@ public class SaveGameReader  {
 	/** Very similar to battleReader in use
 	 * If war_goal is read in, all data is sent here until the line receiver comes
 	 */
-	public static void warGoalReader(String line) {
+	public void warGoalReader(String line) {
 		/* Check required because the first line in war goal is not always the same */
 		if (line.startsWith("war_goal")) {
 			WarGoal w = new WarGoal();
@@ -424,7 +424,7 @@ public class SaveGameReader  {
 		}
 	}
 	/** Similar to warGoalReader. Only used in HoD */
-	public static void originalWGoalReader(String line) {
+	public void originalWGoalReader(String line) {
 		if (line.startsWith("state")) { // state_province_id
 			line = nameExtractor(line, 18, false);
 			int state = Integer.parseInt(line);
@@ -474,7 +474,7 @@ public class SaveGameReader  {
 
 		}
 	}
-	public static void referenceReader(String line) {
+	public void referenceReader(String line) {
 		/* Checking the line and if there is no date 
 		 * Same with start_date*/
 		if (line.startsWith("date=") && saveGameData.getDate().equals("")) {
@@ -491,7 +491,7 @@ public class SaveGameReader  {
 			saveGameData.setStart_date(line);		
 		}
 	}
-	public static void bracketCounterChange(String line) {
+	public void bracketCounterChange(String line) {
 		// Increases or decreases the bracketCounter
 		if (line.equals("{")) {
 			bracketCounter++;
@@ -508,7 +508,7 @@ public class SaveGameReader  {
 	 * @param removeLast If true, removes the last character (used for ")
 	 * @return The correct line
 	 */
-	public static String nameExtractor(String line, int index, boolean removeLast) {
+	public String nameExtractor(String line, int index, boolean removeLast) {
 		StringBuilder sb = new StringBuilder(line);
 		sb.delete(0,index);
 		if (removeLast) {
@@ -516,11 +516,11 @@ public class SaveGameReader  {
 		}
 		return sb.toString();
 	}
-	public static String getDateBuffer() {
+	public String getDateBuffer() {
 		return dateBuffer;
 	}
-	public static void setDateBuffer(String dateBuffer) {
-		SaveGameReader.dateBuffer = dateBuffer;
+	public void setDateBuffer(String dateBuffer) {
+		this.dateBuffer = dateBuffer;
 	}
 
 }
