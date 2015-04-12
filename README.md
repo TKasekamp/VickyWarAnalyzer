@@ -14,6 +14,15 @@ Most of the counties have a flag with them. Originally I planned to find all of 
 
 This analyzer is NOT a fully-fledged save game analyzer. It does one thing and does it reasonably well.
 
+### Screenshots
+All wars tab:
+![alt text](http://i.imgur.com/pldQN5y.png "All wars tab")
+War details tab:
+![alt text](http://i.imgur.com/45GCUTm.png "War details tab")
+Battle details tab:
+![alt text](http://i.imgur.com/g8TKMQu.png "Battle details tab")
+Wargoals tab:
+![alt text](http://i.imgur.com/CZWOSRn.png "Wargoals tab")
 ## Tools
 * Java 8
 * JavaFX
@@ -32,6 +41,8 @@ If you really want to build your own version of this then go right ahead. I'm go
 The analyzer will produce many errors when it can't find the flag or the name for a country. Just ignore it.
 
 When the player country has fought no wars then it's name will be a TAG even if localisation is used.
+
+Modern Age Mod produces save games that won't work with the analyzer.
 
 The UI design was made by me and with Java 7 it looked fine. With Java 8 it doesn't. Thanks, Oracle. Due to this, some words will be hidden and some tables will have empty columns.
 
