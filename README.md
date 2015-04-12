@@ -6,7 +6,7 @@ Paradox forum thread: [link](https://forum.paradoxplaza.com/forum/index.php?thre
 
 ## Download links
 * Version 1.0.1 that works with Java 7 [link](https://dl.dropboxusercontent.com/u/107744145/vickywaranalyzer-1.0.1.jar)
-* New version 1.2.0 that works with Java 8 [link](https://dl.dropboxusercontent.com/u/107744145/vickywaranalyzer-1.2.0-jfx.jar)
+* New version 1.2.1 that works with Java 8 [link](https://dl.dropboxusercontent.com/u/107744145/vickywaranalyzer-1.2.1-jfx.jar)
 * Or you can look inside the dist folder for all the versions. Download by "View Raw".
 
 ## What is it

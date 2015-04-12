@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>ee.tkasekamp</groupId>
 	<artifactId>vickywaranalyzer</artifactId>
-	<version>1.2.0</version>
+	<version>1.2.1</version>
 	<name>Victoria II save game war analyser</name>
 	<description>Gets all the wars from the save game and presents them in a family-friendly way.</description>
 

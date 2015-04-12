@@ -55,7 +55,7 @@
                         <Label ellipsisString="" prefHeight="81.0" prefWidth="527.0" text="The save game reader has been tested to work with the base version of the game, AHD and HoD. This tool works as long as the save game stucture remains the same. The flags of the new HoD dominions are not used. " textAlignment="JUSTIFY" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <HBox id="HBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="3" GridPane.rowIndex="0">
                           <children>
-                            <Label contentDisplay="RIGHT" prefWidth="73.0" styleClass="label-dark" text="Version 1.2.0" wrapText="true" />
+                            <Label contentDisplay="RIGHT" prefWidth="73.0" styleClass="label-dark" text="Version 1.2.1" wrapText="true" />
                           </children>
                         </HBox>
                         <HBox id="HBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
@@ -66,7 +66,7 @@
                             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
                           </padding>
                         </HBox>
-                        <Label styleClass="label-dark" text="Tõnis Kasekamp, University of Tartu, 2013-2015" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <Label styleClass="label-dark" text="Tõnis Kasekamp, 2013-2015" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                         <CheckBox fx:id="localisationCheck" mnemonicParsing="false" selected="true" styleClass="label" text="Use localisation (if unselected, country tags will be displayed as names)" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                       </children>
                       <columnConstraints>
