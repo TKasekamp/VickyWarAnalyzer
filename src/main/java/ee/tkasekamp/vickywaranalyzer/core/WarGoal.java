@@ -1,6 +1,6 @@
-package ee.tkasekamp.vickywargame.core;
+package ee.tkasekamp.vickywaranalyzer.core;
 
-import ee.tkasekamp.vickywargame.core.Battle.Result;
+import ee.tkasekamp.vickywaranalyzer.core.Battle.Result;
 
 
 public class WarGoal {

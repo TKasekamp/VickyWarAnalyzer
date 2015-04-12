@@ -1,13 +1,13 @@
-package ee.tkasekamp.vickywargame.parser;
+package ee.tkasekamp.vickywaranalyzer.parser;
 
-import ee.tkasekamp.vickywargame.core.Battle;
-import ee.tkasekamp.vickywargame.core.JoinedCountry;
-import ee.tkasekamp.vickywargame.core.Unit;
-import ee.tkasekamp.vickywargame.core.War;
-import ee.tkasekamp.vickywargame.core.WarGoal;
-import ee.tkasekamp.vickywargame.core.Battle.Result;
-import ee.tkasekamp.vickywargame.gui.GuiController;
-import ee.tkasekamp.vickywargame.util.Reference;
+import ee.tkasekamp.vickywaranalyzer.core.Battle;
+import ee.tkasekamp.vickywaranalyzer.core.JoinedCountry;
+import ee.tkasekamp.vickywaranalyzer.core.Unit;
+import ee.tkasekamp.vickywaranalyzer.core.War;
+import ee.tkasekamp.vickywaranalyzer.core.WarGoal;
+import ee.tkasekamp.vickywaranalyzer.core.Battle.Result;
+import ee.tkasekamp.vickywaranalyzer.gui.GuiController;
+import ee.tkasekamp.vickywaranalyzer.util.Reference;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -161,7 +161,7 @@ public class Parser  {
 		scanner.close();
 		/* Setting the start date and casus belli */
 		for (War war : warList) {
-			war.setCasusBelliAndStartDate();
+			war.setCasusBelliAndStartDate();				
 		}
 		return warList;
 

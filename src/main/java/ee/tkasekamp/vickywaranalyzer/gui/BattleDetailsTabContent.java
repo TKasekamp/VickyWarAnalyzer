@@ -1,9 +1,9 @@
-package ee.tkasekamp.vickywargame.gui;
+package ee.tkasekamp.vickywaranalyzer.gui;
 
-import ee.tkasekamp.vickywargame.core.Battle;
-import ee.tkasekamp.vickywargame.core.Country;
-import ee.tkasekamp.vickywargame.core.Unit;
-import ee.tkasekamp.vickywargame.util.Reference;
+import ee.tkasekamp.vickywaranalyzer.core.Battle;
+import ee.tkasekamp.vickywaranalyzer.core.Country;
+import ee.tkasekamp.vickywaranalyzer.core.Unit;
+import ee.tkasekamp.vickywaranalyzer.util.Reference;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 /**

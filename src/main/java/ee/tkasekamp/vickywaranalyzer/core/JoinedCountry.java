@@ -1,4 +1,4 @@
-package ee.tkasekamp.vickywargame.core;
+package ee.tkasekamp.vickywaranalyzer.core;
 
 /**
  * Class for storing "add_attacker", "add_defender", "rem_attacker", "rem_defender" data

@@ -1,6 +1,6 @@
-package ee.tkasekamp.vickywargame.util;
+package ee.tkasekamp.vickywaranalyzer.util;
 
-import ee.tkasekamp.vickywargame.gui.GuiController;
+import ee.tkasekamp.vickywaranalyzer.gui.GuiController;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

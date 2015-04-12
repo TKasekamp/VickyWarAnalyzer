@@ -1,19 +1,19 @@
-package ee.tkasekamp.vickywargame.gui;
+package ee.tkasekamp.vickywaranalyzer.gui;
 
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import ee.tkasekamp.vickywargame.core.Battle;
-import ee.tkasekamp.vickywargame.core.Unit;
-import ee.tkasekamp.vickywargame.core.War;
-import ee.tkasekamp.vickywargame.core.WarGoal;
-import ee.tkasekamp.vickywargame.core.Battle.Result;
-import ee.tkasekamp.vickywargame.core.Battle.Type;
-import ee.tkasekamp.vickywargame.parser.Parser;
-import ee.tkasekamp.vickywargame.util.Localisation;
-import ee.tkasekamp.vickywargame.util.PathLoader;
-import ee.tkasekamp.vickywargame.util.Reference;
+import ee.tkasekamp.vickywaranalyzer.core.Battle;
+import ee.tkasekamp.vickywaranalyzer.core.Unit;
+import ee.tkasekamp.vickywaranalyzer.core.War;
+import ee.tkasekamp.vickywaranalyzer.core.WarGoal;
+import ee.tkasekamp.vickywaranalyzer.core.Battle.Result;
+import ee.tkasekamp.vickywaranalyzer.core.Battle.Type;
+import ee.tkasekamp.vickywaranalyzer.parser.Parser;
+import ee.tkasekamp.vickywaranalyzer.util.Localisation;
+import ee.tkasekamp.vickywaranalyzer.util.PathLoader;
+import ee.tkasekamp.vickywaranalyzer.util.Reference;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;

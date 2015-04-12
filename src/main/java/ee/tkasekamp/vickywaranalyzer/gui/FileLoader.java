@@ -1,6 +1,6 @@
-package ee.tkasekamp.vickywargame.gui;
+package ee.tkasekamp.vickywaranalyzer.gui;
 
-import static ee.tkasekamp.vickywargame.core.Country.findOfficalName;
+import static ee.tkasekamp.vickywaranalyzer.core.Country.findOfficalName;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -10,12 +10,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import ee.tkasekamp.vickywargame.core.Battle;
-import ee.tkasekamp.vickywargame.core.Country;
-import ee.tkasekamp.vickywargame.core.JoinedCountry;
-import ee.tkasekamp.vickywargame.core.War;
-import ee.tkasekamp.vickywargame.parser.Parser;
-import ee.tkasekamp.vickywargame.util.Reference;
+import ee.tkasekamp.vickywaranalyzer.core.Battle;
+import ee.tkasekamp.vickywaranalyzer.core.Country;
+import ee.tkasekamp.vickywaranalyzer.core.JoinedCountry;
+import ee.tkasekamp.vickywaranalyzer.core.War;
+import ee.tkasekamp.vickywaranalyzer.parser.Parser;
+import ee.tkasekamp.vickywaranalyzer.util.Reference;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;

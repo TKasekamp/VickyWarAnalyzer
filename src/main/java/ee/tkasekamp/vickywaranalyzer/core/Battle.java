@@ -1,4 +1,4 @@
-package ee.tkasekamp.vickywargame.core;
+package ee.tkasekamp.vickywaranalyzer.core;
 
 import java.util.Arrays;
 //import static gui.GuiController.getErrorLabel;
@@ -6,7 +6,8 @@ import java.util.Arrays;
 
 
 
-import ee.tkasekamp.vickywargame.util.Reference;
+
+import ee.tkasekamp.vickywaranalyzer.util.Reference;
 
 public class Battle {
 	private String date = "";

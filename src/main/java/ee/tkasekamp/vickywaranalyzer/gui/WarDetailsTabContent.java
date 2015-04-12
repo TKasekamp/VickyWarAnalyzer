@@ -1,14 +1,14 @@
-package ee.tkasekamp.vickywargame.gui;
+package ee.tkasekamp.vickywaranalyzer.gui;
 
-import static ee.tkasekamp.vickywargame.core.Country.findOfficalName;
-import static ee.tkasekamp.vickywargame.gui.GuiController.*;
-import ee.tkasekamp.vickywargame.core.Battle;
-import ee.tkasekamp.vickywargame.core.Country;
-import ee.tkasekamp.vickywargame.core.War;
-import ee.tkasekamp.vickywargame.core.WarGoal;
-import ee.tkasekamp.vickywargame.core.Battle.Result;
-import ee.tkasekamp.vickywargame.core.Battle.Type;
-import ee.tkasekamp.vickywargame.util.Reference;
+import static ee.tkasekamp.vickywaranalyzer.core.Country.findOfficalName;
+import static ee.tkasekamp.vickywaranalyzer.gui.GuiController.*;
+import ee.tkasekamp.vickywaranalyzer.core.Battle;
+import ee.tkasekamp.vickywaranalyzer.core.Country;
+import ee.tkasekamp.vickywaranalyzer.core.War;
+import ee.tkasekamp.vickywaranalyzer.core.WarGoal;
+import ee.tkasekamp.vickywaranalyzer.core.Battle.Result;
+import ee.tkasekamp.vickywaranalyzer.core.Battle.Type;
+import ee.tkasekamp.vickywaranalyzer.util.Reference;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 

@@ -1,8 +1,8 @@
-package ee.tkasekamp.vickywargame.core;
+package ee.tkasekamp.vickywaranalyzer.core;
 
 import java.util.Arrays;
 
-import static ee.tkasekamp.vickywargame.core.Country.findOfficalName;
+import static ee.tkasekamp.vickywaranalyzer.core.Country.findOfficalName;
 
 /**
  * War class. All critical info and a list about war events.

@@ -1,4 +1,4 @@
-package ee.tkasekamp.vickywargame.gui;
+package ee.tkasekamp.vickywaranalyzer.gui;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

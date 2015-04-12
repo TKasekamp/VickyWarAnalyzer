@@ -1,7 +1,7 @@
-package ee.tkasekamp.vickywargame.util;
+package ee.tkasekamp.vickywaranalyzer.util;
 
-import ee.tkasekamp.vickywargame.core.Country;
-import ee.tkasekamp.vickywargame.gui.GuiController;
+import ee.tkasekamp.vickywaranalyzer.core.Country;
+import ee.tkasekamp.vickywaranalyzer.gui.GuiController;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import static ee.tkasekamp.vickywargame.util.Reference.countryList;
+import static ee.tkasekamp.vickywaranalyzer.util.Reference.countryList;
 
 /** Handles the localisation. I wanted it to only read from files which I knew had country tags, but 
  * that proved a bit difficult to implement. So now it reads all the .csv files in the localisation folder. 
@@ -38,6 +38,7 @@ public class Localisation {
 		for (Country country: countryList) { 
 			countryMap.put(country.getTag(), ""); 
 		}
+
 //		countryMapTemp = new HashMap<countryMap;
 		/* Checking if checkbutton is selected. if it is, read localisation */
 

@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1400.0" styleClass="background" xmlns:fx="http://javafx.com/fxml" fx:controller="ee.tkasekamp.vickywargame.gui.GuiController">
+<AnchorPane prefHeight="700.0" prefWidth="1400.0" styleClass="background" xmlns:fx="http://javafx.com/fxml" fx:controller="ee.tkasekamp.vickywaranalyzer.gui.GuiController">
   <!-- Better use scene builder to edit this
   Entirely built by Tonis Kasekamp -->
   <children>
@@ -51,7 +51,7 @@
                           </children>
                         </HBox>
                         <Label fx:id="errorLabel" prefHeight="108.0" prefWidth="527.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="505.0" styleClass="label-header" text="Victoria II save game war analyzer" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="505.0" styleClass="label-header" text="Victoria II war analyzer" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                         <Label ellipsisString="" prefHeight="81.0" prefWidth="527.0" text="The save game reader has been tested to work with the base version of the game, AHD and HoD. This tool works as long as the save game stucture remains the same. The flags of the new HoD dominions are not used. " textAlignment="JUSTIFY" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <HBox id="HBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="3" GridPane.rowIndex="0">
                           <children>
