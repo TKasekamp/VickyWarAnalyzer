@@ -5,9 +5,9 @@ Or the full name Victoria II save game war analyzer. Naming stuff is hard.
 Paradox forum thread: [link](https://forum.paradoxplaza.com/forum/index.php?threads/tool-victoria-ii-save-game-war-analyzer.689055/)
 
 ## Download links
-* Version 1.0.1 that works with Java 7 [link](https://dl.dropboxusercontent.com/u/107744145/vickywaranalyzer-1.0.1.jar)
-* New version 1.2.1 that works with Java 8 [link](https://dl.dropboxusercontent.com/u/107744145/vickywaranalyzer-1.2.1-jfx.jar)
-* Or you can look inside the dist folder for all the versions. Download by "View Raw".
+* Version 1.0.1 that works with Java 7 [link](bit.ly/1P50Wf2)
+* New version 1.2.1 that works with Java 8 [link](http://bit.ly/1aKLrtk)
+* Or you can look inside the dist folder for all the versions. 
 
 ## What is it
 The analyzer reads the save game produced by Victoria II (it's a strategy game, look it up) and presents all the wars in a family-friendly way. The program retrieves all the data that can be retrieved from the save file, such as total losses in a war, all the battles, wargoals and the war participants.
