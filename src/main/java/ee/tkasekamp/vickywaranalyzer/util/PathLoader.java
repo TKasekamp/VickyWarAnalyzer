@@ -1,8 +1,5 @@
 package ee.tkasekamp.vickywaranalyzer.util;
 
-import ee.tkasekamp.vickywaranalyzer.gui.GuiController;
-import static ee.tkasekamp.vickywaranalyzer.util.Constants.*;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -12,88 +9,110 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
-/** Class for handling savegame path reading, finding and loading from a file 
- */
 public class PathLoader {
-	private GuiController controller;
+	public static final String PROGRAM_FILES_X86 = "C:/Program Files (x86)";
+	public static final String PROGRAM_FILES = "C:/Program Files";
+	public static final String STEAM = "Steam/steamapps/common";
+	public static final String PARADOX_FOLDER = "Paradox Interactive";
+	public static final String VICTORIA_2 = "Victoria 2";
+	public static final String VICTORIA_AHD = "Victoria 2 A House Divided";
+	public static final String VICTORIA_HOD = "Victoria II - A Heart of Darkness";
+	public static final String SLASH = "/";
 	
-	public PathLoader(GuiController controller) {
-		this.controller = controller;
-	}
-	
-	
-	/** Checking if the path file exists. If not, attempts to construct 
-	 * the default save game paths. If the file exist, reads from it.
+	public static final String PATHS = "./paths.txt";
+	/**
+	 * Checking if the path file exists. If not, attempts to guess the default
+	 * save game and install folders.
+	 * 
+	 * @throws IOException
 	 * 
 	 */
-	public void pathLoader() {
-		if ((new File("./paths.txt")).exists()) {
-			readPaths();
+	public static String[] getFolders() throws IOException {
+		String[] paths = new String[2];
+		if ((new File(PATHS)).exists()) {
+			paths = readPaths();
+		} else {
+			paths[0] = checkSaveGameFolder();
+			paths[1] = checkInstallFolder();
 		}
-		else { 
-			checkSaveGamePath();
-			checkInstallPath();	
-		}
+		return paths;
 	}
-	/** Gets the user of the system and constructs a default save game path.
-	 * If it is not found, sets the path to "". 
+
+	/**
+	 * Gets the user of the system and constructs a default save game path. If
+	 * it is not found, sets the path to "".
 	 */
-	private static void checkSaveGamePath() {
+	private static String checkSaveGameFolder() {
 		String user = System.getProperty("user.name");
-		Reference.SAVEGAMEPATH = "C:/Users/" + user + "/Documents/Paradox Interactive/Victoria II/save games/";
-		if (!(new File(Reference.SAVEGAMEPATH)).exists()) {
-			Reference.SAVEGAMEPATH = "";
-		}
+		String saveGameFolder = "C:/Users/" + user
+				+ "/Documents/Paradox Interactive/Victoria II/save games/";
+		if (new File(saveGameFolder).exists())
+			return saveGameFolder;
+		else
+			return "";
+
 	}
-	
-	/** Checks several places where I think the game directory could be. Starting from the newest version.
+
+	/**
+	 * Checks several places where I think the game directory could be. Starting
+	 * from the newest version.
 	 */
-	private String checkInstallPath() {
+	private static String checkInstallFolder() {
 		/* Heart of Darkness */
-		if (new File(PROGRAM_FILES + SLASH + PARADOX_FOLDER + SLASH + VICTORIA_HOD).exists()) {
-			return PROGRAM_FILES + SLASH + PARADOX_FOLDER + SLASH + VICTORIA_HOD;
-		}
-		else if ((new File(PROGRAM_FILES + SLASH + STEAM + SLASH + VICTORIA_HOD)).exists()) {
+		if (new File(PROGRAM_FILES + SLASH + PARADOX_FOLDER + SLASH
+				+ VICTORIA_HOD).exists()) {
+			return PROGRAM_FILES + SLASH + PARADOX_FOLDER + SLASH
+					+ VICTORIA_HOD;
+		} else if ((new File(PROGRAM_FILES + SLASH + STEAM + SLASH
+				+ VICTORIA_HOD)).exists()) {
 			return PROGRAM_FILES + SLASH + STEAM + SLASH + VICTORIA_HOD;
-		}
-		else if ((new File(PROGRAM_FILES_X86 + SLASH + STEAM + SLASH + VICTORIA_HOD)).exists()) {
+		} else if ((new File(PROGRAM_FILES_X86 + SLASH + STEAM + SLASH
+				+ VICTORIA_HOD)).exists()) {
 			return PROGRAM_FILES_X86 + SLASH + STEAM + SLASH + VICTORIA_HOD;
-		}
-		else if ((new File(PROGRAM_FILES_X86 + SLASH + PARADOX_FOLDER + SLASH + VICTORIA_HOD)).exists()) {
-			return PROGRAM_FILES_X86 + SLASH + PARADOX_FOLDER + SLASH + VICTORIA_HOD;
+		} else if ((new File(PROGRAM_FILES_X86 + SLASH + PARADOX_FOLDER + SLASH
+				+ VICTORIA_HOD)).exists()) {
+			return PROGRAM_FILES_X86 + SLASH + PARADOX_FOLDER + SLASH
+					+ VICTORIA_HOD;
 		}
 		/* A House Divided */
-		if (new File(PROGRAM_FILES + SLASH + PARADOX_FOLDER + SLASH + VICTORIA_AHD).exists()) {
-			return PROGRAM_FILES + SLASH + PARADOX_FOLDER + SLASH + VICTORIA_AHD;
-		}
-		else if ((new File(PROGRAM_FILES + SLASH + STEAM + SLASH + VICTORIA_AHD)).exists()) {
+		if (new File(PROGRAM_FILES + SLASH + PARADOX_FOLDER + SLASH
+				+ VICTORIA_AHD).exists()) {
+			return PROGRAM_FILES + SLASH + PARADOX_FOLDER + SLASH
+					+ VICTORIA_AHD;
+		} else if ((new File(PROGRAM_FILES + SLASH + STEAM + SLASH
+				+ VICTORIA_AHD)).exists()) {
 			return PROGRAM_FILES + SLASH + STEAM + SLASH + VICTORIA_AHD;
-		}
-		else if ((new File(PROGRAM_FILES_X86 + SLASH + STEAM + SLASH + VICTORIA_AHD)).exists()) {
+		} else if ((new File(PROGRAM_FILES_X86 + SLASH + STEAM + SLASH
+				+ VICTORIA_AHD)).exists()) {
 			return PROGRAM_FILES_X86 + SLASH + STEAM + SLASH + VICTORIA_AHD;
-		}
-		else if ((new File(PROGRAM_FILES_X86 + SLASH + PARADOX_FOLDER + SLASH + VICTORIA_AHD)).exists()) {
-			return PROGRAM_FILES_X86 + SLASH + PARADOX_FOLDER + SLASH + VICTORIA_AHD;
+		} else if ((new File(PROGRAM_FILES_X86 + SLASH + PARADOX_FOLDER + SLASH
+				+ VICTORIA_AHD)).exists()) {
+			return PROGRAM_FILES_X86 + SLASH + PARADOX_FOLDER + SLASH
+					+ VICTORIA_AHD;
 		}
 		/* Vanilla */
-		if (new File(PROGRAM_FILES + SLASH + PARADOX_FOLDER + SLASH + VICTORIA_2).exists()) {
+		if (new File(PROGRAM_FILES + SLASH + PARADOX_FOLDER + SLASH
+				+ VICTORIA_2).exists()) {
 			return PROGRAM_FILES + SLASH + PARADOX_FOLDER + SLASH + VICTORIA_2;
-		}
-		else if ((new File(PROGRAM_FILES + SLASH + STEAM + SLASH + VICTORIA_2)).exists()) {
+		} else if ((new File(PROGRAM_FILES + SLASH + STEAM + SLASH + VICTORIA_2))
+				.exists()) {
 			return PROGRAM_FILES + SLASH + STEAM + SLASH + VICTORIA_2;
-		}
-		else if ((new File(PROGRAM_FILES_X86 + SLASH + STEAM + SLASH + VICTORIA_2)).exists()) {
+		} else if ((new File(PROGRAM_FILES_X86 + SLASH + STEAM + SLASH
+				+ VICTORIA_2)).exists()) {
 			return PROGRAM_FILES_X86 + SLASH + STEAM + SLASH + VICTORIA_2;
-		}
-		else if ((new File(PROGRAM_FILES_X86 + SLASH + PARADOX_FOLDER + SLASH + VICTORIA_2)).exists()) {
-			return PROGRAM_FILES_X86 + SLASH + PARADOX_FOLDER + SLASH + VICTORIA_2;
-		}
-		else {
+		} else if ((new File(PROGRAM_FILES_X86 + SLASH + PARADOX_FOLDER + SLASH
+				+ VICTORIA_2)).exists()) {
+			return PROGRAM_FILES_X86 + SLASH + PARADOX_FOLDER + SLASH
+					+ VICTORIA_2;
+		} else {
 			return "";
 		}
 	}
-	/** Takes the path of the full path of the savegame and return
-	 * the directory it was in 
+
+	/**
+	 * Takes the path of the full path of the savegame and return the directory
+	 * it was in
+	 * 
 	 * @param path
 	 */
 	private static String getDirectoryOnly(String path) {
@@ -104,48 +123,53 @@ public class PathLoader {
 		Reference.SAVEGAMEPATH = line.toString();
 		return line.toString();
 	}
-	
-	/** This method saves the paths so the user does not have
-	 * to choose the file every time. Saved after every loading of a savefile
-	 * in GuiController.startIssueFired
+
+	/**
+	 * This method saves the paths so the user does not have to choose the file
+	 * every time.
+	 * 
+	 * @throws IOException
 	 */
-	public void savePaths() {
-			try {
-//				FileWriter out = new FileWriter("paths.txt");
-				BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("paths.txt"),"UTF-8"));
-				out.write(getDirectoryOnly(Reference.saveGameFile));
-				out.write("\n");
-				out.write(Reference.INSTALLPATH);
-				out.close();
-			} catch (IOException e) {
-				 controller.getErrorLabel().setText(controller.getErrorLabel().getText() + " Could not save the paths.txt.");
-			}
-			
-	}
-	/** Reads file ./paths.txt.
-	 * First line is the SAVEGAMEPATH, second the INSTALLPATH
-	 */
-	private void readPaths() {
+	public void savePaths() throws IOException {
 		try {
-			/* Lifted from saveGameReader */
-			InputStreamReader reader = new InputStreamReader(new FileInputStream("./paths.txt"), "UTF-8"); // This encoding seems to work for õ
-			BufferedReader scanner = new BufferedReader(reader);
-			
-			String line;
-			while ((line = scanner.readLine()) != null) {
-				/* Simple solution to only give value if the paths are empty */
-				if (Reference.SAVEGAMEPATH.equals("")){
-					Reference.SAVEGAMEPATH = line;
-				}
-				else if (Reference.INSTALLPATH.equals("")){
-					Reference.INSTALLPATH = line;
-				}
-			}
-			scanner.close();
+			BufferedWriter out = new BufferedWriter(new OutputStreamWriter(
+					new FileOutputStream("paths.txt"), "UTF-8"));
+			out.write(getDirectoryOnly(Reference.saveGameFile));
+			out.write("\n");
+			out.write(Reference.INSTALLPATH);
+			out.close();
 		} catch (IOException e) {
-			controller.getErrorLabel().setText(controller.getErrorLabel().getText() + " Could not read paths.txt. ");
+			throw new IOException("Could not save the paths.txt.");
+
 		}
+
 	}
 
+	/**
+	 * Reads file {@link Constants#PATHS}. First line is the SAVEGAMEPATH,
+	 * second the INSTALLPATH
+	 * 
+	 * @throws IOException
+	 */
+	private static String[] readPaths() throws IOException {
+		String[] paths = new String[2];
+
+		InputStreamReader reader = new InputStreamReader(new FileInputStream(
+				PATHS), "UTF-8");
+		BufferedReader scanner = new BufferedReader(reader);
+
+		String line;
+		int counter = 0;
+		while ((line = scanner.readLine()) != null) {
+			if (counter == 0 | counter == 1)
+				paths[counter] = line;
+
+			counter++;
+
+		}
+		scanner.close();
+
+		return paths;
+	}
 
 }
