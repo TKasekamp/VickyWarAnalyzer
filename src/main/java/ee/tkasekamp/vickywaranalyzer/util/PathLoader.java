@@ -1,6 +1,7 @@
 package ee.tkasekamp.vickywaranalyzer.util;
 
 import ee.tkasekamp.vickywaranalyzer.gui.GuiController;
+import static ee.tkasekamp.vickywaranalyzer.util.Constants.*;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -45,41 +46,50 @@ public class PathLoader {
 		}
 	}
 	
-	/** Checks several places where I think the game directory could be. Starting from the newest version
+	/** Checks several places where I think the game directory could be. Starting from the newest version.
 	 */
-	private static void checkInstallPath() {
+	private String checkInstallPath() {
 		/* Heart of Darkness */
-		if ((new File("C:/Program Files (x86)/Paradox Interactive/Victoria II - A Heart of Darkness")).exists()) {
-			Reference.INSTALLPATH = "C:/Program Files (x86)/Paradox Interactive/Victoria II - A Heart of Darkness";
+		if (new File(PROGRAM_FILES + SLASH + PARADOX_FOLDER + SLASH + VICTORIA_HOD).exists()) {
+			return PROGRAM_FILES + SLASH + PARADOX_FOLDER + SLASH + VICTORIA_HOD;
 		}
-		else if ((new File("C:/Program Files (x86)/Steam/steamapps/common/Victoria II - A Heart of Darkness")).exists()) {
-			Reference.INSTALLPATH = "C:/Program Files (x86)/Steam/steamapps/common/Victoria II - A Heart of Darkness";
+		else if ((new File(PROGRAM_FILES + SLASH + STEAM + SLASH + VICTORIA_HOD)).exists()) {
+			return PROGRAM_FILES + SLASH + STEAM + SLASH + VICTORIA_HOD;
 		}
-		else if ((new File("C:/Program Files/Paradox Interactive/Victoria II - A Heart of Darkness")).exists()) {
-			Reference.INSTALLPATH = "C:/Program Files/Paradox Interactive/Victoria II - A Heart of Darkness";
+		else if ((new File(PROGRAM_FILES_X86 + SLASH + STEAM + SLASH + VICTORIA_HOD)).exists()) {
+			return PROGRAM_FILES_X86 + SLASH + STEAM + SLASH + VICTORIA_HOD;
+		}
+		else if ((new File(PROGRAM_FILES_X86 + SLASH + PARADOX_FOLDER + SLASH + VICTORIA_HOD)).exists()) {
+			return PROGRAM_FILES_X86 + SLASH + PARADOX_FOLDER + SLASH + VICTORIA_HOD;
 		}
 		/* A House Divided */
-		else if ((new File("C:/Program Files (x86)/Paradox Interactive/Victoria 2 A House Divided")).exists()) {
-			Reference.INSTALLPATH = "C:/Program Files (x86)/Paradox Interactive/Victoria 2 A House Divided";
+		if (new File(PROGRAM_FILES + SLASH + PARADOX_FOLDER + SLASH + VICTORIA_AHD).exists()) {
+			return PROGRAM_FILES + SLASH + PARADOX_FOLDER + SLASH + VICTORIA_AHD;
 		}
-		else if ((new File("C:/Program Files (x86)/Steam/steamapps/common/Victoria 2 A House Divided")).exists()) {
-			Reference.INSTALLPATH = "C:/Program Files (x86)/Steam/steamapps/common/Victoria 2 A House Divided";
+		else if ((new File(PROGRAM_FILES + SLASH + STEAM + SLASH + VICTORIA_AHD)).exists()) {
+			return PROGRAM_FILES + SLASH + STEAM + SLASH + VICTORIA_AHD;
 		}
-		else if ((new File("C:/Program Files/Paradox Interactive/Victoria 2 A House Divided")).exists()) {
-			Reference.INSTALLPATH = "C:/Program Files/Paradox Interactive/Victoria 2 A House Divided";
+		else if ((new File(PROGRAM_FILES_X86 + SLASH + STEAM + SLASH + VICTORIA_AHD)).exists()) {
+			return PROGRAM_FILES_X86 + SLASH + STEAM + SLASH + VICTORIA_AHD;
+		}
+		else if ((new File(PROGRAM_FILES_X86 + SLASH + PARADOX_FOLDER + SLASH + VICTORIA_AHD)).exists()) {
+			return PROGRAM_FILES_X86 + SLASH + PARADOX_FOLDER + SLASH + VICTORIA_AHD;
 		}
 		/* Vanilla */
-		else if ((new File("C:/Program Files (x86)/Paradox Interactive/Victoria 2")).exists()) {
-			Reference.INSTALLPATH = "C:/Program Files (x86)/Paradox Interactive/Victoria 2";
+		if (new File(PROGRAM_FILES + SLASH + PARADOX_FOLDER + SLASH + VICTORIA_2).exists()) {
+			return PROGRAM_FILES + SLASH + PARADOX_FOLDER + SLASH + VICTORIA_2;
 		}
-		else if ((new File("C:/Program Files (x86)/Steam/steamapps/common/Victoria 2")).exists()) {
-			Reference.INSTALLPATH = "C:/Program Files (x86)/Steam/steamapps/common/Victoria 2";
+		else if ((new File(PROGRAM_FILES + SLASH + STEAM + SLASH + VICTORIA_2)).exists()) {
+			return PROGRAM_FILES + SLASH + STEAM + SLASH + VICTORIA_2;
 		}
-		else if ((new File("C:/Program Files/Paradox Interactive/Victoria 2")).exists()) {
-			Reference.INSTALLPATH = "C:/Program Files/Paradox Interactive/Victoria 2";
+		else if ((new File(PROGRAM_FILES_X86 + SLASH + STEAM + SLASH + VICTORIA_2)).exists()) {
+			return PROGRAM_FILES_X86 + SLASH + STEAM + SLASH + VICTORIA_2;
+		}
+		else if ((new File(PROGRAM_FILES_X86 + SLASH + PARADOX_FOLDER + SLASH + VICTORIA_2)).exists()) {
+			return PROGRAM_FILES_X86 + SLASH + PARADOX_FOLDER + SLASH + VICTORIA_2;
 		}
 		else {
-			Reference.INSTALLPATH = "";
+			return "";
 		}
 	}
 	/** Takes the path of the full path of the savegame and return
@@ -132,7 +142,7 @@ public class PathLoader {
 				}
 			}
 			scanner.close();
-		} catch (NullPointerException | IOException e) {
+		} catch (IOException e) {
 			controller.getErrorLabel().setText(controller.getErrorLabel().getText() + " Could not read paths.txt. ");
 		}
 	}

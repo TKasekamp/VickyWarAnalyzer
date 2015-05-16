@@ -38,7 +38,7 @@ public class SettingsController extends AbstractController {
 
 	@FXML
 	void directoryIssueFired(ActionEvent event) {
-        throw new RuntimeException("An unknown error occurred");
+		
 	}
 
 	@FXML
