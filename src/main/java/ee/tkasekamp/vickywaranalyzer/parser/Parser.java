@@ -55,7 +55,7 @@ public class Parser  {
 	private boolean originalWarGoalProcessing; // New for Hod. Has the same function as warGoalProcessing
 	/* Various */
 	private int bracketCounter = 0; // bracketCounter is uses to check if all data from the war has been read in
-	static public Reference saveGameData = new Reference(); // public so it can be used by all methods
+//	static public Reference saveGameData = new Reference(); // public so it can be used by all methods
 	
 	private GuiController controller;
 	public Parser(GuiController controller) {

@@ -49,7 +49,7 @@ public class Main extends Application {
 
 	private static void showErrorDialog(Throwable e) {
 		StringWriter errorMsg = new StringWriter();
-		e.printStackTrace(new PrintWriter(errorMsg));
+		e.getCause().getCause().printStackTrace(new PrintWriter(errorMsg));
 		Stage dialog = new Stage();
 		dialog.initModality(Modality.APPLICATION_MODAL);
 		FXMLLoader loader = new FXMLLoader(Main.class.getClassLoader()

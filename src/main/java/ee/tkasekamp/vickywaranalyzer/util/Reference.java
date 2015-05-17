@@ -11,11 +11,11 @@ public class Reference {
 	public final static String [] navalUnitsList = {"clipper_transport", "commerce_raider", "cruiser", "dreadnougth", "frigate", "ironclad", 
 		"manowar", "monitor", "steam_transport", "battleship" };
 	/* Paths here for the time being */
-	public static String SAVEGAMEPATH = "";
-	public static String INSTALLPATH = "";
+//	public static String SAVEGAMEPATH = "";
+//	public static String INSTALLPATH = "";
 	public final static String FLAGPATH = "/flags/"; 
-	public static String saveGameFile; // Path to a specific save game
-	public static String installFile;
+//	public String saveGameFile; // Path to a specific save game
+//	public String installFile;
 	public static ArrayList<Country> countryList = new ArrayList<Country>();
 	/* Data about the save game */
 	private String date = "";

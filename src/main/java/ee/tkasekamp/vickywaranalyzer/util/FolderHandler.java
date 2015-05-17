@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
-public class PathLoader {
+public class FolderHandler {
 	public static final String PROGRAM_FILES_X86 = "C:/Program Files (x86)";
 	public static final String PROGRAM_FILES = "C:/Program Files";
 	public static final String STEAM = "Steam/steamapps/common";
@@ -120,7 +120,7 @@ public class PathLoader {
 		int index = line.lastIndexOf("/");
 
 		line.delete(index + 1, line.length());
-		Reference.SAVEGAMEPATH = line.toString();
+//		Reference.SAVEGAMEPATH = line.toString();
 		return line.toString();
 	}
 
@@ -130,13 +130,13 @@ public class PathLoader {
 	 * 
 	 * @throws IOException
 	 */
-	public void savePaths() throws IOException {
+	public static void savePaths(String saveGameFolder, String installFolder) throws IOException {
 		try {
 			BufferedWriter out = new BufferedWriter(new OutputStreamWriter(
 					new FileOutputStream("paths.txt"), "UTF-8"));
-			out.write(getDirectoryOnly(Reference.saveGameFile));
+			out.write(saveGameFolder);
 			out.write("\n");
-			out.write(Reference.INSTALLPATH);
+			out.write(installFolder);
 			out.close();
 		} catch (IOException e) {
 			throw new IOException("Could not save the paths.txt.");

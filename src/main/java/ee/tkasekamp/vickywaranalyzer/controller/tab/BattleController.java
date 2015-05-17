@@ -85,4 +85,10 @@ public class BattleController extends AbstractController{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void populate() {
+		// TODO Auto-generated method stub
+		
+	}
 }

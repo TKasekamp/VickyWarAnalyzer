@@ -12,7 +12,7 @@ import ee.tkasekamp.vickywaranalyzer.core.Battle.Result;
 import ee.tkasekamp.vickywaranalyzer.core.Battle.Type;
 import ee.tkasekamp.vickywaranalyzer.parser.Parser;
 import ee.tkasekamp.vickywaranalyzer.util.Localisation;
-import ee.tkasekamp.vickywaranalyzer.util.PathLoader;
+import ee.tkasekamp.vickywaranalyzer.util.FolderHandler;
 import ee.tkasekamp.vickywaranalyzer.util.Reference;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -250,7 +250,7 @@ public class GuiController implements Initializable {
     private FileLoader fileLoader;
     private WarDetailsTabContent detailsTab;
     private Localisation loc;
-    private PathLoader pathLoader;
+    private FolderHandler pathLoader;
     private Parser reader;
     
 //	public static GuiController getController() {
@@ -262,7 +262,7 @@ public class GuiController implements Initializable {
 		fileLoader = new FileLoader(this);
 		detailsTab = new WarDetailsTabContent(this);
 		loc = new Localisation(this);
-		pathLoader = new PathLoader(this);
+		pathLoader = new FolderHandler(this);
 		reader = new Parser(this);
 		
     	/* Checking if paths exist */
@@ -791,7 +791,7 @@ public class GuiController implements Initializable {
 	public Localisation getLoc() {
 		return loc;
 	}
-	public PathLoader getPathLoader() {
+	public FolderHandler getPathLoader() {
 		return pathLoader;
 	}
 	public Parser getReader() {

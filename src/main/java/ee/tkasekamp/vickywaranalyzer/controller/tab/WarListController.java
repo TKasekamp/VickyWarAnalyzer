@@ -88,4 +88,10 @@ public class WarListController extends AbstractController{
 		
 	}
 
+	@Override
+	public void populate() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
