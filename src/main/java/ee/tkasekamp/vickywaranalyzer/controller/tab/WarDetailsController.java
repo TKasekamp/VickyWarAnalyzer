@@ -5,9 +5,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import ee.tkasekamp.vickywaranalyzer.controller.MainController;
+import ee.tkasekamp.vickywaranalyzer.core.Battle;
+import ee.tkasekamp.vickywaranalyzer.core.Battle.Result;
+import ee.tkasekamp.vickywaranalyzer.core.Battle.Type;
 import ee.tkasekamp.vickywaranalyzer.core.War;
+import ee.tkasekamp.vickywaranalyzer.gui.ObservableJoinedCountry;
 import ee.tkasekamp.vickywaranalyzer.service.ModelService;
 
 public class WarDetailsController extends AbstractController {
@@ -25,19 +30,19 @@ public class WarDetailsController extends AbstractController {
 	private Label attackerTotalShipLossesLabel;
 
 	@FXML
-	private TableView<?> attackerTable;
+	private TableView<ObservableJoinedCountry> attackerTable;
 
 	@FXML
-	private TableColumn<?, ?> colAttackerFlag;
+	private TableColumn<ObservableJoinedCountry, ImageView> colAttackerFlag;
 
 	@FXML
-	private TableColumn<?, ?> colAttackerName;
+	private TableColumn<ObservableJoinedCountry, String> colAttackerName;
 
 	@FXML
-	private TableColumn<?, ?> colAttackerStartDate;
+	private TableColumn<ObservableJoinedCountry, String> colAttackerStartDate;
 
 	@FXML
-	private TableColumn<?, ?> colAttackerEndDate;
+	private TableColumn<ObservableJoinedCountry, String> colAttackerEndDate;
 
 	@FXML
 	private Label warAttackerHelper;
@@ -46,28 +51,28 @@ public class WarDetailsController extends AbstractController {
 	private Label warAttacker;
 
 	@FXML
-	private TableView<?> battleTable;
+	private TableView<Battle> battleTable;
 
 	@FXML
-	private TableColumn<?, ?> colNameBattle;
+	private TableColumn<Battle, String> colNameBattle;
 
 	@FXML
-	private TableColumn<?, ?> colDateBattle;
+	private TableColumn<Battle, String> colDateBattle;
 
 	@FXML
-	private TableColumn<?, ?> colAttackerBattle;
+	private TableColumn<Battle, String> colAttackerBattle;
 
 	@FXML
-	private TableColumn<?, ?> colDefenderBattle;
+	private TableColumn<Battle, String> colDefenderBattle;
 
 	@FXML
-	private TableColumn<?, ?> colTypeBattle;
+	private TableColumn<Battle, Type> colTypeBattle;
 
 	@FXML
-	private TableColumn<?, ?> colBattleResult;
+	private TableColumn<Battle, Result> colBattleResult;
 
 	@FXML
-	private TableColumn<?, ?> colBattleTotalLosses;
+	private TableColumn<Battle, Integer> colBattleTotalLosses;
 
 	@FXML
 	private Label warNameLabel;
@@ -142,19 +147,19 @@ public class WarDetailsController extends AbstractController {
 	private Label defenderTotalShipLossesLabel;
 
 	@FXML
-	private TableView<?> defenderTable;
+	private TableView<ObservableJoinedCountry> defenderTable;
 
 	@FXML
-	private TableColumn<?, ?> colDefenderFlag;
+	private TableColumn<ObservableJoinedCountry, ImageView> colDefenderFlag;
 
 	@FXML
-	private TableColumn<?, ?> colDefenderName;
+	private TableColumn<ObservableJoinedCountry, String> colDefenderName;
 
 	@FXML
-	private TableColumn<?, ?> colDefenderStartDate;
+	private TableColumn<ObservableJoinedCountry, String> colDefenderStartDate;
 
 	@FXML
-	private TableColumn<?, ?> colDefenderEndDate;
+	private TableColumn<ObservableJoinedCountry, String> colDefenderEndDate;
 
 	@FXML
 	private Label warDefenderHelper;
@@ -171,6 +176,7 @@ public class WarDetailsController extends AbstractController {
 		main = mainController;
 		this.tab = tab;
 		this.modelService = modelService;
+		setColumnValues();
 	}
 
 	@Override
@@ -181,7 +187,69 @@ public class WarDetailsController extends AbstractController {
 	}
 	
 	public void populate(War war) {
-		
+		/* Set the name of the tab */
+		tab.setText(war.getName());
+		tab.setDisable(false);
+		/* Basic information about the war */
+		warNameLabel.setText(war.getName());
+		warStartDateLabel.setText(war.getStartDate());
+		warEndDateLabel.setText(war.getEndDate());
+		warActionLabel.setText(war.getAction());
+		if (war.isActive()) {
+			warHasEndedLabel.setText("No");
+		} else {
+			warHasEndedLabel.setText("Yes");
+		}
+	}
+	
+	/**
+	 * This method is run once on startup and it defines the values of columns
+	 * in the war tab and the wargoaltab.
+	 */
+	private void setColumnValues() {
+		/* Connecting the War fields with warTable columns */
+		colNameBattle.setCellValueFactory(
+				new PropertyValueFactory<Battle, String>("name"));
+		colDateBattle.setCellValueFactory(
+				new PropertyValueFactory<Battle, String>("date"));
+		colDefenderBattle.setCellValueFactory(
+				new PropertyValueFactory<Battle, String>("defenderOfficial"));
+		colAttackerBattle.setCellValueFactory(
+				new PropertyValueFactory<Battle, String>("attackerOfficial"));
+		colTypeBattle.setCellValueFactory(
+				new PropertyValueFactory<Battle, Type>("battleType"));
+		colBattleResult.setCellValueFactory(
+				new PropertyValueFactory<Battle, Result>("res"));
+		colBattleTotalLosses.setCellValueFactory(
+				new PropertyValueFactory<Battle, Integer>("totalLosses"));
+
+		/* Defender table */
+		colDefenderName.setCellValueFactory(
+				new PropertyValueFactory<ObservableJoinedCountry, String>(
+						"officialName"));
+		colDefenderFlag.setCellValueFactory(
+				new PropertyValueFactory<ObservableJoinedCountry, ImageView>(
+						"flag"));
+		colDefenderStartDate.setCellValueFactory(
+				new PropertyValueFactory<ObservableJoinedCountry, String>(
+						"joinDate"));
+		colDefenderEndDate.setCellValueFactory(
+				new PropertyValueFactory<ObservableJoinedCountry, String>(
+						"endDate"));
+
+		/* Attacker table */
+		colAttackerName.setCellValueFactory(
+				new PropertyValueFactory<ObservableJoinedCountry, String>(
+						"officialName"));
+		colAttackerFlag.setCellValueFactory(
+				new PropertyValueFactory<ObservableJoinedCountry, ImageView>(
+						"flag"));
+		colAttackerStartDate.setCellValueFactory(
+				new PropertyValueFactory<ObservableJoinedCountry, String>(
+						"joinDate"));
+		colAttackerEndDate.setCellValueFactory(
+				new PropertyValueFactory<ObservableJoinedCountry, String>(
+						"endDate"));
 	}
 
 }
