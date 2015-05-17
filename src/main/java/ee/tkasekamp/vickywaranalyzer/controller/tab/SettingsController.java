@@ -61,8 +61,6 @@ public class SettingsController extends AbstractController {
 		try {
 			File file = chooser.showDialog(null);
 			installTextField.setText(file.getPath());
-			String temp = file.getPath().replace("\\", "/"); // Usable path 
-			utilServ.setInstallFolder(temp);
 		} catch (NullPointerException e) {
 		}
 	}
@@ -83,24 +81,24 @@ public class SettingsController extends AbstractController {
         try {
 			File file = fileChooser.showOpenDialog(null);
 			saveGameTextField.setText(file.getPath());
-			String temp = file.getPath().replace("\\", "/"); // Usable path 
-//			utilServ.setInstallFolder(temp);
-//			errorLabel.setText(getErrorLabel().getText() + " ");
 		} catch (NullPointerException e) {
 		}
 	}
 
 	@FXML
 	void startIssueFired(ActionEvent event) {
-		System.out.println(saveGameTextField.getText());
-		System.out.println(main == null);
-		main.readSaveGame(saveGameTextField.getText());
+		boolean useLocalisation = localisationCheck.isSelected();
+		main.readSaveGame(saveGameTextField.getText(), useLocalisation);
 	}
 
 	@Override
 	public void reset() {
 		errorLabel.setText("");
 
+	}
+	
+	public void setFolderPaths() {
+		utilServ.setFolderPaths(saveGameTextField.getText(), installTextField.getText());
 	}
 
 	@Override

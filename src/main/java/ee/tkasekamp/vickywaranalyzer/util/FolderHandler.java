@@ -115,12 +115,11 @@ public class FolderHandler {
 	 * 
 	 * @param path
 	 */
-	private static String getDirectoryOnly(String path) {
+	public static String getDirectoryOnly(String path) {
 		StringBuilder line = new StringBuilder(path);
 		int index = line.lastIndexOf("/");
 
 		line.delete(index + 1, line.length());
-//		Reference.SAVEGAMEPATH = line.toString();
 		return line.toString();
 	}
 

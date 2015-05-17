@@ -19,6 +19,8 @@ public interface UtilService {
 	public void setSaveGameFolder(String pathToFolder);
 
 	public void setInstallFolder(String pathToFolder);
+	
+	public void setFolderPaths(String saveFolder, String installFolder);
 
 	public void reset();
 

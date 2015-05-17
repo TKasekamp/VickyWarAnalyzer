@@ -49,6 +49,13 @@ public class UtilServiceImpl implements UtilService {
 		this.installFolder = pathToFolder;
 	}
 
+	@Override
+	public void setFolderPaths(String saveFolder, String installFolder) {
+		this.installFolder = installFolder.replace("\\", "/");
+		this.saveGameFolder = FolderHandler.getDirectoryOnly(saveFolder.replace("\\", "/"));
+		
+	}
+
 
 
 }

@@ -39,8 +39,8 @@ public class MainController {
 
 	@FXML
 	public void initialize() {
-		modelServ = new ModelServiceImpl();
 		utilServ = new UtilServiceImpl();
+		modelServ = new ModelServiceImpl(utilServ);
 		try {
 			utilServ.guessFolders();
 		} catch (IOException e) {
@@ -59,14 +59,11 @@ public class MainController {
 		settingsController.setErrorText(text);
 	}
 
-	public void readSaveGame(String saveGamePath) {
+	public void readSaveGame(String saveGamePath, boolean useLocalisation) {
 		reset();
-		modelServ.parseSaveGame(saveGamePath);
-		try {
-			utilServ.writePathsToFile();
-		} catch (IOException e) {
-			setErrorText(e.getMessage());
-		}
+		settingsController.setFolderPaths();
+		String text = modelServ.createModel(saveGamePath, useLocalisation);
+		setErrorText(text);
 	}
 
 	private void reset() {
