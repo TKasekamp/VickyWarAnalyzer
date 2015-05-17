@@ -1,6 +1,10 @@
 package ee.tkasekamp.vickywaranalyzer.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
+import ee.tkasekamp.vickywaranalyzer.core.Country;
+import ee.tkasekamp.vickywaranalyzer.core.War;
 
 public interface ModelService {
 	/**
@@ -34,5 +38,13 @@ public interface ModelService {
 	 * returned (but this is unlikely)
 	 */
 	public String findOfficialName(String tag);
+	
+	public ArrayList<Country> getCountries();
+	public ArrayList<War> getWars();
+	/**
+	 * Determines if the game version is HoD by looking if any of the wars have
+	 * originalattacker and if they have, returns true
+	 */
+	public boolean isHOD();
 
 }

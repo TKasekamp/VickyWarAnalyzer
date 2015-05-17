@@ -2,6 +2,8 @@ package ee.tkasekamp.vickywaranalyzer.service;
 
 import java.io.IOException;
 
+import javafx.scene.image.Image;
+
 public interface UtilService {
 	/**
 	 * Try to find the install and save game folders.
@@ -23,5 +25,7 @@ public interface UtilService {
 	public void setFolderPaths(String saveFolder, String installFolder);
 
 	public void reset();
+	
+	public Image loadFlag(String tag);
 
 }

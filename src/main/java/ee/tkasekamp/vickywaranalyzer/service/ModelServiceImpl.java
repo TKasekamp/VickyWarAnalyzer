@@ -7,10 +7,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javafx.scene.image.Image;
 import ee.tkasekamp.vickywaranalyzer.core.Battle;
 import ee.tkasekamp.vickywaranalyzer.core.Country;
 import ee.tkasekamp.vickywaranalyzer.core.JoinedCountry;
 import ee.tkasekamp.vickywaranalyzer.core.War;
+import ee.tkasekamp.vickywaranalyzer.gui.FileLoader;
 import ee.tkasekamp.vickywaranalyzer.parser.Parser;
 
 public class ModelServiceImpl implements ModelService {
@@ -42,7 +44,8 @@ public class ModelServiceImpl implements ModelService {
 		createUniqueCountryList();
 
 		/* Localisation */
-//		controller.getLoc().readLocalisation();
+		// TODO multithreading
+		// controller.getLoc().readLocalisation();
 		/* Finding official names for every country and battle */
 		// TODO try to optimise
 		for (War war : warList) {
@@ -51,10 +54,15 @@ public class ModelServiceImpl implements ModelService {
 				setBattleOfficialNames(battle);
 			}
 		}
+		// TODO multithreading
 		try {
 			utilServ.writePathsToFile();
 		} catch (IOException e) {
 			return "Couldn't write to file";
+		}
+		// TODO multithreading
+		for (Country country : countryList) {
+			country.setFlag(utilServ.loadFlag(country.getTag()));
 		}
 		return "Everything is OK";
 	}
@@ -66,23 +74,26 @@ public class ModelServiceImpl implements ModelService {
 		startDate = "";
 		countryList.clear();
 	}
-	
+
 	@Override
 	public String findOfficialName(String tag) {
-		for (Country country: countryList) { 
+		for (Country country : countryList) {
 			if (country.getTag().equals(tag)) {
 				return country.getOfficialName();
-			}}
+			}
+		}
 		return tag;
-		
+
 	}
-	
+
 	private void setWarOfficialNames(War war) {
-		war.setOfficialNames(findOfficialName(war.getOriginalAttacker()), findOfficialName(war.getOriginalDefender()));
+		war.setOfficialNames(findOfficialName(war.getOriginalAttacker()),
+				findOfficialName(war.getOriginalDefender()));
 	}
-	
+
 	private void setBattleOfficialNames(Battle battle) {
-		battle.setOfficialNames(findOfficialName(battle.getAttacker()), findOfficialName(battle.getDefender()));
+		battle.setOfficialNames(findOfficialName(battle.getAttacker()),
+				findOfficialName(battle.getDefender()));
 	}
 
 	/**
@@ -148,6 +159,26 @@ public class ModelServiceImpl implements ModelService {
 	@Override
 	public String getPlayerOfficial() {
 		return findOfficialName(player);
+	}
+
+	@Override
+	public ArrayList<Country> getCountries() {
+		return countryList;
+	}
+
+	@Override
+	public ArrayList<War> getWars() {
+		return warList;
+	}
+
+	@Override
+	public boolean isHOD() {
+		for (War war : warList) {
+			if (!(war.getOriginalWarGoal().getCasus_belli().equals(""))) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
