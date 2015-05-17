@@ -70,7 +70,7 @@ public class WarListController extends AbstractController {
 	@FXML
 	private TableColumn<War, String> colEndDateWar;
 
-	private Tab warListTab;
+	private Tab tab;
 
 	private MainController main;
 	private ModelService modelServ;
@@ -79,7 +79,7 @@ public class WarListController extends AbstractController {
 	public void init(MainController mainController, ModelService model, Tab tab) {
 		main = mainController;
 		modelServ = model;
-		warListTab = tab;
+		this.tab = tab;
 		warTableContent = FXCollections.observableArrayList();
 
 		selectCountryIssue.getSelectionModel().selectedItemProperty()
@@ -125,24 +125,19 @@ public class WarListController extends AbstractController {
 		playerLabel.setText("");
 		startDateLabel.setText("");
 		currentDateLabel.setText("");
-		warListTab.setDisable(true);
+		tab.setDisable(true);
 		selectCountryIssue.getItems().clear();
 
 	}
 
-	@Override
+
 	public void populate() {
 		playerLabel.setText(modelServ.getPlayerOfficial());
 		startDateLabel.setText(modelServ.getStartDate());
 		currentDateLabel.setText(modelServ.getDate());
-		warListTab.setDisable(false);
+		tab.setDisable(false);
 
-		try {
-			populateCountryList();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		populateCountryList();
 		warTablePopulateAll();
 
 	}
@@ -222,13 +217,12 @@ public class WarListController extends AbstractController {
 		}
 	}
 
-	private void populateCountryList() throws FileNotFoundException {
+	private void populateCountryList() {
 
 		for (Country country : modelServ.getCountries()) {
-			// flagLoader(country);
 			ImageView iv2 = new ImageView(country.getFlag());
 
-			iv2.setFitWidth(32); // 30 to 35 look good
+			iv2.setFitWidth(32); // 30 to 35 looks good
 			iv2.setPreserveRatio(true);
 			iv2.setSmooth(true);
 			iv2.setCache(true);
@@ -243,7 +237,7 @@ public class WarListController extends AbstractController {
 		@Override
 		public void onChanged(Change<? extends War> c) {
 			if (!warTable.getSelectionModel().getSelectedItems().isEmpty()) {
-				// detailsTab.warDetailsTabPopulate((War)warTable.getSelectionModel().getSelectedItems().toArray()[0]);
+				 main.populateWarTab((War)warTable.getSelectionModel().getSelectedItems().toArray()[0]);
 			}
 		}
 

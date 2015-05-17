@@ -2,11 +2,13 @@ package ee.tkasekamp.vickywaranalyzer.controller.tab;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import ee.tkasekamp.vickywaranalyzer.controller.MainController;
+import ee.tkasekamp.vickywaranalyzer.core.WarGoal;
 
-public class WargoalController extends AbstractController{
+public class WargoalController extends AbstractController {
 
 	@FXML
 	private TableView<?> warGoalTable;
@@ -40,22 +42,23 @@ public class WargoalController extends AbstractController{
 
 	@FXML
 	private Label warName2;
-	
-	private MainController main;
 
-	public void init(MainController mainController) {
+	private MainController main;
+	private Tab tab;
+
+	public void init(MainController mainController, Tab tab) {
 		main = mainController;
+		this.tab = tab;
 	}
 
 	@Override
 	public void reset() {
-		// TODO Auto-generated method stub
+		tab.setDisable(true);
+
+	}
+	
+	public void populate(WarGoal wargoal) {
 		
 	}
 
-	@Override
-	public void populate() {
-		// TODO Auto-generated method stub
-		
-	}
 }

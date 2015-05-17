@@ -9,6 +9,9 @@ import ee.tkasekamp.vickywaranalyzer.controller.tab.SettingsController;
 import ee.tkasekamp.vickywaranalyzer.controller.tab.WarDetailsController;
 import ee.tkasekamp.vickywaranalyzer.controller.tab.WarListController;
 import ee.tkasekamp.vickywaranalyzer.controller.tab.WargoalController;
+import ee.tkasekamp.vickywaranalyzer.core.Battle;
+import ee.tkasekamp.vickywaranalyzer.core.War;
+import ee.tkasekamp.vickywaranalyzer.core.WarGoal;
 import ee.tkasekamp.vickywaranalyzer.service.ModelService;
 import ee.tkasekamp.vickywaranalyzer.service.ModelServiceImpl;
 import ee.tkasekamp.vickywaranalyzer.service.UtilService;
@@ -47,10 +50,10 @@ public class MainController {
 			setErrorText(e.getMessage());
 		}
 
-		battleController.init(this);
+		battleController.init(this, battleTab);
 		settingsController.init(this, utilServ);
-		warDetailsController.init(this);
-		wargoalController.init(this);
+		warDetailsController.init(this, modelServ, warDetailsTab);
+		wargoalController.init(this, wargoalTab);
 		warListController.init(this, modelServ, warListTab);
 
 	}
@@ -67,18 +70,24 @@ public class MainController {
 		warListController.populate();
 	}
 
+	public void populateWarTab(War war) {
+		warDetailsController.populate(war);
+	}
+
+	public void populateBattleTab(Battle battle) {
+		battleController.populate(battle);
+	}
+
+	public void populateWargoalTab(WarGoal wargoal) {
+		wargoalController.populate(wargoal);
+	}
+
 	private void reset() {
 		battleController.reset();
 		settingsController.reset();
 		warDetailsController.reset();
 		wargoalController.reset();
 		warListController.reset();
-
-		warDetailsTab.setText("War");
-		battleTab.setText("Battle");
-
-		battleTab.setDisable(true);
-		wargoalTab.setDisable(true);
 
 		modelServ.reset();
 		utilServ.reset();

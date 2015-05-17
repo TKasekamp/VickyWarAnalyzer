@@ -101,7 +101,6 @@ public class SettingsController extends AbstractController {
 		utilServ.setFolderPaths(saveGameTextField.getText(), installTextField.getText());
 	}
 
-	@Override
 	public void populate() {
 		installTextField.setText(utilServ.getInstallFolder());
 		saveGameTextField.setText(utilServ.getSaveGameFolder());

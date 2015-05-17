@@ -2,12 +2,15 @@ package ee.tkasekamp.vickywaranalyzer.controller.tab;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
 import ee.tkasekamp.vickywaranalyzer.controller.MainController;
+import ee.tkasekamp.vickywaranalyzer.core.War;
+import ee.tkasekamp.vickywaranalyzer.service.ModelService;
 
-public class WarDetailsController extends AbstractController{
+public class WarDetailsController extends AbstractController {
 
 	@FXML
 	private ImageView attackerFlag;
@@ -160,20 +163,25 @@ public class WarDetailsController extends AbstractController{
 	private Label warDefender;
 
 	private MainController main;
+	private Tab tab;
+	private ModelService modelService;
 
-	public void init(MainController mainController) {
+	public void init(MainController mainController, ModelService modelService,
+			Tab tab) {
 		main = mainController;
+		this.tab = tab;
+		this.modelService = modelService;
 	}
 
 	@Override
 	public void reset() {
-		// TODO Auto-generated method stub
+		tab.setDisable(true);
+		tab.setText("War");
+
+	}
+	
+	public void populate(War war) {
 		
 	}
 
-	@Override
-	public void populate() {
-		// TODO Auto-generated method stub
-		
-	}
 }

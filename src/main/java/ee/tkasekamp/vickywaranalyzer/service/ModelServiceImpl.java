@@ -33,7 +33,6 @@ public class ModelServiceImpl implements ModelService {
 
 	@Override
 	public String createModel(String saveGamePath, boolean useLocalisation) {
-		System.out.println("Save game path " + saveGamePath);
 
 		try {
 			warList = parser.read(saveGamePath);

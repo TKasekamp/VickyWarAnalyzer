@@ -1,11 +1,13 @@
 package ee.tkasekamp.vickywaranalyzer.controller.tab;
 
-import ee.tkasekamp.vickywaranalyzer.controller.MainController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
+import ee.tkasekamp.vickywaranalyzer.controller.MainController;
+import ee.tkasekamp.vickywaranalyzer.core.Battle;
 
 public class BattleController extends AbstractController{
 	@FXML
@@ -75,20 +77,21 @@ public class BattleController extends AbstractController{
 	private Label battleTotalLosses;
 	
 	private MainController main;
+	private Tab tab;
 	
-	public void init(MainController mainController) {
+	public void init(MainController mainController, Tab tab) {
 		main = mainController;
+		this.tab = tab;
 	}
 
 	@Override
 	public void reset() {
-		// TODO Auto-generated method stub
+		tab.setDisable(true);
+		tab.setText("Battle");
 		
 	}
 
-	@Override
-	public void populate() {
-		// TODO Auto-generated method stub
+	public void populate(Battle battle) {
 		
 	}
 }
