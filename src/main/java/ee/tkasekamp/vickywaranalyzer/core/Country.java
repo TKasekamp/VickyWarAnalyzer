@@ -1,6 +1,5 @@
 package ee.tkasekamp.vickywaranalyzer.core;
 
-import static ee.tkasekamp.vickywaranalyzer.util.Reference.countryList;
 import javafx.scene.image.Image;
 
 /** Holds the flag and a longer name than just three letters.   
@@ -14,6 +13,7 @@ public class Country {
 	public Country(String tag) {
 		super();
 		this.tag = tag;
+		this.officialName = tag; // By default
 	}
 
 	@Override
@@ -21,16 +21,7 @@ public class Country {
 		return "Country [tag=" + tag + ", officialName=" + officialName
 				+ ", flag=" + flag + "]";
 	}
-	
-	/** Returns an official name for the given tag. If not found, the same tag is returned (but this is unlikely) */
-	public static String findOfficalName(String tag) {
-		for (Country country: countryList) { 
-			if (country.getTag().equals(tag)) {
-				return country.getOfficialName();
-			}}
-		return tag;
-		
-	}
+
 	public String getTag() {
 		return tag;
 	}

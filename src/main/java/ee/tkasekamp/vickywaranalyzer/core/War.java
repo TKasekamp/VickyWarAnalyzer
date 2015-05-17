@@ -2,8 +2,6 @@ package ee.tkasekamp.vickywaranalyzer.core;
 
 import java.util.Arrays;
 
-import static ee.tkasekamp.vickywaranalyzer.core.Country.findOfficalName;
-
 /**
  * War class. All critical info and a list about war events.
  */
@@ -27,7 +25,6 @@ public class War {
 	/* New from HoD */
 	private WarGoal originalWarGoal = new WarGoal();
 
-
 	public War() {
 		super();
 
@@ -38,7 +35,6 @@ public class War {
 
 	}
 
-	
 	public void setCasusBelliAndStartDate() {
 		this.startDate = joinedCountryList[0].getStartDate(); // The first one in the list has the oldest startDate
 		/* Check required as only HoD uses original wargoals. Checking if it has been given values */
@@ -51,12 +47,9 @@ public class War {
 
 	}
 	
-	/** Takes the official names from Reference.countyList and gives them to the
-	 * attacker and defender of this war.
-	 */
-	public void setOfficialNames() {
-		originalAttackerOfficial = findOfficalName(originalAttacker);
-		originalDefenderOfficial = findOfficalName(originalDefender);
+	public void setOfficialNames(String attacker, String defender) {
+		originalAttackerOfficial = attacker;
+		originalDefenderOfficial = defender;
 	}
 	public String getName() {
 		return name;

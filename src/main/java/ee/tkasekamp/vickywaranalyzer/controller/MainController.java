@@ -51,7 +51,7 @@ public class MainController {
 		settingsController.init(this, utilServ);
 		warDetailsController.init(this);
 		wargoalController.init(this);
-		warListController.init(this);
+		warListController.init(this, modelServ, warListTab);
 
 	}
 
@@ -64,6 +64,7 @@ public class MainController {
 		settingsController.setFolderPaths();
 		String text = modelServ.createModel(saveGamePath, useLocalisation);
 		setErrorText(text);
+		warListController.populate();
 	}
 
 	private void reset() {
@@ -75,7 +76,7 @@ public class MainController {
 
 		warDetailsTab.setText("War");
 		battleTab.setText("Battle");
-		warListTab.setDisable(true);
+
 		battleTab.setDisable(true);
 		wargoalTab.setDisable(true);
 
