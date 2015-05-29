@@ -6,49 +6,15 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
 import ee.tkasekamp.vickywaranalyzer.controller.MainController;
+import ee.tkasekamp.vickywaranalyzer.controller.WarCountryBox;
 import ee.tkasekamp.vickywaranalyzer.core.Battle;
 import ee.tkasekamp.vickywaranalyzer.core.Battle.Result;
 import ee.tkasekamp.vickywaranalyzer.core.Battle.Type;
 import ee.tkasekamp.vickywaranalyzer.core.War;
-import ee.tkasekamp.vickywaranalyzer.gui.ObservableJoinedCountry;
 import ee.tkasekamp.vickywaranalyzer.service.ModelService;
 
 public class WarDetailsController extends AbstractController {
-
-	@FXML
-	private ImageView attackerFlag;
-
-	@FXML
-	private Label originalAttackerLabel;
-
-	@FXML
-	private Label attackerTotalLossesLabel;
-
-	@FXML
-	private Label attackerTotalShipLossesLabel;
-
-	@FXML
-	private TableView<ObservableJoinedCountry> attackerTable;
-
-	@FXML
-	private TableColumn<ObservableJoinedCountry, ImageView> colAttackerFlag;
-
-	@FXML
-	private TableColumn<ObservableJoinedCountry, String> colAttackerName;
-
-	@FXML
-	private TableColumn<ObservableJoinedCountry, String> colAttackerStartDate;
-
-	@FXML
-	private TableColumn<ObservableJoinedCountry, String> colAttackerEndDate;
-
-	@FXML
-	private Label warAttackerHelper;
-
-	@FXML
-	private Label warAttacker;
 
 	@FXML
 	private TableView<Battle> battleTable;
@@ -135,37 +101,9 @@ public class WarDetailsController extends AbstractController {
 	private Label warGoalStateLabel;
 
 	@FXML
-	private ImageView defenderFlag;
-
+	private WarCountryBox attackerBox;
 	@FXML
-	private Label originalDefenderLabel;
-
-	@FXML
-	private Label defenderTotalLossesLabel;
-
-	@FXML
-	private Label defenderTotalShipLossesLabel;
-
-	@FXML
-	private TableView<ObservableJoinedCountry> defenderTable;
-
-	@FXML
-	private TableColumn<ObservableJoinedCountry, ImageView> colDefenderFlag;
-
-	@FXML
-	private TableColumn<ObservableJoinedCountry, String> colDefenderName;
-
-	@FXML
-	private TableColumn<ObservableJoinedCountry, String> colDefenderStartDate;
-
-	@FXML
-	private TableColumn<ObservableJoinedCountry, String> colDefenderEndDate;
-
-	@FXML
-	private Label warDefenderHelper;
-
-	@FXML
-	private Label warDefender;
+	private WarCountryBox defenderBox;
 
 	private MainController main;
 	private Tab tab;
@@ -185,7 +123,7 @@ public class WarDetailsController extends AbstractController {
 		tab.setText("War");
 
 	}
-	
+
 	public void populate(War war) {
 		/* Set the name of the tab */
 		tab.setText(war.getName());
@@ -201,55 +139,30 @@ public class WarDetailsController extends AbstractController {
 			warHasEndedLabel.setText("Yes");
 		}
 	}
-	
-	/**
-	 * This method is run once on startup and it defines the values of columns
-	 * in the war tab and the wargoaltab.
-	 */
+
 	private void setColumnValues() {
-		/* Connecting the War fields with warTable columns */
-		colNameBattle.setCellValueFactory(
-				new PropertyValueFactory<Battle, String>("name"));
-		colDateBattle.setCellValueFactory(
-				new PropertyValueFactory<Battle, String>("date"));
-		colDefenderBattle.setCellValueFactory(
-				new PropertyValueFactory<Battle, String>("defenderOfficial"));
-		colAttackerBattle.setCellValueFactory(
-				new PropertyValueFactory<Battle, String>("attackerOfficial"));
-		colTypeBattle.setCellValueFactory(
-				new PropertyValueFactory<Battle, Type>("battleType"));
-		colBattleResult.setCellValueFactory(
-				new PropertyValueFactory<Battle, Result>("res"));
-		colBattleTotalLosses.setCellValueFactory(
-				new PropertyValueFactory<Battle, Integer>("totalLosses"));
+		colNameBattle
+				.setCellValueFactory(new PropertyValueFactory<Battle, String>(
+						"name"));
+		colDateBattle
+				.setCellValueFactory(new PropertyValueFactory<Battle, String>(
+						"date"));
+		colDefenderBattle
+				.setCellValueFactory(new PropertyValueFactory<Battle, String>(
+						"defenderOfficial"));
+		colAttackerBattle
+				.setCellValueFactory(new PropertyValueFactory<Battle, String>(
+						"attackerOfficial"));
+		colTypeBattle
+				.setCellValueFactory(new PropertyValueFactory<Battle, Type>(
+						"battleType"));
+		colBattleResult
+				.setCellValueFactory(new PropertyValueFactory<Battle, Result>(
+						"res"));
+		colBattleTotalLosses
+				.setCellValueFactory(new PropertyValueFactory<Battle, Integer>(
+						"totalLosses"));
 
-		/* Defender table */
-		colDefenderName.setCellValueFactory(
-				new PropertyValueFactory<ObservableJoinedCountry, String>(
-						"officialName"));
-		colDefenderFlag.setCellValueFactory(
-				new PropertyValueFactory<ObservableJoinedCountry, ImageView>(
-						"flag"));
-		colDefenderStartDate.setCellValueFactory(
-				new PropertyValueFactory<ObservableJoinedCountry, String>(
-						"joinDate"));
-		colDefenderEndDate.setCellValueFactory(
-				new PropertyValueFactory<ObservableJoinedCountry, String>(
-						"endDate"));
-
-		/* Attacker table */
-		colAttackerName.setCellValueFactory(
-				new PropertyValueFactory<ObservableJoinedCountry, String>(
-						"officialName"));
-		colAttackerFlag.setCellValueFactory(
-				new PropertyValueFactory<ObservableJoinedCountry, ImageView>(
-						"flag"));
-		colAttackerStartDate.setCellValueFactory(
-				new PropertyValueFactory<ObservableJoinedCountry, String>(
-						"joinDate"));
-		colAttackerEndDate.setCellValueFactory(
-				new PropertyValueFactory<ObservableJoinedCountry, String>(
-						"endDate"));
 	}
 
 }
