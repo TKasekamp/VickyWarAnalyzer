@@ -1,14 +1,18 @@
 package ee.tkasekamp.vickywaranalyzer.controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import ee.tkasekamp.vickywaranalyzer.controller.tab.AbstractController;
+import ee.tkasekamp.vickywaranalyzer.core.Country;
+import ee.tkasekamp.vickywaranalyzer.core.War;
 import ee.tkasekamp.vickywaranalyzer.gui.ObservableJoinedCountry;
+import ee.tkasekamp.vickywaranalyzer.service.ModelService;
 
 public class WarCountryBox extends AbstractController {
 
@@ -43,16 +47,17 @@ public class WarCountryBox extends AbstractController {
 	private Label warHelper;
 
 	@FXML
-	private Label war;
-
-	@FXML
-	private Insets x3;
+	private Label warLabel;
 
 	/** Attacker or defender */
 	private String side;
+	private ModelService modelService;
+	private ObservableList<ObservableJoinedCountry> tableContent;
 
-	public void init(String side) {
+	public void init(ModelService modelService, String side) {
 		this.side = side;
+		this.modelService = modelService;
+		tableContent = FXCollections.observableArrayList();
 		colName.setCellValueFactory(new PropertyValueFactory<ObservableJoinedCountry, String>(
 				"officialName"));
 		colFlag.setCellValueFactory(new PropertyValueFactory<ObservableJoinedCountry, ImageView>(
@@ -66,14 +71,124 @@ public class WarCountryBox extends AbstractController {
 
 	}
 
-	public void populate() {
-
-	}
-
 	@Override
 	public void reset() {
 		// TODO Auto-generated method stub
 
 	}
 
+	public void populate(War war) {
+		if (side == "Attacker")
+			populateAttacker(war);
+
+		else
+			populateDefender(war);
+	}
+
+	private void populateAttacker(War war) {
+		/* If there is no attacker, the flag will be the original attacker's */
+		if (war.getAttacker().equals("")) {
+			for (Country country : modelService.getCountries()) {
+				if (war.getOriginalAttacker().equals(country.getTag())) {
+					flag.setImage(country.getFlag());
+					originalLabel.setText(country.getOfficialName());
+				}
+			}
+			// Hiding the labels as there is no use for them
+			warLabel.setVisible(false);
+			warHelper.setVisible(false);
+		} else {
+			for (Country country : modelService.getCountries()) {
+				if (war.getAttacker().equals(country.getTag())) {
+					flag.setImage(country.getFlag());
+
+				}
+			}
+			// Showing labels and giving value
+			warLabel.setVisible(true);
+			warHelper.setVisible(true);
+			warLabel.setText(war.getOriginalAttackerOfficial());
+		}
+
+		tableContent.clear(); // Clearing list
+
+		/*
+		 * Comparing war.countrylist items to reference.countrylist items Join
+		 * type true for attackers
+		 */
+		for (int i = 0; i < war.getCountryList().length; i++) {
+			for (Country country : modelService.getCountries()) {
+				if (country.getTag().equals(war.getCountryList()[i].getTag())
+						&& war.getCountryList()[i].isJoinType()) {
+					/* Creating a row with items from both classes */
+					ObservableJoinedCountry temp = new ObservableJoinedCountry(
+							country.getOfficialName(), country.getFlag(),
+							war.getCountryList()[i].getStartDate(),
+							war.getCountryList()[i].getEndDate());
+					tableContent.add(temp);
+					break;
+
+				}
+			}
+		}
+
+		/* Adding the countries to table */
+		table.setItems(tableContent);
+	}
+
+	private void populateDefender(War war) {
+		/* If there is no defender, the flag will be the original defender's */
+		if (war.getDefender().equals("")) {
+			for (Country country : modelService.getCountries()) {
+				if (war.getOriginalDefender().equals(country.getTag())) {
+					flag.setImage(country.getFlag());
+					originalLabel.setText(country.getOfficialName());
+				}
+			}
+			// Hiding the labels as there is no use for them
+			warLabel.setVisible(false);
+			warHelper.setVisible(false);
+		} else {
+			for (Country country : modelService.getCountries()) {
+				if (war.getDefender().equals(country.getTag())) {
+					flag.setImage(country.getFlag());
+
+				}
+			}
+			// Showing labels and giving value
+			warLabel.setVisible(true);
+			warHelper.setVisible(true);
+			warLabel.setText(war.getOriginalDefenderOfficial());
+		}
+
+		tableContent.clear(); // Clearing list
+
+		/*
+		 * Comparing war.countrylist items to reference.countrylist items Join
+		 * type true for attackers
+		 */
+		for (int i = 0; i < war.getCountryList().length; i++) {
+			for (Country country : modelService.getCountries()) {
+				if (country.getTag().equals(war.getCountryList()[i].getTag())
+						&& !war.getCountryList()[i].isJoinType()) {
+					/* Creating a row with items from both classes */
+					ObservableJoinedCountry temp = new ObservableJoinedCountry(
+							country.getOfficialName(), country.getFlag(),
+							war.getCountryList()[i].getStartDate(),
+							war.getCountryList()[i].getEndDate());
+					tableContent.add(temp);
+					break;
+
+				}
+			}
+		}
+
+		/* Adding the countries to table */
+		table.setItems(tableContent);
+	}
+
+	public void setTotalLosses(int totalLosses, int totalShipLosses) {
+		totalLossesLabel.setText(Integer.toString(totalLosses));
+		totalShipLossesLabel.setText(Integer.toString(totalShipLosses));
+	}
 }

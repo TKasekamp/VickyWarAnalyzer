@@ -52,7 +52,7 @@
 			GridPane.columnIndex="0" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
 			<children>
 				<Label fx:id="warHelper" styleClass="label-dark" text="Attacker:" />
-				<Label id="originalAttackerLabel" fx:id="war" text="Only active wars have attackers" />
+				<Label id="originalAttackerLabel" fx:id="warLabel" text="Only active wars have attackers" />
 			</children>
 		</HBox>
 	</children>
