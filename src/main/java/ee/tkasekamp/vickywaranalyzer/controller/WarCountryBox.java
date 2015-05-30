@@ -22,6 +22,9 @@ public class WarCountryBox extends AbstractController {
 	@FXML
 	private Label originalLabel;
 
+    @FXML
+    private Label originalHelper;
+
 	@FXML
 	private Label totalLossesLabel;
 
@@ -68,7 +71,7 @@ public class WarCountryBox extends AbstractController {
 		colEndDate
 				.setCellValueFactory(new PropertyValueFactory<ObservableJoinedCountry, String>(
 						"endDate"));
-
+		setHelperLabels(side);
 	}
 
 	@Override
@@ -190,5 +193,10 @@ public class WarCountryBox extends AbstractController {
 	public void setTotalLosses(int totalLosses, int totalShipLosses) {
 		totalLossesLabel.setText(Integer.toString(totalLosses));
 		totalShipLossesLabel.setText(Integer.toString(totalShipLosses));
+	}
+	
+	private void setHelperLabels(String side) {
+		originalHelper.setText("Original " + side.toLowerCase()+ ":");
+		warHelper.setText(side + ":");
 	}
 }
