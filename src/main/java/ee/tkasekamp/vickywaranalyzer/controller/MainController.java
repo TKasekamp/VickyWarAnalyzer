@@ -49,7 +49,7 @@ public class MainController {
 			setErrorText(e.getMessage());
 		}
 
-		battleController.init(this, battleTab);
+		battleController.init(this, modelServ, battleTab);
 		settingsController.init(this, utilServ);
 		warDetailsController.init(this, modelServ, warDetailsTab);
 		wargoalController.init(this, wargoalTab, modelServ);

@@ -3,60 +3,12 @@ package ee.tkasekamp.vickywaranalyzer.controller.tab;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.image.ImageView;
 import ee.tkasekamp.vickywaranalyzer.controller.MainController;
+import ee.tkasekamp.vickywaranalyzer.controller.box.BattleCountryBox;
 import ee.tkasekamp.vickywaranalyzer.core.Battle;
+import ee.tkasekamp.vickywaranalyzer.service.ModelService;
 
 public class BattleController extends AbstractController{
-	@FXML
-	private TableView<?> attackerUnitsTable;
-
-	@FXML
-	private TableColumn<?, ?> colAttackerUnitType;
-
-	@FXML
-	private TableColumn<?, ?> colAttackerUnitNumber;
-
-	@FXML
-	private Label battleAttackerLosses;
-
-	@FXML
-	private Label battleAttackerArmySize;
-
-	@FXML
-	private Label battleAttacker;
-
-	@FXML
-	private ImageView battleAttackerFlag;
-
-	@FXML
-	private Label battleAttackerLeader;
-
-	@FXML
-	private TableView<?> defenderUnitsTable;
-
-	@FXML
-	private TableColumn<?, ?> colDefenderUnitType;
-
-	@FXML
-	private TableColumn<?, ?> colDefenderUnitNumber;
-
-	@FXML
-	private Label battleDefenderLosses;
-
-	@FXML
-	private Label battleDefenderArmySize;
-
-	@FXML
-	private Label battleDefender;
-
-	@FXML
-	private ImageView battleDefenderFlag;
-
-	@FXML
-	private Label battleDefenderLeader;
 
 	@FXML
 	private Label battleName;
@@ -76,12 +28,21 @@ public class BattleController extends AbstractController{
 	@FXML
 	private Label battleTotalLosses;
 	
+	@FXML
+	private BattleCountryBox attackerBoxController;
+	@FXML
+	private BattleCountryBox defenderBoxController;
+	
 	private MainController main;
 	private Tab tab;
+	private ModelService modelService;
 	
-	public void init(MainController mainController, Tab tab) {
+	public void init(MainController mainController,ModelService modelService, Tab tab) {
 		main = mainController;
 		this.tab = tab;
+		this.modelService = modelService;
+		attackerBoxController.init(modelService, "Attacker");
+		defenderBoxController.init(modelService, "Defender");
 	}
 
 	@Override
