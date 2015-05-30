@@ -12,7 +12,6 @@ import ee.tkasekamp.vickywaranalyzer.controller.MainController;
 import ee.tkasekamp.vickywaranalyzer.core.Battle.Result;
 import ee.tkasekamp.vickywaranalyzer.core.War;
 import ee.tkasekamp.vickywaranalyzer.core.WarGoal;
-import ee.tkasekamp.vickywaranalyzer.gui.FileLoader;
 import ee.tkasekamp.vickywaranalyzer.service.ModelService;
 
 public class WargoalController extends AbstractController {
@@ -52,13 +51,14 @@ public class WargoalController extends AbstractController {
 			ModelService modelService) {
 		main = mainController;
 		this.tab = tab;
+		this.modelService = modelService;
 		warGoalTableContent = FXCollections.observableArrayList();
+		setWarGoalTabColumnValues();
 	}
 
 	@Override
 	public void reset() {
 		tab.setDisable(true);
-		tab.setText("Wargoal");
 
 	}
 
@@ -74,13 +74,16 @@ public class WargoalController extends AbstractController {
 		}
 
 		warGoalTable.setItems(warGoalTableContent);
+
+		setColumnVisiblility(modelService.isHOD());
+
 	}
 
 	/**
 	 * Sets the column values for wargoaltab. If the version is HoD, more column
 	 * are shown. Otherwise they are hidden.
 	 */
-	public void setWarGoalTabColumnValues() {
+	private void setWarGoalTabColumnValues() {
 		/* Wargoal tab columns */
 		colWarGoalActor
 				.setCellValueFactory(new PropertyValueFactory<WarGoal, String>(
@@ -97,33 +100,34 @@ public class WargoalController extends AbstractController {
 		colWarGoalStateID
 				.setCellValueFactory(new PropertyValueFactory<WarGoal, Integer>(
 						"state_province_id"));
-		/*
-		 * Giving values to columns only if the game is HoD. Also hiding some
-		 * columns if there is nothing to put in them
-		 */
-		if (modelService.isHOD()) {
-			colWarGoalDate
-					.setCellValueFactory(new PropertyValueFactory<WarGoal, String>(
-							"date"));
-			colWarGoalScore
-					.setCellValueFactory(new PropertyValueFactory<WarGoal, Double>(
-							"score"));
-			colWarGoalChange
-					.setCellValueFactory(new PropertyValueFactory<WarGoal, Double>(
-							"change"));
-			colWarGoalFulfilled
-					.setCellValueFactory(new PropertyValueFactory<WarGoal, Result>(
-							"fulfilled"));
-			colWarGoalDate.setVisible(true);
-			colWarGoalScore.setVisible(true);
-			colWarGoalChange.setVisible(true);
-			colWarGoalFulfilled.setVisible(true);
-		} else {
-			colWarGoalDate.setVisible(false);
-			colWarGoalScore.setVisible(false);
-			colWarGoalChange.setVisible(false);
-			colWarGoalFulfilled.setVisible(false);
-		}
+
+		// Only used for HoD
+		colWarGoalDate
+				.setCellValueFactory(new PropertyValueFactory<WarGoal, String>(
+						"date"));
+		colWarGoalScore
+				.setCellValueFactory(new PropertyValueFactory<WarGoal, Double>(
+						"score"));
+		colWarGoalChange
+				.setCellValueFactory(new PropertyValueFactory<WarGoal, Double>(
+						"change"));
+		colWarGoalFulfilled
+				.setCellValueFactory(new PropertyValueFactory<WarGoal, Result>(
+						"fulfilled"));
+
+	}
+
+	/**
+	 * Some columns are only necessary for HoD.
+	 * 
+	 * @param isHOD
+	 *            If is Heart of Darkness
+	 */
+	private void setColumnVisiblility(boolean isHOD) {
+		colWarGoalDate.setVisible(isHOD);
+		colWarGoalScore.setVisible(isHOD);
+		colWarGoalChange.setVisible(isHOD);
+		colWarGoalFulfilled.setVisible(isHOD);
 	}
 
 }

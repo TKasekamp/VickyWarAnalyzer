@@ -24,7 +24,7 @@ public class Main extends Application {
 	public void start(Stage stage) throws Exception {
 		// start is called on the FX Application Thread,
 		// so Thread.currentThread() is the FX application thread:
-		Thread.setDefaultUncaughtExceptionHandler(Main::showError);
+//		Thread.setDefaultUncaughtExceptionHandler(Main::showError);
 
 		Parent root = FXMLLoader.load(getClass().getClassLoader().getResource(
 				"Main.fxml"));
