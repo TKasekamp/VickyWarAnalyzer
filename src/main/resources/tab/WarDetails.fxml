@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="Content" styleClass="content" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="ee.tkasekamp.vickywaranalyzer.controller.tab.WarDetailsController">
+	<children>
+		<GridPane id="GridPane" alignment="CENTER" hgap="20.0" vgap="20.0"
+			AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0"
+			AnchorPane.topAnchor="20.0">
+			<children>
+				<VBox prefHeight="541.0" prefWidth="300.0" styleClass="background" GridPane.columnIndex="0"
+					GridPane.hgrow="SOMETIMES" GridPane.rowIndex="0" GridPane.rowSpan="2147483647">
+					<children>
+						<fx:include fx:id="attackerBox" source="../box/WarCountryBox.fxml" />
+					</children>
+				</VBox>
+				<HBox prefHeight="334.0" prefWidth="594.0" styleClass="background" GridPane.columnIndex="1"
+					GridPane.rowIndex="1">
+					<children>
+						<TableView fx:id="battleTable" prefHeight="309.0" prefWidth="627.0" HBox.hgrow="ALWAYS"
+							HBox.margin="$x1">
+							<columns>
+								<TableColumn prefWidth="100.0" text="Battle" fx:id="colNameBattle" />
+								<TableColumn prefWidth="75.0" text="Date" fx:id="colDateBattle" />
+								<TableColumn prefWidth="100.0" text="Attacker" fx:id="colAttackerBattle" />
+								<TableColumn prefWidth="100.0" text="Defender" fx:id="colDefenderBattle" />
+								<TableColumn prefWidth="70.0" text="Type" fx:id="colTypeBattle" />
+								<TableColumn prefWidth="70.0" text="Result" fx:id="colBattleResult" />
+								<TableColumn prefWidth="110.0" text="Total losses" fx:id="colBattleTotalLosses" />
+							</columns>
+						</TableView>
+					</children>
+				</HBox>
+				<HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="background"
+					GridPane.columnIndex="1" GridPane.rowIndex="0">
+					<children>
+						<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+							HBox.hgrow="ALWAYS">
+							<children>
+								<HBox id="HBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0"
+									GridPane.columnSpan="2147483647" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0">
+									<children>
+										<Label fx:id="warNameLabel" alignment="CENTER" maxHeight="1.7976931348623157E308"
+											maxWidth="1.7976931348623157E308" styleClass="label-header" text="WAR_NAME"
+											textAlignment="CENTER" wrapText="true" />
+									</children>
+								</HBox>
+								<HBox id="HBox" alignment="CENTER" prefHeight="30.0" prefWidth="323.0001220703125"
+									spacing="5.0" GridPane.columnIndex="0" GridPane.rowIndex="2">
+									<children>
+										<Label styleClass="label-dark" text="Start date:" />
+										<Label id="startDateLabel" fx:id="warStartDateLabel" text="Label" />
+									</children>
+								</HBox>
+								<HBox id="HBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0"
+									GridPane.rowIndex="3">
+									<children>
+										<Label styleClass="label-dark" text="End Date:" />
+										<Label fx:id="warEndDateLabel" text="Label" />
+									</children>
+								</HBox>
+								<HBox id="HBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="1"
+									GridPane.rowIndex="2">
+									<children>
+										<Label styleClass="label-dark" text="Total losses:" />
+										<Label fx:id="warTotalLossesLabel" text="Label" />
+									</children>
+								</HBox>
+								<HBox id="HBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="1"
+									GridPane.rowIndex="3">
+									<children>
+										<Label styleClass="label-dark" text="Total ships lost:" />
+										<Label fx:id="warTotalShipLossesLabel" text="Label" />
+									</children>
+								</HBox>
+								<HBox id="HBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0"
+									GridPane.rowIndex="4">
+									<children>
+										<Label styleClass="label-dark" text="Action:" />
+										<Label fx:id="warActionLabel" text="Label" />
+									</children>
+								</HBox>
+								<HBox id="HBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="1"
+									GridPane.rowIndex="4">
+									<children>
+										<Label styleClass="label-dark" text="Has ended:" />
+										<Label id="warActionLabel" fx:id="warHasEndedLabel" text="Label" />
+									</children>
+								</HBox>
+								<HBox id="HBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0"
+									GridPane.columnSpan="2" GridPane.rowIndex="1">
+									<children>
+										<Label styleClass="label-dark" text="General information" />
+									</children>
+								</HBox>
+								<HBox id="HBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="2"
+									GridPane.columnSpan="2" GridPane.rowIndex="1">
+									<children>
+										<Label styleClass="label-dark" text="Original wargoal" />
+									</children>
+								</HBox>
+								<HBox id="HBox" alignment="CENTER" prefHeight="30.0" prefWidth="323.0001220703125"
+									spacing="5.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+									<children>
+										<Label styleClass="label-dark" text="Actor:" />
+										<Label id="startDateLabel" fx:id="warGoalActorLabel" text="Label" />
+									</children>
+								</HBox>
+								<HBox id="HBox" alignment="CENTER" prefHeight="30.0" prefWidth="323.0001220703125"
+									spacing="5.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
+									<children>
+										<Label styleClass="label-dark" text="Receiver:" />
+										<Label id="startDateLabel" fx:id="warGoalReceiverLabel" text="Label" />
+									</children>
+								</HBox>
+								<HBox id="HBox" alignment="CENTER" prefHeight="30.0" prefWidth="323.0001220703125"
+									spacing="5.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3">
+									<children>
+										<Label styleClass="label-dark" text="Casus belli:" />
+										<Label id="startDateLabel" fx:id="warGoalCBLabel" text="Label" />
+									</children>
+								</HBox>
+								<HBox id="HBox" alignment="CENTER" prefHeight="30.0" prefWidth="323.0001220703125"
+									spacing="5.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
+									<children>
+										<Label styleClass="label-dark" text="Country:" />
+										<Label id="startDateLabel" fx:id="warGoalCountryLabel" text="Label" />
+									</children>
+								</HBox>
+								<HBox id="HBox" alignment="CENTER" prefHeight="30.0" prefWidth="323.0001220703125"
+									spacing="5.0" GridPane.columnIndex="2" GridPane.rowIndex="6">
+									<children>
+										<Label fx:id="warGoalScoreHelper" styleClass="label-dark" text="Score:" />
+										<Label id="startDateLabel" fx:id="warGoalScoreLabel" text="Label" />
+									</children>
+								</HBox>
+								<HBox id="HBox" alignment="CENTER" prefHeight="30.0" prefWidth="323.0001220703125"
+									spacing="5.0" GridPane.columnIndex="3" GridPane.rowIndex="6">
+									<children>
+										<Label fx:id="warGoalChangeHelper" styleClass="label-dark" text="Change:" />
+										<Label id="startDateLabel" fx:id="warGoalChangeLabel" text="Label" />
+									</children>
+								</HBox>
+								<HBox id="HBox" alignment="CENTER" prefHeight="30.0" prefWidth="323.0001220703125"
+									spacing="5.0" GridPane.columnIndex="3" GridPane.rowIndex="5">
+									<children>
+										<Label fx:id="warGoalDateHelper" styleClass="label-dark" text="Date:" />
+										<Label id="startDateLabel" fx:id="warGoalDateLabel" text="Label" />
+									</children>
+								</HBox>
+								<HBox id="HBox" alignment="CENTER" prefHeight="30.0" prefWidth="323.0001220703125"
+									spacing="5.0" GridPane.columnIndex="2" GridPane.rowIndex="5">
+									<children>
+										<Label fx:id="warGoalFulfilledHelper" styleClass="label-dark" text="Is fulfilled:" />
+										<Label id="startDateLabel" fx:id="warGoalFulfilledLabel" text="Label" />
+									</children>
+								</HBox>
+								<HBox id="HBox" alignment="CENTER" prefHeight="30.0" prefWidth="323.0001220703125"
+									spacing="5.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
+									<children>
+										<Label styleClass="label-dark" text="State ID:" />
+										<Label id="startDateLabel" fx:id="warGoalStateLabel" text="Label" />
+									</children>
+								</HBox>
+							</children>
+							<columnConstraints>
+								<ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="-Infinity"
+									prefWidth="172.0" />
+								<ColumnConstraints hgrow="SOMETIMES" maxWidth="324.0" minWidth="-Infinity"
+									prefWidth="162.0" />
+								<ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308"
+									minWidth="10.0" prefWidth="170.0" />
+								<ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308"
+									minWidth="10.0" prefWidth="165.0" />
+							</columnConstraints>
+							<rowConstraints>
+								<RowConstraints maxHeight="64.0" minHeight="0.0" prefHeight="55.0" vgrow="SOMETIMES" />
+								<RowConstraints maxHeight="40.0" minHeight="0.0" prefHeight="28.0" vgrow="SOMETIMES" />
+								<RowConstraints maxHeight="40.0" minHeight="0.0" prefHeight="40.0" vgrow="SOMETIMES" />
+								<RowConstraints maxHeight="41.0" minHeight="0.0" prefHeight="41.0" vgrow="SOMETIMES" />
+								<RowConstraints maxHeight="40.0" minHeight="0.0" prefHeight="40.0" vgrow="SOMETIMES" />
+								<RowConstraints maxHeight="1.7976931348623157E308" minHeight="0.0"
+									prefHeight="43.0" vgrow="SOMETIMES" />
+								<RowConstraints maxHeight="1.7976931348623157E308" minHeight="0.0"
+									prefHeight="43.0" vgrow="SOMETIMES" />
+							</rowConstraints>
+						</GridPane>
+					</children>
+				</HBox>
+				<VBox prefHeight="541.0" prefWidth="300.0" styleClass="background" GridPane.columnIndex="2"
+					GridPane.hgrow="SOMETIMES" GridPane.rowIndex="0" GridPane.rowSpan="2147483647">
+					<children>
+						<fx:include fx:id="defenderBox" source="../box/WarCountryBox.fxml" />
+					</children>
+				</VBox>
+			</children>
+			<columnConstraints>
+				<ColumnConstraints hgrow="ALWAYS" maxWidth="350.0" minWidth="200.0" prefWidth="300.0" />
+				<ColumnConstraints hgrow="SOMETIMES" maxWidth="900.0" minWidth="300.0"
+					prefWidth="669.0" />
+				<ColumnConstraints hgrow="ALWAYS" maxWidth="350.0" minWidth="200.0" prefWidth="300.0" />
+			</columnConstraints>
+			<rowConstraints>
+				<RowConstraints maxHeight="312.0" minHeight="100.0" prefHeight="290.0" vgrow="SOMETIMES" />
+				<RowConstraints maxHeight="420.0" minHeight="150.0" prefHeight="311.0" vgrow="SOMETIMES" />
+			</rowConstraints>
+		</GridPane>
+	</children>
+	<stylesheets>
+		<URL value="@GUI.css" />
+	</stylesheets>
+</AnchorPane>

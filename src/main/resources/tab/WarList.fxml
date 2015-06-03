@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="Content" styleClass="content" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="ee.tkasekamp.vickywaranalyzer.controller.tab.WarListController">
+	<children>
+		<GridPane id="GridPane" alignment="CENTER" hgap="20.0" AnchorPane.bottomAnchor="20.0"
+			AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+			<children>
+				<AnchorPane minHeight="0.0" minWidth="50.0" prefHeight="160.0" prefWidth="326.0"
+					styleClass="background" GridPane.columnIndex="0" GridPane.rowIndex="0">
+					<children>
+						<GridPane prefHeight="541.0" prefWidth="258.0" AnchorPane.bottomAnchor="0.0"
+							AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+							<children>
+								<HBox id="HBox" alignment="CENTER" prefHeight="51.000099999997474" prefWidth="111.99990000000253"
+									spacing="5.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+									<children>
+										<Label alignment="CENTER" contentDisplay="CENTER" styleClass="label-dark" text="Player country:" />
+										<Label fx:id="playerLabel" alignment="CENTER" text="Hi there!" />
+									</children>
+								</HBox>
+								<HBox id="HBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0"
+									GridPane.rowIndex="1">
+									<children>
+										<Label styleClass="label-dark" text="Start date:" />
+										<Label fx:id="startDateLabel" text="1836.1.1" />
+									</children>
+								</HBox>
+								<HBox id="HBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0"
+									GridPane.rowIndex="2">
+									<children>
+										<Label styleClass="label-dark" text="Current date:" />
+										<Label fx:id="currentDateLabel" text="1867.3.16" />
+									</children>
+								</HBox>
+								<Separator prefHeight="13.0" prefWidth="247.0" GridPane.columnIndex="0"
+									GridPane.rowIndex="3" />
+								<ListView fx:id="selectCountryIssue" prefHeight="381.0" prefWidth="258.0"
+									GridPane.columnIndex="0" GridPane.rowIndex="5" />
+								<HBox id="HBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0"
+									GridPane.rowIndex="4">
+									<children>
+										<Label styleClass="label-dark" text="Click on the country to see its wars" />
+									</children>
+								</HBox>
+							</children>
+							<columnConstraints>
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+							</columnConstraints>
+							<padding>
+								<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" fx:id="x2" />
+							</padding>
+							<rowConstraints>
+								<RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="NEVER" />
+								<RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="NEVER" />
+								<RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="NEVER" />
+								<RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+								<RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="NEVER" />
+								<RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" vgrow="SOMETIMES" />
+							</rowConstraints>
+						</GridPane>
+					</children>
+				</AnchorPane>
+				<AnchorPane maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0"
+					styleClass="background" GridPane.columnIndex="1" GridPane.rowIndex="0">
+					<children>
+						<HBox id="HBox" alignment="CENTER" maxWidth="1500.0" prefHeight="45.0" prefWidth="870.0"
+							spacing="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+							<children>
+								<ToolBar id="showAllWarsIssue" maxWidth="20000.0" minHeight="-Infinity" prefHeight="45.0"
+									prefWidth="870.0" styleClass="background" HBox.hgrow="ALWAYS">
+									<items>
+										<Button fx:id="showAllWarsIssue" mnemonicParsing="false" onAction="#showAllWarsIssue"
+											text="Show all wars" />
+										<Separator orientation="VERTICAL" prefHeight="200.0" />
+										<Button fx:id="showActiveWarsIssue" mnemonicParsing="false" onAction="#showActiveWarsIssue"
+											text="Show active wars" />
+										<Button fx:id="showPreviousWarsIssue" mnemonicParsing="false" onAction="#showPreviousWarsIssue"
+											text="Show previous wars" />
+										<Separator orientation="VERTICAL" prefHeight="200.0" />
+										<Button fx:id="showMyWarsIssue" mnemonicParsing="false" onAction="#showMyWarsIssue"
+											text="Show my wars" />
+										<Separator orientation="VERTICAL" prefHeight="200.0" />
+									</items>
+									<HBox.margin>
+										<Insets bottom="5.0" left="5.0" top="5.0" />
+									</HBox.margin>
+								</ToolBar>
+							</children>
+						</HBox>
+						<HBox id="HBox" alignment="CENTER" prefHeight="530.0" prefWidth="1138.0" spacing="5.0"
+							AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+							AnchorPane.topAnchor="91.0">
+							<children>
+								<TableView fx:id="warTable" maxWidth="1500.0" prefHeight="415.0" prefWidth="1117.0"
+									HBox.hgrow="ALWAYS">
+									<columns>
+										<TableColumn maxWidth="500.0" minWidth="150.0" prefWidth="300.0" text="Name"
+											fx:id="colNameWar" />
+										<TableColumn minWidth="50.0" prefWidth="120.0" text="Attacker" fx:id="colAttackerWar" />
+										<TableColumn minWidth="50.0" prefWidth="120.0" text="Defender" fx:id="colDefenderWar" />
+										<TableColumn minWidth="50.0" prefWidth="120.0" text="Casus belli" fx:id="colCasusBelliWar" />
+										<TableColumn prefWidth="120.0" text="Start date" fx:id="colStartDateWar" />
+										<TableColumn minWidth="50.0" prefWidth="120.0" text="End date" fx:id="colEndDateWar" />
+									</columns>
+									<HBox.margin>
+										<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
+									</HBox.margin>
+								</TableView>
+							</children>
+						</HBox>
+					</children>
+				</AnchorPane>
+			</children>
+			<columnConstraints>
+				<ColumnConstraints hgrow="SOMETIMES" maxWidth="350.0" minWidth="150.0" />
+				<ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308"
+					minWidth="10.0" />
+			</columnConstraints>
+			<rowConstraints>
+				<RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+			</rowConstraints>
+		</GridPane>
+	</children>
+	<stylesheets>
+		<URL value="@GUI.css" />
+	</stylesheets>
+</AnchorPane>

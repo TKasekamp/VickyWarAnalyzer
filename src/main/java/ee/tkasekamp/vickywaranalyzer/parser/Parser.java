@@ -1,19 +1,18 @@
 package ee.tkasekamp.vickywaranalyzer.parser;
 
-import ee.tkasekamp.vickywaranalyzer.core.Battle;
-import ee.tkasekamp.vickywaranalyzer.core.JoinedCountry;
-import ee.tkasekamp.vickywaranalyzer.core.Unit;
-import ee.tkasekamp.vickywaranalyzer.core.War;
-import ee.tkasekamp.vickywaranalyzer.core.WarGoal;
-import ee.tkasekamp.vickywaranalyzer.core.Battle.Result;
-import ee.tkasekamp.vickywaranalyzer.gui.GuiController;
-import ee.tkasekamp.vickywaranalyzer.util.Reference;
-
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+
+import ee.tkasekamp.vickywaranalyzer.core.Battle;
+import ee.tkasekamp.vickywaranalyzer.core.Battle.Result;
+import ee.tkasekamp.vickywaranalyzer.core.JoinedCountry;
+import ee.tkasekamp.vickywaranalyzer.core.Unit;
+import ee.tkasekamp.vickywaranalyzer.core.War;
+import ee.tkasekamp.vickywaranalyzer.core.WarGoal;
+import ee.tkasekamp.vickywaranalyzer.service.ModelService;
 
 /** Readers in order of activation in a typical save game:
  *   saveGameReader
@@ -55,11 +54,11 @@ public class Parser  {
 	private boolean originalWarGoalProcessing; // New for Hod. Has the same function as warGoalProcessing
 	/* Various */
 	private int bracketCounter = 0; // bracketCounter is uses to check if all data from the war has been read in
-	static public Reference saveGameData = new Reference(); // public so it can be used by all methods
+//	static public Reference saveGameData = new Reference(); // public so it can be used by all methods
 	
-	private GuiController controller;
-	public Parser(GuiController controller) {
-		this.controller = controller;
+	private ModelService modelService;
+	public Parser(ModelService modelService) {
+		this.modelService = modelService;
 	}
 	
 	
@@ -74,7 +73,7 @@ public class Parser  {
 	public ArrayList<War> read(String saveGamePath) throws IOException {
 		/* Resetting values for when user loads multiple files during a session 
 		 * Might not be necessary but doing it just in case. */
-		saveGameData = new Reference();
+//		saveGameData = new Reference();
 		warList = new ArrayList<War>();
 		WAR_COUNTER = 0;
 		BATTLE_COUNTER = 0;
@@ -359,7 +358,7 @@ public class Parser  {
 				unitList.add(new Unit(pieces[0], losses));
 			} catch (NumberFormatException e) {
 				// Mainly debug if the lines which come here aren't integers
-				controller.getErrorLabel().setText(controller.getErrorLabel().getText() + "Problem with reading: " + line);
+//				controller.getErrorLabel().setText(controller.getErrorLabel().getText() + "Problem with reading: " + line);
 			}
 			
 		}
@@ -482,18 +481,18 @@ public class Parser  {
 	public void referenceReader(String line) {
 		/* Checking the line and if there is no date 
 		 * Same with start_date*/
-		if (line.startsWith("date=") && saveGameData.getDate().equals("")) {
+		if (line.startsWith("date=") && modelService.getDate().equals("")) {
 			line = nameExtractor(line, 6, true);
-			saveGameData.setDate(line);
+			modelService.setDate(line);
 		}
 		/* Checking if it's empty is not needed as there is only one line with player= */
 		else if (line.startsWith("player=")) {
 			line = nameExtractor(line, 8, true);
-			saveGameData.setPlayer(line);
+			modelService.setPlayer(line);
 		}
-		else if (line.startsWith("start_date=") && saveGameData.getStart_date().equals("")) {
+		else if (line.startsWith("start_date=") && modelService.getStartDate().equals("")) {
 			line = nameExtractor(line, 12, true);
-			saveGameData.setStart_date(line);		
+			modelService.setStartDate(line);		
 		}
 	}
 	public void bracketCounterChange(String line) {

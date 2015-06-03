@@ -3,11 +3,7 @@ package ee.tkasekamp.vickywaranalyzer.core;
 import java.util.Arrays;
 //import static gui.GuiController.getErrorLabel;
 
-
-
-
-
-import ee.tkasekamp.vickywaranalyzer.util.Reference;
+import ee.tkasekamp.vickywaranalyzer.util.Constants;
 
 public class Battle {
 	private String date = "";
@@ -69,7 +65,7 @@ public class Battle {
 		try {	
 			if (!(attackerUnits.length == 0) || !(defenderUnits.length == 0)) {
 				unit = attackerUnits[0].getType();		
-				for (String ship : Reference.navalUnitsList) {
+				for (String ship : Constants.NAVAL_UNITS) {
 				if (unit.equals(ship)) {
 					setBattleType(Type.NAVAL);
 				}
@@ -85,9 +81,9 @@ public class Battle {
 
 	}
 	/** Finding the official attacker and defender names for this battle */
-	public void setOfficialNames() {
-		defenderOfficial = Country.findOfficalName(defender);
-		attackerOfficial = Country.findOfficalName(attacker);
+	public void setOfficialNames(String at, String def) {
+		defenderOfficial = def;
+		attackerOfficial = at;
 	}
 	public String getDate() {
 		return date;

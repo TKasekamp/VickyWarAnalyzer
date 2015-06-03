@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.GridPane?>
+
+<GridPane prefHeight="651.0" prefWidth="300.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.40" fx:controller="ee.tkasekamp.vickywaranalyzer.controller.box.WarCountryBox">
+	<children>
+		<HBox id="HBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+			<children>
+				<ImageView id="ABU" fx:id="flag" pickOnBounds="true" preserveRatio="true">
+					<image>
+						<Image preserveRatio="true" smooth="true" url="@../flags/ABU.png" />
+					</image>
+				</ImageView>
+			</children>
+		</HBox>
+		<HBox id="HBox" alignment="CENTER" prefHeight="30.0" prefWidth="207.0" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2147483647" GridPane.rowIndex="2">
+			<children>
+				<Label fx:id="originalHelper" styleClass="label-dark" text="Original attacker:" />
+				<Label fx:id="originalLabel" text="Label" />
+			</children>
+		</HBox>
+		<HBox id="HBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0" GridPane.rowIndex="3">
+			<children>
+				<Label styleClass="label-dark" text="Total losses:" />
+				<Label fx:id="totalLossesLabel" text="Label" />
+			</children>
+		</HBox>
+		<HBox id="HBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0" GridPane.rowIndex="4">
+			<children>
+				<Label styleClass="label-dark" text="Total ships lost:" />
+				<Label fx:id="totalShipLossesLabel" text="Label" />
+			</children>
+		</HBox>
+		<TableView fx:id="table" prefHeight="397.0" prefWidth="300.0" GridPane.columnIndex="0" GridPane.rowIndex="5">
+			<columns>
+				<TableColumn fx:id="colFlag" prefWidth="50.0" text="Flag" />
+				<TableColumn fx:id="colName" prefWidth="90.0" text="Country" />
+				<TableColumn fx:id="colStartDate" prefWidth="88.0" text="Join date" />
+				<TableColumn fx:id="colEndDate" prefWidth="88.0" text="End Date" />
+			</columns>
+		</TableView>
+		<HBox id="HBox" alignment="CENTER" prefHeight="30.0" prefWidth="207.0" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
+			<children>
+				<Label fx:id="warHelper" styleClass="label-dark" text="Attacker:" />
+				<Label id="originalAttackerLabel" fx:id="warLabel" text="Only active wars have attackers" />
+			</children>
+		</HBox>
+	</children>
+	<columnConstraints>
+		<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+	</columnConstraints>
+	<padding>
+		<Insets bottom="10.0" top="10.0" fx:id="x3" />
+	</padding>
+	<rowConstraints>
+		<RowConstraints maxHeight="120.0" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+		<RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+		<RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+		<RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+		<RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+		<RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="100.0" vgrow="ALWAYS" />
+	</rowConstraints>
+	<stylesheets>
+		<URL value="@GUI.css" />
+	</stylesheets>
+</GridPane>

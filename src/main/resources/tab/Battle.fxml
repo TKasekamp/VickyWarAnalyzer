@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="Content" styleClass="content" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="ee.tkasekamp.vickywaranalyzer.controller.tab.BattleController">
+	<children>
+		<GridPane alignment="CENTER" hgap="20.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+			vgap="20.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0"
+			AnchorPane.topAnchor="20.0">
+			<children>
+				<VBox maxHeight="1.7976931348623157E308" styleClass="background" GridPane.columnIndex="0"
+					GridPane.rowIndex="0" GridPane.rowSpan="2147483647">
+					<children>
+						<fx:include fx:id="attackerBox" source="../box/BattleCountryBox.fxml" />
+					</children>
+				</VBox>
+				<VBox prefHeight="200.0" prefWidth="100.0" styleClass="background" GridPane.columnIndex="2"
+					GridPane.rowIndex="0" GridPane.rowSpan="2147483647">
+					<children>
+						<fx:include fx:id="defenderBox" source="../box/BattleCountryBox.fxml" />
+					</children>
+				</VBox>
+				<VBox prefHeight="200.0" prefWidth="100.0" styleClass="background" GridPane.columnIndex="1"
+					GridPane.rowIndex="0" GridPane.rowSpan="2147483647">
+					<children>
+						<GridPane prefHeight="373.0" prefWidth="707.0">
+							<children>
+								<HBox id="HBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0"
+									GridPane.columnSpan="2147483647" GridPane.rowIndex="0">
+									<children>
+										<Label fx:id="battleName" styleClass="label-header" text="Battle of this place" />
+									</children>
+								</HBox>
+								<HBox id="HBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="1"
+									GridPane.rowIndex="1">
+									<children>
+										<Label styleClass="label-dark" text="Type:" />
+										<Label fx:id="battleType" text="Label" />
+									</children>
+								</HBox>
+								<HBox id="HBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="1"
+									GridPane.rowIndex="2">
+									<children>
+										<Label styleClass="label-dark" text="Result:" />
+										<Label fx:id="battleResult" text="Label" />
+									</children>
+								</HBox>
+								<HBox id="HBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0"
+									GridPane.rowIndex="2">
+									<children>
+										<Label styleClass="label-dark" text="Location:" />
+										<Label fx:id="battleLocation" text="Label" />
+									</children>
+								</HBox>
+								<HBox id="HBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0"
+									GridPane.rowIndex="1">
+									<children>
+										<Label styleClass="label-dark" text="Date:" />
+										<Label fx:id="battleDate" text="Label" />
+									</children>
+								</HBox>
+								<HBox id="HBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0"
+									GridPane.columnSpan="2147483647" GridPane.rowIndex="3">
+									<children>
+										<Label styleClass="label-dark" text="Total losses:" />
+										<Label fx:id="battleTotalLosses" text="Label" />
+									</children>
+								</HBox>
+							</children>
+							<columnConstraints>
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+							</columnConstraints>
+							<rowConstraints>
+								<RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+								<RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+								<RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+								<RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+							</rowConstraints>
+						</GridPane>
+					</children>
+				</VBox>
+			</children>
+			<columnConstraints>
+				<ColumnConstraints hgrow="SOMETIMES" maxWidth="350.0" minWidth="120.0"
+					prefWidth="300.0" />
+				<ColumnConstraints hgrow="SOMETIMES" maxWidth="900.0" minWidth="100.0"
+					prefWidth="669.0" />
+				<ColumnConstraints hgrow="SOMETIMES" maxWidth="350.0" minWidth="120.0"
+					prefWidth="300.0" />
+			</columnConstraints>
+			<rowConstraints>
+				<RowConstraints maxHeight="301.0" minHeight="10.0" prefHeight="228.0" vgrow="SOMETIMES" />
+				<RowConstraints maxHeight="195.0" minHeight="10.0" prefHeight="160.0" vgrow="SOMETIMES" />
+				<RowConstraints maxHeight="193.0" minHeight="10.0" prefHeight="193.0" vgrow="SOMETIMES" />
+			</rowConstraints>
+		</GridPane>
+	</children>
+	<stylesheets>
+		<URL value="@GUI.css" />
+	</stylesheets>
+</AnchorPane>
