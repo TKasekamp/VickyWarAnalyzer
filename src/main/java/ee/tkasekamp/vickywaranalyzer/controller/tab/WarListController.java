@@ -1,7 +1,5 @@
 package ee.tkasekamp.vickywaranalyzer.controller.tab;
 
-import java.io.FileNotFoundException;
-
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;

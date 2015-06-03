@@ -8,10 +8,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import ee.tkasekamp.vickywaranalyzer.controller.ObservableJoinedCountry;
 import ee.tkasekamp.vickywaranalyzer.controller.tab.AbstractController;
 import ee.tkasekamp.vickywaranalyzer.core.Country;
 import ee.tkasekamp.vickywaranalyzer.core.War;
-import ee.tkasekamp.vickywaranalyzer.gui.ObservableJoinedCountry;
 import ee.tkasekamp.vickywaranalyzer.service.ModelService;
 
 public class WarCountryBox extends AbstractController {

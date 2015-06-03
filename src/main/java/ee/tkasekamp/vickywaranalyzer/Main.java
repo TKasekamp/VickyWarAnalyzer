@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import ee.tkasekamp.vickywaranalyzer.controller.ErrorController;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import ee.tkasekamp.vickywaranalyzer.controller.ErrorController;
 
 public class Main extends Application {
 

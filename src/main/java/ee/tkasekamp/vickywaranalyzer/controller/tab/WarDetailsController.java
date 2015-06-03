@@ -3,7 +3,6 @@ package ee.tkasekamp.vickywaranalyzer.controller.tab;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.collections.ListChangeListener.Change;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
@@ -13,11 +12,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import ee.tkasekamp.vickywaranalyzer.controller.MainController;
 import ee.tkasekamp.vickywaranalyzer.controller.box.WarCountryBox;
 import ee.tkasekamp.vickywaranalyzer.core.Battle;
-import ee.tkasekamp.vickywaranalyzer.core.Country;
 import ee.tkasekamp.vickywaranalyzer.core.Battle.Result;
 import ee.tkasekamp.vickywaranalyzer.core.Battle.Type;
 import ee.tkasekamp.vickywaranalyzer.core.War;
-import ee.tkasekamp.vickywaranalyzer.gui.FileLoader;
 import ee.tkasekamp.vickywaranalyzer.service.ModelService;
 
 public class WarDetailsController extends AbstractController {

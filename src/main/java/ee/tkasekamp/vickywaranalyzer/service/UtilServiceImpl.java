@@ -3,7 +3,6 @@ package ee.tkasekamp.vickywaranalyzer.service;
 import java.io.IOException;
 
 import javafx.scene.image.Image;
-import ee.tkasekamp.vickywaranalyzer.gui.FileLoader;
 import ee.tkasekamp.vickywaranalyzer.util.FolderHandler;
 
 public class UtilServiceImpl implements UtilService {
@@ -54,16 +53,14 @@ public class UtilServiceImpl implements UtilService {
 	@Override
 	public void setFolderPaths(String saveFolder, String installFolder) {
 		this.installFolder = installFolder.replace("\\", "/");
-		this.saveGameFolder = FolderHandler.getDirectoryOnly(saveFolder
-				.replace("\\", "/"));
+		this.saveGameFolder = FolderHandler.getDirectoryOnly(saveFolder.replace("\\", "/"));
 
 	}
 
 	@Override
 	public Image loadFlag(String tag) {
 		try {
-			return new Image(this.getClass().getResourceAsStream(
-					FLAGPATH + tag + ".png"));
+			return new Image(this.getClass().getResourceAsStream(FLAGPATH + tag + ".png"));
 		} catch (NullPointerException e) {
 			return null;
 		}

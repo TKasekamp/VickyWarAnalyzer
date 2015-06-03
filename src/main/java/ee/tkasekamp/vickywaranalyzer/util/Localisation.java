@@ -14,10 +14,9 @@ import java.util.Map.Entry;
 
 import ee.tkasekamp.vickywaranalyzer.core.Country;
 
-
 public class Localisation {
 
-	private static Map<String, String> countryMap = new HashMap<String, String>(); 
+	private static Map<String, String> countryMap = new HashMap<String, String>();
 
 	/** Main method of this class. Manages the reading from csv */
 	public static void readLocalisation(String installPath,
