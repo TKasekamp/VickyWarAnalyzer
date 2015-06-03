@@ -1,4 +1,4 @@
-package ee.tkasekamp.vickywaranalyzer.controller;
+package ee.tkasekamp.vickywaranalyzer.controller.box;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

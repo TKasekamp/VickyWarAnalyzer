@@ -9,7 +9,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import ee.tkasekamp.vickywaranalyzer.controller.MainController;
-import ee.tkasekamp.vickywaranalyzer.controller.WarCountryBox;
+import ee.tkasekamp.vickywaranalyzer.controller.box.WarCountryBox;
 import ee.tkasekamp.vickywaranalyzer.core.Battle;
 import ee.tkasekamp.vickywaranalyzer.core.Country;
 import ee.tkasekamp.vickywaranalyzer.core.Battle.Result;

@@ -19,7 +19,7 @@
 				<VBox prefHeight="541.0" prefWidth="300.0" styleClass="background" GridPane.columnIndex="0"
 					GridPane.hgrow="SOMETIMES" GridPane.rowIndex="0" GridPane.rowSpan="2147483647">
 					<children>
-						<fx:include fx:id="attackerBox" source="../WarCountryBox.fxml" />
+						<fx:include fx:id="attackerBox" source="../box/WarCountryBox.fxml" />
 					</children>
 				</VBox>
 				<HBox prefHeight="334.0" prefWidth="594.0" styleClass="background" GridPane.columnIndex="1"
@@ -198,7 +198,7 @@
 				<VBox prefHeight="541.0" prefWidth="300.0" styleClass="background" GridPane.columnIndex="2"
 					GridPane.hgrow="SOMETIMES" GridPane.rowIndex="0" GridPane.rowSpan="2147483647">
 					<children>
-						<fx:include fx:id="defenderBox" source="../WarCountryBox.fxml" />
+						<fx:include fx:id="defenderBox" source="../box/WarCountryBox.fxml" />
 					</children>
 				</VBox>
 			</children>
