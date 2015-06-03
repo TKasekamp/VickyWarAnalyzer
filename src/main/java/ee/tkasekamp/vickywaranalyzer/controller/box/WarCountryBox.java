@@ -22,8 +22,8 @@ public class WarCountryBox extends AbstractController {
 	@FXML
 	private Label originalLabel;
 
-    @FXML
-    private Label originalHelper;
+	@FXML
+	private Label originalHelper;
 
 	@FXML
 	private Label totalLossesLabel;
@@ -76,11 +76,15 @@ public class WarCountryBox extends AbstractController {
 
 	@Override
 	public void reset() {
-		// TODO Auto-generated method stub
-
+		warLabel.setText("");
+		originalLabel.setText("");
+		totalLossesLabel.setText("");
+		totalShipLossesLabel.setText("");
+		tableContent.clear(); // Clearing list
 	}
 
 	public void populate(War war) {
+		reset();
 		if (side == "Attacker")
 			populateAttacker(war);
 
@@ -113,7 +117,6 @@ public class WarCountryBox extends AbstractController {
 			warLabel.setText(war.getOriginalAttackerOfficial());
 		}
 
-		tableContent.clear(); // Clearing list
 
 		/*
 		 * Comparing war.countrylist items to reference.countrylist items Join
@@ -164,8 +167,6 @@ public class WarCountryBox extends AbstractController {
 			warLabel.setText(war.getOriginalDefenderOfficial());
 		}
 
-		tableContent.clear(); // Clearing list
-
 		/*
 		 * Comparing war.countrylist items to reference.countrylist items Join
 		 * type true for attackers
@@ -194,9 +195,9 @@ public class WarCountryBox extends AbstractController {
 		totalLossesLabel.setText(Integer.toString(totalLosses));
 		totalShipLossesLabel.setText(Integer.toString(totalShipLosses));
 	}
-	
+
 	private void setHelperLabels(String side) {
-		originalHelper.setText("Original " + side.toLowerCase()+ ":");
+		originalHelper.setText("Original " + side.toLowerCase() + ":");
 		warHelper.setText(side + ":");
 	}
 }
