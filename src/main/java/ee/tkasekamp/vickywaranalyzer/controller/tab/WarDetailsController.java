@@ -1,7 +1,9 @@
 package ee.tkasekamp.vickywaranalyzer.controller.tab;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.collections.ListChangeListener.Change;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
@@ -123,6 +125,11 @@ public class WarDetailsController extends AbstractController {
 		attackerBoxController.init(modelService, "Attacker");
 		defenderBoxController.init(modelService, "Defender");
 		battleTableContent = FXCollections.observableArrayList();
+
+		/* Listening to selections in battleTable */
+		ObservableList<Battle> battleTableSelection = battleTable
+				.getSelectionModel().getSelectedItems();
+		battleTableSelection.addListener(battleTableSelectionChanged);
 	}
 
 	@Override
@@ -358,5 +365,16 @@ public class WarDetailsController extends AbstractController {
 			warGoalFulfilledHelper.setVisible(false);
 		}
 	}
+
+	/** Battle table selection listener in the war details tab */
+	private final ListChangeListener<Battle> battleTableSelectionChanged = new ListChangeListener<Battle>() {
+		@Override
+		public void onChanged(Change<? extends Battle> c) {
+			if (!battleTable.getSelectionModel().getSelectedItems().isEmpty()) {
+				main.populateBattleTab((Battle) battleTable.getSelectionModel()
+						.getSelectedItems().toArray()[0]);
+			}
+		}
+	};
 
 }

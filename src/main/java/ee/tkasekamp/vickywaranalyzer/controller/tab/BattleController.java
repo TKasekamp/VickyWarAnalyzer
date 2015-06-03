@@ -8,7 +8,7 @@ import ee.tkasekamp.vickywaranalyzer.controller.box.BattleCountryBox;
 import ee.tkasekamp.vickywaranalyzer.core.Battle;
 import ee.tkasekamp.vickywaranalyzer.service.ModelService;
 
-public class BattleController extends AbstractController{
+public class BattleController extends AbstractController {
 
 	@FXML
 	private Label battleName;
@@ -27,17 +27,18 @@ public class BattleController extends AbstractController{
 
 	@FXML
 	private Label battleTotalLosses;
-	
+
 	@FXML
 	private BattleCountryBox attackerBoxController;
 	@FXML
 	private BattleCountryBox defenderBoxController;
-	
+
 	private MainController main;
 	private Tab tab;
 	private ModelService modelService;
-	
-	public void init(MainController mainController,ModelService modelService, Tab tab) {
+
+	public void init(MainController mainController, ModelService modelService,
+			Tab tab) {
 		main = mainController;
 		this.tab = tab;
 		this.modelService = modelService;
@@ -49,10 +50,20 @@ public class BattleController extends AbstractController{
 	public void reset() {
 		tab.setDisable(true);
 		tab.setText("Battle");
-		
+
 	}
 
 	public void populate(Battle battle) {
-		
+		tab.setDisable(false);
+		tab.setText("Battle of " + battle.getName());
+		battleName.setText("Battle of " + battle.getName());
+		battleDate.setText(battle.getDate());
+		battleType.setText(battle.getBattleType().toString());
+		battleLocation.setText(Integer.toString(battle.getLocation()));
+		battleResult.setText(battle.getRes().toString());
+		battleTotalLosses.setText(Integer.toString(battle.getTotalLosses()));
+
+		attackerBoxController.populate(battle);
+		defenderBoxController.populate(battle);
 	}
 }
