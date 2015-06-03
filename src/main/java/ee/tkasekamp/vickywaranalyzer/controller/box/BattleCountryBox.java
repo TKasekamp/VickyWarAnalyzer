@@ -13,39 +13,56 @@ import ee.tkasekamp.vickywaranalyzer.service.ModelService;
 
 public class BattleCountryBox {
 	@FXML
-	private TableView<Unit> attackerUnitsTable;
+	private TableView<Unit> unitsTable;
 	@FXML
-	private TableColumn<Unit, String> colAttackerUnitType;
+	private TableColumn<Unit, String> colUnitType;
 	@FXML
-	private TableColumn<Unit, Integer> colAttackerUnitNumber;
+	private TableColumn<Unit, Integer> colUnitNumber;
 
 	@FXML
-	private Label battleAttackerLosses;
+	private Label losses;
 
 	@FXML
-	private Label battleAttackerArmySize;
+	private Label armySize;
 
 	@FXML
-	private Label battleAttacker;
+	private Label country;
 
 	@FXML
-	private ImageView battleAttackerFlag;
+	private ImageView flag;
 
 	@FXML
-	private Label battleAttackerLeader;
+	private Label leader;
 
-	private ObservableList<Unit> attackerUnitsTableContent;
+	// Helper labels that describe side of the country
+
+	@FXML
+	private Label sideHelper;
+	@FXML
+	private Label leaderHelper;
+
+	@FXML
+	private Label sideUnitsHelper;
+
+	private ObservableList<Unit> unitsTableContent;
 
 	private String side;
 	private ModelService modelService;
 
 	public void init(ModelService modelService, String side) {
-		attackerUnitsTableContent = FXCollections.observableArrayList();
+		unitsTableContent = FXCollections.observableArrayList();
 		this.side = side;
 		this.modelService = modelService;
+		setHelperLabels();
 	}
-	
+
 	public void populate(Battle battle) {
-		
+
+	}
+
+	private void setHelperLabels() {
+		sideHelper.setText(side + ":");
+		leaderHelper.setText(side + " leader:");
+		sideUnitsHelper.setText(side + " units");
 	}
 }
