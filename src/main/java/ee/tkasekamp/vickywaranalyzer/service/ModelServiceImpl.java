@@ -7,13 +7,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javafx.scene.image.Image;
 import ee.tkasekamp.vickywaranalyzer.core.Battle;
 import ee.tkasekamp.vickywaranalyzer.core.Country;
 import ee.tkasekamp.vickywaranalyzer.core.JoinedCountry;
 import ee.tkasekamp.vickywaranalyzer.core.War;
-import ee.tkasekamp.vickywaranalyzer.gui.FileLoader;
 import ee.tkasekamp.vickywaranalyzer.parser.Parser;
+import ee.tkasekamp.vickywaranalyzer.util.Localisation;
 
 public class ModelServiceImpl implements ModelService {
 	private String date = "";
@@ -44,7 +43,8 @@ public class ModelServiceImpl implements ModelService {
 
 		/* Localisation */
 		// TODO multithreading
-		// controller.getLoc().readLocalisation();
+		if(useLocalisation)
+			Localisation.readLocalisation(utilServ.getInstallFolder(), countryList);
 		/* Finding official names for every country and battle */
 		// TODO try to optimise
 		for (War war : warList) {
