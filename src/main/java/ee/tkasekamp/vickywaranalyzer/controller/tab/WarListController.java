@@ -205,7 +205,7 @@ public class WarListController extends AbstractController {
 		warTableContent.clear();
 		for (War item : modelServ.getWars()) {
 			for (JoinedCountry country : item.getCountryList()) {
-				if (modelServ.findOfficialName(country.getTag()).equals(tag)) {
+				if (modelServ.getOfficialName(country.getTag()).equals(tag)) {
 					warTableContent.add(item);
 				} else if (country.getTag().equals(tag)) {
 					warTableContent.add(item);

@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javafx.scene.image.Image;
 import ee.tkasekamp.vickywaranalyzer.core.Battle;
 import ee.tkasekamp.vickywaranalyzer.core.Country;
 import ee.tkasekamp.vickywaranalyzer.core.JoinedCountry;
@@ -75,7 +76,7 @@ public class ModelServiceImpl implements ModelService {
 	}
 
 	@Override
-	public String findOfficialName(String tag) {
+	public String getOfficialName(String tag) {
 		for (Country country : countryList) {
 			if (country.getTag().equals(tag)) {
 				return country.getOfficialName();
@@ -86,13 +87,13 @@ public class ModelServiceImpl implements ModelService {
 	}
 
 	private void setWarOfficialNames(War war) {
-		war.setOfficialNames(findOfficialName(war.getOriginalAttacker()),
-				findOfficialName(war.getOriginalDefender()));
+		war.setOfficialNames(getOfficialName(war.getOriginalAttacker()),
+				getOfficialName(war.getOriginalDefender()));
 	}
 
 	private void setBattleOfficialNames(Battle battle) {
-		battle.setOfficialNames(findOfficialName(battle.getAttacker()),
-				findOfficialName(battle.getDefender()));
+		battle.setOfficialNames(getOfficialName(battle.getAttacker()),
+				getOfficialName(battle.getDefender()));
 	}
 
 	/**
@@ -157,7 +158,7 @@ public class ModelServiceImpl implements ModelService {
 
 	@Override
 	public String getPlayerOfficial() {
-		return findOfficialName(player);
+		return getOfficialName(player);
 	}
 
 	@Override
@@ -178,6 +179,16 @@ public class ModelServiceImpl implements ModelService {
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public Image getFlag(String tag) {
+		for (Country country : countryList) {
+			if (country.getTag().equals(tag)) {
+				return country.getFlag();
+			}
+		}
+		return null;
 	}
 
 }

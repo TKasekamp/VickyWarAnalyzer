@@ -3,6 +3,7 @@ package ee.tkasekamp.vickywaranalyzer.service;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javafx.scene.image.Image;
 import ee.tkasekamp.vickywaranalyzer.core.Country;
 import ee.tkasekamp.vickywaranalyzer.core.War;
 
@@ -37,7 +38,9 @@ public interface ModelService {
 	 * Returns an official name for the given tag. If not found, the same tag is
 	 * returned (but this is unlikely)
 	 */
-	public String findOfficialName(String tag);
+	public String getOfficialName(String tag);
+	
+	public Image getFlag(String tag);
 	
 	public ArrayList<Country> getCountries();
 	public ArrayList<War> getWars();

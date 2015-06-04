@@ -282,13 +282,13 @@ public class WarDetailsController extends AbstractController {
 			 * Otherwise the first wargoal in the wargoalList will be used
 			 */
 			if (!(war.getOriginalWarGoal().getActor().equals(""))) {
-				warGoalActorLabel.setText(modelService.findOfficialName(war
+				warGoalActorLabel.setText(modelService.getOfficialName(war
 						.getOriginalWarGoal().getActor()));
-				warGoalReceiverLabel.setText(modelService.findOfficialName(war
+				warGoalReceiverLabel.setText(modelService.getOfficialName(war
 						.getOriginalWarGoal().getReceiver()));
 				warGoalCBLabel.setText(war.getOriginalWarGoal()
 						.getCasus_belli());
-				warGoalCountryLabel.setText(modelService.findOfficialName(war
+				warGoalCountryLabel.setText(modelService.getOfficialName(war
 						.getOriginalWarGoal().getCountry()));
 				warGoalStateLabel.setText(Integer.toString(war
 						.getOriginalWarGoal().getState_province_id()));
@@ -300,13 +300,13 @@ public class WarDetailsController extends AbstractController {
 				warGoalFulfilledLabel.setText(war.getOriginalWarGoal()
 						.getFulfilled().toString());
 			} else {
-				warGoalActorLabel.setText(modelService.findOfficialName(war
+				warGoalActorLabel.setText(modelService.getOfficialName(war
 						.getWarGoalList()[0].getActor()));
-				warGoalReceiverLabel.setText(modelService.findOfficialName(war
+				warGoalReceiverLabel.setText(modelService.getOfficialName(war
 						.getWarGoalList()[0].getReceiver()));
 				warGoalCBLabel
 						.setText(war.getWarGoalList()[0].getCasus_belli());
-				warGoalCountryLabel.setText(modelService.findOfficialName(war
+				warGoalCountryLabel.setText(modelService.getOfficialName(war
 						.getWarGoalList()[0].getCountry()));
 				warGoalStateLabel
 						.setText(Integer.toString(war.getWarGoalList()[0]
@@ -332,9 +332,9 @@ public class WarDetailsController extends AbstractController {
 			warGoalFulfilledHelper.setVisible(true);
 		} else {
 			try {
-				warGoalActorLabel.setText(modelService.findOfficialName(war
+				warGoalActorLabel.setText(modelService.getOfficialName(war
 						.getWarGoalList()[0].getActor()));
-				warGoalReceiverLabel.setText(modelService.findOfficialName(war
+				warGoalReceiverLabel.setText(modelService.getOfficialName(war
 						.getWarGoalList()[0].getReceiver()));
 				warGoalCBLabel
 						.setText(war.getWarGoalList()[0].getCasus_belli());

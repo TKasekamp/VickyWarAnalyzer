@@ -9,7 +9,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import ee.tkasekamp.vickywaranalyzer.core.Battle;
-import ee.tkasekamp.vickywaranalyzer.core.Country;
 import ee.tkasekamp.vickywaranalyzer.core.Unit;
 import ee.tkasekamp.vickywaranalyzer.service.ModelService;
 
@@ -61,55 +60,30 @@ public class BattleCountryBox {
 	public void populate(Battle battle) {
 		unitsTableContent.clear();
 		if (side == "Attacker")
-			populateAttacker(battle);
+			populateBox(battle.getAttacker(), battle.getAttackerUnits(),
+					battle.getAttackerLosses(), battle.getLeaderAttacker());
 
 		else
-			populateDefender(battle);
+			populateBox(battle.getDefender(), battle.getDefenderUnits(),
+					battle.getDefenderLosses(), battle.getLeaderDefender());
 	}
 
-	private void populateAttacker(Battle battle) {
-		/* Finding the main flag */
-		for (Country country : modelService.getCountries()) {
-			if (battle.getAttacker().equals(country.getTag())) {
-				flag.setImage(country.getFlag());
-			}
-		}
-		country.setText(battle.getAttackerOfficial());
+	private void populateBox(String sideTag, Unit[] units, int sideLosses, String sideLeader) {
+		flag.setImage(modelService.getFlag(sideTag));
+
+		country.setText(modelService.getOfficialName(sideTag));
 
 		/* Army size and adding to table list */
 		int size = 0;
-		for (Unit unit : battle.getAttackerUnits()) {
+		for (Unit unit : units) {
 			size += unit.getNumber();
 			unitsTableContent.add(unit);
 		}
 		unitsTable.setItems(unitsTableContent);
 
 		armySize.setText(Integer.toString(size));
-		losses.setText(Integer.toString(battle.getAttackerLosses()));
-
-		leader.setText(battle.getLeaderAttacker());
-	}
-
-	private void populateDefender(Battle battle) {
-		/* Finding the main flag */
-		for (Country country : modelService.getCountries()) {
-			if (battle.getDefender().equals(country.getTag())) {
-				flag.setImage(country.getFlag());
-			}
-		}
-		country.setText(battle.getDefenderOfficial());
-
-		/* Army size and adding to table list */
-		int size = 0;
-		for (Unit unit : battle.getDefenderUnits()) {
-			size += unit.getNumber();
-			unitsTableContent.add(unit);
-		}
-		unitsTable.setItems(unitsTableContent);
-
-		armySize.setText(Integer.toString(size));
-		losses.setText(Integer.toString(battle.getDefenderLosses()));
-		leader.setText(battle.getLeaderDefender());
+		losses.setText(Integer.toString(sideLosses));
+		leader.setText(sideLeader);
 	}
 
 	private void setHelperLabels() {
@@ -120,11 +94,8 @@ public class BattleCountryBox {
 
 	private void setColumnValues() {
 		/* Attacker side */
-		colUnitType.setCellValueFactory(new PropertyValueFactory<Unit, String>(
-				"type"));
-		colUnitNumber
-				.setCellValueFactory(new PropertyValueFactory<Unit, Integer>(
-						"number"));
+		colUnitType.setCellValueFactory(new PropertyValueFactory<Unit, String>("type"));
+		colUnitNumber.setCellValueFactory(new PropertyValueFactory<Unit, Integer>("number"));
 
 	}
 }
