@@ -17,7 +17,8 @@ hs_err_pid*
 .project
 .classpath
 target/
-vickywaranalyzer.iml
+Victoria II war analyzer.iml
+.idea
 
 paths.txt
 
