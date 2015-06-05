@@ -37,7 +37,8 @@ public class War {
 	}
 
 	public void setCasusBelliAndStartDate() {
-		this.startDate = joinedCountryList[0].getStartDate(); // The first one in the list has the oldest startDate
+		// The first one in the list has the oldest startDate
+		this.startDate = joinedCountryList[0].getStartDate();
 		/* Check required as only HoD uses original wargoals. Checking if it has been given values */
 		if (!(originalWarGoal.getCasus_belli().equals(""))) {
 			this.casus_belli = originalWarGoal.getCasus_belli();
@@ -158,32 +159,19 @@ public class War {
 
 	@Override
 	public String toString() {
-		return "War [name=" + name + ", originalAttacker=" + originalAttacker
-				+ ", attacker=" + attacker + ", originalDefender="
-				+ originalDefender + ", defender=" + defender + ", action="
-				+ action + ", isActive=" + isActive + ", battleList="
-				+ Arrays.toString(battleList) + ", joinedCountryList="
-				+ Arrays.toString(joinedCountryList) + ", warGoalList="
-				+ Arrays.toString(warGoalList) + ", startDate=" + startDate
-				+ ", endDate=" + endDate + ", casus_belli=" + casus_belli
-				+ ", originalWarGoal=" + originalWarGoal + "]";
-	}
-
-	public JoinedCountry[] getJoinedCountryList() {
-		return joinedCountryList;
-	}
-
-	public void setJoinedCountryList(JoinedCountry[] joinedCountryList) {
-		this.joinedCountryList = joinedCountryList;
+		return "War [name=" + name + ", originalAttacker=" + originalAttacker + ", attacker=" +
+				attacker + ", originalDefender=" + originalDefender + ", defender=" + defender +
+				", action=" + action + ", isActive=" + isActive + ", battleList=" +
+				Arrays.toString(battleList) + ", joinedCountryList=" +
+				Arrays.toString(joinedCountryList) + ", warGoalList=" +
+				Arrays.toString(warGoalList) + ", startDate=" + startDate + ", endDate=" + endDate +
+				", casus_belli=" + casus_belli + ", originalWarGoal=" + originalWarGoal + "]";
 	}
 
 	public WarGoal getOriginalWarGoal() {
 		return originalWarGoal;
 	}
 
-	public void setOriginalWarGoal(WarGoal originalWarGoal) {
-		this.originalWarGoal = originalWarGoal;
-	}
 
 	public String getOriginalAttackerOfficial() {
 		return originalAttackerOfficial;

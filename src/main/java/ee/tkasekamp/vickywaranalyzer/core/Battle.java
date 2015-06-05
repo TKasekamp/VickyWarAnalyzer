@@ -88,6 +88,22 @@ public class Battle {
 
 	}
 
+	public int attackerUnitSize() {
+		return getUnitSize(attackerUnits);
+	}
+
+	public int defenderUnitSize() {
+		return getUnitSize(defenderUnits);
+	}
+
+	public static int getUnitSize(Unit[] units) {
+		int size = 0;
+		for (Unit unit : units) {
+			size += unit.getNumber();
+		}
+		return size;
+	}
+
 	public String getDate() {
 		return date;
 	}

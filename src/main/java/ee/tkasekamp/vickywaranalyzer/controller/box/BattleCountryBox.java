@@ -74,11 +74,8 @@ public class BattleCountryBox {
 		country.setText(modelService.getOfficialName(sideTag));
 
 		/* Army size and adding to table list */
-		int size = 0;
-		for (Unit unit : units) {
-			size += unit.getNumber();
-			unitsTableContent.add(unit);
-		}
+		int size = Battle.getUnitSize(units);
+		unitsTableContent.addAll(units);
 		unitsTable.setItems(unitsTableContent);
 
 		armySize.setText(Integer.toString(size));
