@@ -17,6 +17,7 @@ hs_err_pid*
 .project
 .classpath
 target/
+vickywaranalyzer.iml
 
 paths.txt
 

@@ -1,19 +1,14 @@
 package ee.tkasekamp.vickywaranalyzer.service;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import javafx.scene.image.Image;
-import ee.tkasekamp.vickywaranalyzer.core.Battle;
 import ee.tkasekamp.vickywaranalyzer.core.Country;
 import ee.tkasekamp.vickywaranalyzer.core.JoinedCountry;
 import ee.tkasekamp.vickywaranalyzer.core.War;
 import ee.tkasekamp.vickywaranalyzer.parser.Parser;
 import ee.tkasekamp.vickywaranalyzer.util.Localisation;
+import javafx.scene.image.Image;
+
+import java.io.IOException;
+import java.util.*;
 
 public class ModelServiceImpl implements ModelService {
 	private String date = "";
@@ -28,7 +23,7 @@ public class ModelServiceImpl implements ModelService {
 	public ModelServiceImpl(UtilService utilServ) {
 		this.utilServ = utilServ;
 		parser = new Parser(this);
-		countryList = new ArrayList<Country>();
+		countryList = new ArrayList<>();
 	}
 
 	@Override
@@ -50,9 +45,6 @@ public class ModelServiceImpl implements ModelService {
 		// TODO try to optimise
 		for (War war : warList) {
 			setWarOfficialNames(war);
-			for (Battle battle : war.getBattleList()) {
-				setBattleOfficialNames(battle);
-			}
 		}
 		// TODO multithreading
 		try {
@@ -91,25 +83,20 @@ public class ModelServiceImpl implements ModelService {
 				getOfficialName(war.getOriginalDefender()));
 	}
 
-	private void setBattleOfficialNames(Battle battle) {
-		battle.setOfficialNames(getOfficialName(battle.getAttacker()),
-				getOfficialName(battle.getDefender()));
-	}
-
 	/**
 	 * Creating a list that will contain every unique country.
 	 */
 	private void createUniqueCountryList() {
 		// TODO try to optimise
 		/* Adding all countries to a set to get only unique ones */
-		Set<String> set = new HashSet<String>();
+		Set<String> set = new HashSet<>();
 		for (War item : warList) {
 			for (JoinedCountry country : item.getCountryList()) {
 				set.add(country.getTag());
 			}
 		}
 		/* This list is used to arrange the countries alphabetically */
-		List<String> tempcountrylist = new ArrayList<String>();
+		List<String> tempcountrylist = new ArrayList<>();
 		/* From set to list */
 		for (String strin : set) {
 			tempcountrylist.add(strin);

@@ -4,10 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import ee.tkasekamp.vickywaranalyzer.controller.MainController;
 import ee.tkasekamp.vickywaranalyzer.controller.box.WarCountryBox;
@@ -114,7 +111,7 @@ public class WarDetailsController extends AbstractController {
 	private ModelService modelService;
 
 	public void init(MainController mainController, ModelService modelService,
-			Tab tab) {
+					 Tab tab) {
 		main = mainController;
 		this.tab = tab;
 		this.modelService = modelService;
@@ -160,43 +157,62 @@ public class WarDetailsController extends AbstractController {
 
 	private void setColumnValues() {
 		colNameBattle
-				.setCellValueFactory(new PropertyValueFactory<Battle, String>(
+				.setCellValueFactory(new PropertyValueFactory<>(
 						"name"));
 		colDateBattle
-				.setCellValueFactory(new PropertyValueFactory<Battle, String>(
+				.setCellValueFactory(new PropertyValueFactory<>(
 						"date"));
 		colDefenderBattle
-				.setCellValueFactory(new PropertyValueFactory<Battle, String>(
-						"defenderOfficial"));
+				.setCellValueFactory(new PropertyValueFactory<>(
+						"defender"));
+
+		colDefenderBattle
+				.setCellFactory(column -> getCell());
 		colAttackerBattle
-				.setCellValueFactory(new PropertyValueFactory<Battle, String>(
-						"attackerOfficial"));
+				.setCellValueFactory(new PropertyValueFactory<>(
+						"attacker"));
+		colAttackerBattle
+				.setCellFactory(column -> getCell());
 		colTypeBattle
-				.setCellValueFactory(new PropertyValueFactory<Battle, Type>(
+				.setCellValueFactory(new PropertyValueFactory<>(
 						"battleType"));
 		colBattleResult
-				.setCellValueFactory(new PropertyValueFactory<Battle, Result>(
+				.setCellValueFactory(new PropertyValueFactory<>(
 						"res"));
 		colBattleTotalLosses
-				.setCellValueFactory(new PropertyValueFactory<Battle, Integer>(
+				.setCellValueFactory(new PropertyValueFactory<>(
 						"totalLosses"));
 
 	}
 
-	/** Sets all labels at the attackers side except losses */
+	private TableCell<Battle, String> getCell() {
+		return new TableCell<Battle, String>() {
+
+			@Override
+			protected void updateItem(String item, boolean empty) {
+				super.updateItem(item, empty);
+				setText(modelService.getOfficialName(item));
+			}
+		};
+	}
+
+	/**
+	 * Sets all labels at the attackers side except losses
+	 */
 	private void battleTablePopulate(War war) {
 		battleTableContent.clear();
 
 		/* Adding battles to list */
-		for (Battle item : war.getBattleList()) {
-			battleTableContent.add(item);
-		}
+		battleTableContent.addAll(war.getBattleList());
+
 		/* Displaying battles in table */
 		battleTable.setItems(battleTableContent);
 
 	}
 
-	/** Sets labels for losses */
+	/**
+	 * Sets labels for losses
+	 */
 	private void lossesPopulate(War war) {
 
 		int attackerTotalLosses = 0;
@@ -272,7 +288,9 @@ public class WarDetailsController extends AbstractController {
 
 	}
 
-	/** Gives values to the labels related to wargoals */
+	/**
+	 * Gives values to the labels related to wargoals
+	 */
 	private void originalWarGoalPopulate(War war) {
 
 		/* True if the version is HoD. Otherwise some labels will be hidden */
@@ -363,7 +381,9 @@ public class WarDetailsController extends AbstractController {
 		}
 	}
 
-	/** Battle table selection listener in the war details tab */
+	/**
+	 * Battle table selection listener in the war details tab
+	 */
 	private final ListChangeListener<Battle> battleTableSelectionChanged = new ListChangeListener<Battle>() {
 		@Override
 		public void onChanged(Change<? extends Battle> c) {
