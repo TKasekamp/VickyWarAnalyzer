@@ -1,26 +1,20 @@
 package ee.tkasekamp.vickywaranalyzer.util;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import ee.tkasekamp.vickywaranalyzer.core.Country;
+
+import java.io.*;
+import java.util.*;
+import java.util.Map.Entry;
 
 public class Localisation {
 
-	private static Map<String, String> countryMap = new HashMap<String, String>();
+	private static Map<String, String> countryMap = new HashMap<>();
 
-	/** Main method of this class. Manages the reading from csv */
+	/**
+	 * Main method of this class. Manages the reading from csv
+	 */
 	public static void readLocalisation(String installPath,
-			ArrayList<Country> countryList) {
+										ArrayList<Country> countryList) {
 		// Emptying the countryMap so all a new savegame is read only with that
 		// file's countries in map
 		countryMap.clear();
@@ -51,7 +45,7 @@ public class Localisation {
 		/* The same reader as in SaveGameReader */
 		InputStreamReader reader = new InputStreamReader(new FileInputStream(
 				filename), "ISO8859_1"); // This encoding seems to work for ö
-											// and ü
+		// and ü
 		BufferedReader scanner = new BufferedReader(reader);
 
 		String line;
@@ -66,7 +60,7 @@ public class Localisation {
 			Iterator<Entry<String, String>> it = countryMap.entrySet()
 					.iterator();
 			while (it.hasNext()) {
-				Map.Entry<String, String> entry = (Map.Entry<String, String>) it
+				Map.Entry<String, String> entry = it
 						.next();
 				if (entry.getKey().equals(dataArray[0])) {
 					entry.setValue(dataArray[1]);
@@ -89,24 +83,22 @@ public class Localisation {
 	 */
 	synchronized private static void mapCleaner(
 			Map.Entry<String, String> entry, ArrayList<Country> countryList) {
-		for (Country country : countryList) {
-			if (country.getTag().equals(entry.getKey())) {
-				country.setOfficialName(entry.getValue());
-			}
-		}
+		countryList.stream().filter(country -> country.getTag().equals(entry.getKey())).forEach(country -> {
+			country.setOfficialName(entry.getValue());
+		});
 	}
 
 	private static List<String> getLocalisationFiles(String path)
 			throws NullPointerException {
-		List<String> locList = new ArrayList<String>();
+		List<String> locList = new ArrayList<>();
 
 		File folder = new File(path + "/localisation");
 		File[] listOfFiles = folder.listFiles();
 		String file;
 
-		for (int i = 0; i < listOfFiles.length; i++) {
-			if (listOfFiles[i].isFile()) {
-				file = listOfFiles[i].getName();
+		for (File listOfFile : listOfFiles) {
+			if (listOfFile.isFile()) {
+				file = listOfFile.getName();
 				if (file.endsWith(".csv") || file.endsWith(".CSV")) {
 					locList.add(file);
 				}

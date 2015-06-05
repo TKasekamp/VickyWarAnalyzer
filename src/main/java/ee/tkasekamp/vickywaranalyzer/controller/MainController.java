@@ -1,20 +1,16 @@
 package ee.tkasekamp.vickywaranalyzer.controller;
 
-import java.io.IOException;
-
-import javafx.fxml.FXML;
-import javafx.scene.control.Tab;
-import ee.tkasekamp.vickywaranalyzer.controller.tab.BattleController;
-import ee.tkasekamp.vickywaranalyzer.controller.tab.SettingsController;
-import ee.tkasekamp.vickywaranalyzer.controller.tab.WarDetailsController;
-import ee.tkasekamp.vickywaranalyzer.controller.tab.WarListController;
-import ee.tkasekamp.vickywaranalyzer.controller.tab.WargoalController;
+import ee.tkasekamp.vickywaranalyzer.controller.tab.*;
 import ee.tkasekamp.vickywaranalyzer.core.Battle;
 import ee.tkasekamp.vickywaranalyzer.core.War;
 import ee.tkasekamp.vickywaranalyzer.service.ModelService;
 import ee.tkasekamp.vickywaranalyzer.service.ModelServiceImpl;
 import ee.tkasekamp.vickywaranalyzer.service.UtilService;
 import ee.tkasekamp.vickywaranalyzer.service.UtilServiceImpl;
+import javafx.fxml.FXML;
+import javafx.scene.control.Tab;
+
+import java.io.IOException;
 
 public class MainController {
 	@FXML
@@ -52,7 +48,7 @@ public class MainController {
 		battleController.init(this, modelServ, battleTab);
 		settingsController.init(this, utilServ);
 		warDetailsController.init(this, modelServ, warDetailsTab);
-		wargoalController.init(this, wargoalTab, modelServ);
+		wargoalController.init(wargoalTab, modelServ);
 		warListController.init(this, modelServ, warListTab);
 
 	}
@@ -72,6 +68,7 @@ public class MainController {
 	public void populateWarTab(War war) {
 		warDetailsController.populate(war);
 		populateWargoalTab(war);
+		battleController.reset();
 	}
 
 	public void populateBattleTab(Battle battle) {

@@ -1,5 +1,10 @@
 package ee.tkasekamp.vickywaranalyzer.controller.box;
 
+import ee.tkasekamp.vickywaranalyzer.controller.ObservableJoinedCountry;
+import ee.tkasekamp.vickywaranalyzer.controller.tab.AbstractController;
+import ee.tkasekamp.vickywaranalyzer.core.Country;
+import ee.tkasekamp.vickywaranalyzer.core.War;
+import ee.tkasekamp.vickywaranalyzer.service.ModelService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -8,11 +13,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
-import ee.tkasekamp.vickywaranalyzer.controller.ObservableJoinedCountry;
-import ee.tkasekamp.vickywaranalyzer.controller.tab.AbstractController;
-import ee.tkasekamp.vickywaranalyzer.core.Country;
-import ee.tkasekamp.vickywaranalyzer.core.War;
-import ee.tkasekamp.vickywaranalyzer.service.ModelService;
 
 public class WarCountryBox extends AbstractController {
 
@@ -52,7 +52,9 @@ public class WarCountryBox extends AbstractController {
 	@FXML
 	private Label warLabel;
 
-	/** Attacker or defender */
+	/**
+	 * Attacker or defender
+	 */
 	private String side;
 	private ModelService modelService;
 	private ObservableList<ObservableJoinedCountry> tableContent;
@@ -61,15 +63,15 @@ public class WarCountryBox extends AbstractController {
 		this.side = side;
 		this.modelService = modelService;
 		tableContent = FXCollections.observableArrayList();
-		colName.setCellValueFactory(new PropertyValueFactory<ObservableJoinedCountry, String>(
+		colName.setCellValueFactory(new PropertyValueFactory<>(
 				"officialName"));
-		colFlag.setCellValueFactory(new PropertyValueFactory<ObservableJoinedCountry, ImageView>(
+		colFlag.setCellValueFactory(new PropertyValueFactory<>(
 				"flag"));
 		colStartDate
-				.setCellValueFactory(new PropertyValueFactory<ObservableJoinedCountry, String>(
+				.setCellValueFactory(new PropertyValueFactory<>(
 						"joinDate"));
 		colEndDate
-				.setCellValueFactory(new PropertyValueFactory<ObservableJoinedCountry, String>(
+				.setCellValueFactory(new PropertyValueFactory<>(
 						"endDate"));
 		setHelperLabels(side);
 	}

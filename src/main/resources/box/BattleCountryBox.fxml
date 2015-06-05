@@ -1,67 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-
-<GridPane id="GridPane" prefHeight="621.0" prefWidth="307.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ee.tkasekamp.vickywaranalyzer.controller.box.BattleCountryBox">
+<GridPane id="GridPane" prefHeight="621.0" prefWidth="307.0" xmlns="http://javafx.com/javafx/8"
+		  xmlns:fx="http://javafx.com/fxml/1"
+		  fx:controller="ee.tkasekamp.vickywaranalyzer.controller.box.BattleCountryBox">
 	<children>
-		<TableView fx:id="unitsTable" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="6">
+		<TableView fx:id="unitsTable" maxHeight="1.7976931348623157E308"
+				   maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0"
+				   GridPane.columnIndex="0" GridPane.rowIndex="6">
 			<columns>
-				<TableColumn fx:id="colUnitType" prefWidth="150.0" text="Unit" />
-				<TableColumn fx:id="colUnitNumber" prefWidth="130.0" text="Numbers" />
+				<TableColumn fx:id="colUnitType" prefWidth="150.0" text="Unit"/>
+				<TableColumn fx:id="colUnitNumber" prefWidth="130.0" text="Numbers"/>
 			</columns>
 		</TableView>
-		<HBox id="HBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0" GridPane.rowIndex="5">
+		<HBox id="HBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0"
+			  GridPane.rowIndex="5">
 			<children>
-				<Label fx:id="sideUnitsHelper" styleClass="label-dark" text="Attacker units" />
+				<Label fx:id="sideUnitsHelper" styleClass="label-dark" text="Attacker units"/>
 			</children>
 		</HBox>
-		<HBox id="HBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0" GridPane.rowIndex="4">
+		<HBox id="HBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0"
+			  GridPane.rowIndex="4">
 			<children>
-				<Label styleClass="label-dark" text="Losses:" />
-				<Label fx:id="losses" text="Label" />
+				<Label styleClass="label-dark" text="Losses:"/>
+				<Label fx:id="losses" text="Label"/>
 			</children>
 		</HBox>
-		<HBox id="HBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0" GridPane.rowIndex="3">
+		<HBox id="HBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0"
+			  GridPane.rowIndex="3">
 			<children>
-				<Label styleClass="label-dark" text="Total army size:" />
-				<Label fx:id="armySize" text="Label" />
+				<Label styleClass="label-dark" text="Total army size:"/>
+				<Label fx:id="armySize" text="Label"/>
 			</children>
 		</HBox>
-		<HBox id="HBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+		<HBox id="HBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0"
+			  GridPane.rowIndex="1">
 			<children>
-				<Label fx:id="sideHelper" styleClass="label-dark" text="Attacker:" />
-				<Label fx:id="country" text="Label" />
+				<Label fx:id="sideHelper" styleClass="label-dark" text="Attacker:"/>
+				<Label fx:id="country" text="Label"/>
 			</children>
 		</HBox>
-		<HBox id="HBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+		<HBox id="HBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0"
+			  GridPane.rowIndex="0">
 			<children>
 				<ImageView id="ABU" fx:id="flag" pickOnBounds="true" preserveRatio="true">
 					<image>
-						<Image preserveRatio="true" smooth="true" url="@../flags/ABU.png" />
+						<Image preserveRatio="true" smooth="true" url="@../flags/ABU.png"/>
 					</image>
 				</ImageView>
 			</children>
 		</HBox>
-		<HBox id="HBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0" GridPane.rowIndex="2">
+		<HBox id="HBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0"
+			  GridPane.rowIndex="2">
 			<children>
-				<Label fx:id="leaderHelper" styleClass="label-dark" text="Attacker leader:" />
-				<Label fx:id="leader" text="Label" />
+				<Label fx:id="leaderHelper" styleClass="label-dark" text="Attacker leader:"/>
+				<Label fx:id="leader" text="Label"/>
 			</children>
 		</HBox>
 	</children>
 	<columnConstraints>
-		<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+		<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"/>
 	</columnConstraints>
 	<rowConstraints>
-		<RowConstraints maxHeight="120.0" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
-		<RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
-		<RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
-		<RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
-		<RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
-		<RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
-		<RowConstraints maxHeight="531.0" minHeight="10.0" prefHeight="377.0" vgrow="SOMETIMES" />
+		<RowConstraints maxHeight="120.0" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES"/>
+		<RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES"/>
+		<RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES"/>
+		<RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES"/>
+		<RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES"/>
+		<RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES"/>
+		<RowConstraints maxHeight="531.0" minHeight="10.0" prefHeight="377.0" vgrow="SOMETIMES"/>
 	</rowConstraints>
 </GridPane>

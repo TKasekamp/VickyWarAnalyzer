@@ -4,12 +4,12 @@ package ee.tkasekamp.vickywaranalyzer.core;
  * Class for storing "add_attacker", "add_defender", "rem_attacker", "rem_defender" data
  */
 public class JoinedCountry {
-	private String tag ="";
+	private String tag = "";
 	private boolean joinType; // True is attacker, false is defender
-	private String startDate ="";
-	private String endDate ="";
-	
-	
+	private String startDate = "";
+	private String endDate = "";
+
+
 	public JoinedCountry(String tag, boolean joinType, String startDate) {
 		super();
 		this.tag = tag;
@@ -64,7 +64,5 @@ public class JoinedCountry {
 		this.endDate = endDate;
 	}
 
-	
-	
 
 }

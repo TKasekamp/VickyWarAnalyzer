@@ -1,9 +1,9 @@
 package ee.tkasekamp.vickywaranalyzer.service;
 
-import java.io.IOException;
-
-import javafx.scene.image.Image;
 import ee.tkasekamp.vickywaranalyzer.util.FolderHandler;
+import javafx.scene.image.Image;
+
+import java.io.IOException;
 
 public class UtilServiceImpl implements UtilService {
 	public static final String FLAGPATH = "/flags/";

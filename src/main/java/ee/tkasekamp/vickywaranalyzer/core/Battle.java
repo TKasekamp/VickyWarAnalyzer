@@ -12,12 +12,12 @@ public class Battle {
 	private Type battleType; // Default value
 	private int totalLosses;
 	// Attacker 
-	private String attacker; // Not shown, used to identfy
+	private String attacker; // Not shown, used to identify
 	private String leaderAttacker;
 	private Unit[] attackerUnits; // There are only 20 different unit types in total
 	private int attackerLosses;
 	// Defender
-	private String defender; // Not shown, used to identfy
+	private String defender; // Not shown, used to identify
 	private String leaderDefender = "";
 	private Unit[] defenderUnits; // There are only 20 different unit types in total
 	private int defenderLosses;
@@ -83,7 +83,8 @@ public class Battle {
 					}
 				}
 			}
-		} catch (NullPointerException | ArrayIndexOutOfBoundsException e) {}
+		} catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
+		}
 
 	}
 

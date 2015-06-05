@@ -1,7 +1,7 @@
 package ee.tkasekamp.vickywaranalyzer.controller.tab;
 
-import java.io.File;
-
+import ee.tkasekamp.vickywaranalyzer.controller.MainController;
+import ee.tkasekamp.vickywaranalyzer.service.UtilService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,8 +10,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
-import ee.tkasekamp.vickywaranalyzer.controller.MainController;
-import ee.tkasekamp.vickywaranalyzer.service.UtilService;
+
+import java.io.File;
 
 public class SettingsController extends AbstractController {
 	@FXML
@@ -42,9 +42,9 @@ public class SettingsController extends AbstractController {
 		main = mainController;
 		this.utilServ = utilServ;
 		populate();
-		
+
 	}
-	
+
 	public void setErrorText(String text) {
 		errorLabel.setText(text);
 	}
@@ -55,7 +55,7 @@ public class SettingsController extends AbstractController {
 		chooser.setTitle("Victoria II directory");
 		/* Only if there is a path is it given to the chooser */
 		if (!utilServ.getInstallFolder().equals("")) {
-			chooser.setInitialDirectory(new File(utilServ.getInstallFolder()));			
+			chooser.setInitialDirectory(new File(utilServ.getInstallFolder()));
 		}
 		// Throws error when user cancels selection
 		try {
@@ -67,18 +67,18 @@ public class SettingsController extends AbstractController {
 
 	@FXML
 	void saveGameIssueFired(ActionEvent event) {
-        FileChooser fileChooser = new FileChooser();
+		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Victoria II save game");
-        //Set extension filter
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Save game (*.v2)", "*.v2");
-        fileChooser.getExtensionFilters().add(extFilter);
-        /* Only if there is a path is it given to the filechooser */
-        if (!utilServ.getSaveGameFolder().equals("")) {
-        	fileChooser.setInitialDirectory(new File(utilServ.getSaveGameFolder()));	      	
-        }
+		//Set extension filter
+		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Save game (*.v2)", "*.v2");
+		fileChooser.getExtensionFilters().add(extFilter);
+		/* Only if there is a path is it given to the filechooser */
+		if (!utilServ.getSaveGameFolder().equals("")) {
+			fileChooser.setInitialDirectory(new File(utilServ.getSaveGameFolder()));
+		}
 
-        // Throws error when user cancels selection
-        try {
+		// Throws error when user cancels selection
+		try {
 			File file = fileChooser.showOpenDialog(null);
 			saveGameTextField.setText(file.getPath());
 		} catch (NullPointerException e) {
@@ -96,7 +96,7 @@ public class SettingsController extends AbstractController {
 		errorLabel.setText("");
 
 	}
-	
+
 	public void setFolderPaths() {
 		utilServ.setFolderPaths(saveGameTextField.getText(), installTextField.getText());
 	}
@@ -104,6 +104,6 @@ public class SettingsController extends AbstractController {
 	public void populate() {
 		installTextField.setText(utilServ.getInstallFolder());
 		saveGameTextField.setText(utilServ.getSaveGameFolder());
-		
+
 	}
 }

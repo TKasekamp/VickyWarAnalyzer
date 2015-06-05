@@ -39,7 +39,7 @@ public class ModelServiceImpl implements ModelService {
 
 		/* Localisation */
 		// TODO multithreading
-		if(useLocalisation)
+		if (useLocalisation)
 			Localisation.readLocalisation(utilServ.getInstallFolder(), countryList);
 		/* Finding official names for every country and battle */
 		// TODO try to optimise

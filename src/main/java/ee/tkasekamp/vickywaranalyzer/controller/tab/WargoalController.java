@@ -1,5 +1,9 @@
 package ee.tkasekamp.vickywaranalyzer.controller.tab;
 
+import ee.tkasekamp.vickywaranalyzer.core.Battle.Result;
+import ee.tkasekamp.vickywaranalyzer.core.War;
+import ee.tkasekamp.vickywaranalyzer.core.WarGoal;
+import ee.tkasekamp.vickywaranalyzer.service.ModelService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -8,11 +12,6 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import ee.tkasekamp.vickywaranalyzer.controller.MainController;
-import ee.tkasekamp.vickywaranalyzer.core.Battle.Result;
-import ee.tkasekamp.vickywaranalyzer.core.War;
-import ee.tkasekamp.vickywaranalyzer.core.WarGoal;
-import ee.tkasekamp.vickywaranalyzer.service.ModelService;
 
 public class WargoalController extends AbstractController {
 
@@ -43,13 +42,11 @@ public class WargoalController extends AbstractController {
 	@FXML
 	private Label warName2;
 
-	private MainController main;
 	private Tab tab;
 	private ModelService modelService;
 
-	public void init(MainController mainController, Tab tab,
-			ModelService modelService) {
-		main = mainController;
+	public void init(Tab tab,
+					 ModelService modelService) {
 		this.tab = tab;
 		this.modelService = modelService;
 		warGoalTableContent = FXCollections.observableArrayList();
@@ -69,9 +66,8 @@ public class WargoalController extends AbstractController {
 		warGoalTableContent.clear(); // A bit of cleaning
 
 		// Adding to list
-		for (WarGoal goal : war.getWarGoalList()) {
-			warGoalTableContent.add(goal);
-		}
+		warGoalTableContent.addAll(war.getWarGoalList());
+
 
 		warGoalTable.setItems(warGoalTableContent);
 
@@ -86,42 +82,41 @@ public class WargoalController extends AbstractController {
 	private void setWarGoalTabColumnValues() {
 		/* Wargoal tab columns */
 		colWarGoalActor
-				.setCellValueFactory(new PropertyValueFactory<WarGoal, String>(
+				.setCellValueFactory(new PropertyValueFactory<>(
 						"actor"));
 		colWarGoalReceiver
-				.setCellValueFactory(new PropertyValueFactory<WarGoal, String>(
+				.setCellValueFactory(new PropertyValueFactory<>(
 						"receiver"));
 		colWarGoalCasusBelli
-				.setCellValueFactory(new PropertyValueFactory<WarGoal, String>(
+				.setCellValueFactory(new PropertyValueFactory<>(
 						"casus_belli"));
 		colWarGoalCountry
-				.setCellValueFactory(new PropertyValueFactory<WarGoal, String>(
+				.setCellValueFactory(new PropertyValueFactory<>(
 						"country"));
 		colWarGoalStateID
-				.setCellValueFactory(new PropertyValueFactory<WarGoal, Integer>(
+				.setCellValueFactory(new PropertyValueFactory<>(
 						"state_province_id"));
 
 		// Only used for HoD
 		colWarGoalDate
-				.setCellValueFactory(new PropertyValueFactory<WarGoal, String>(
+				.setCellValueFactory(new PropertyValueFactory<>(
 						"date"));
 		colWarGoalScore
-				.setCellValueFactory(new PropertyValueFactory<WarGoal, Double>(
+				.setCellValueFactory(new PropertyValueFactory<>(
 						"score"));
 		colWarGoalChange
-				.setCellValueFactory(new PropertyValueFactory<WarGoal, Double>(
+				.setCellValueFactory(new PropertyValueFactory<>(
 						"change"));
 		colWarGoalFulfilled
-				.setCellValueFactory(new PropertyValueFactory<WarGoal, Result>(
+				.setCellValueFactory(new PropertyValueFactory<>(
 						"fulfilled"));
 
 	}
 
 	/**
 	 * Some columns are only necessary for HoD.
-	 * 
-	 * @param isHOD
-	 *            If is Heart of Darkness
+	 *
+	 * @param isHOD If is Heart of Darkness
 	 */
 	private void setColumnVisiblility(boolean isHOD) {
 		colWarGoalDate.setVisible(isHOD);

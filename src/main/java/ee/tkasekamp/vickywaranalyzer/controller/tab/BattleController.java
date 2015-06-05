@@ -1,12 +1,12 @@
 package ee.tkasekamp.vickywaranalyzer.controller.tab;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
 import ee.tkasekamp.vickywaranalyzer.controller.MainController;
 import ee.tkasekamp.vickywaranalyzer.controller.box.BattleCountryBox;
 import ee.tkasekamp.vickywaranalyzer.core.Battle;
 import ee.tkasekamp.vickywaranalyzer.service.ModelService;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 
 public class BattleController extends AbstractController {
 
@@ -38,7 +38,7 @@ public class BattleController extends AbstractController {
 	private ModelService modelService;
 
 	public void init(MainController mainController, ModelService modelService,
-			Tab tab) {
+					 Tab tab) {
 		main = mainController;
 		this.tab = tab;
 		this.modelService = modelService;

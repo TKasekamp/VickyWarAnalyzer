@@ -1,5 +1,8 @@
 package ee.tkasekamp.vickywaranalyzer.controller.box;
 
+import ee.tkasekamp.vickywaranalyzer.core.Battle;
+import ee.tkasekamp.vickywaranalyzer.core.Unit;
+import ee.tkasekamp.vickywaranalyzer.service.ModelService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -8,9 +11,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
-import ee.tkasekamp.vickywaranalyzer.core.Battle;
-import ee.tkasekamp.vickywaranalyzer.core.Unit;
-import ee.tkasekamp.vickywaranalyzer.service.ModelService;
 
 public class BattleCountryBox {
 	@FXML
@@ -94,8 +94,8 @@ public class BattleCountryBox {
 
 	private void setColumnValues() {
 		/* Attacker side */
-		colUnitType.setCellValueFactory(new PropertyValueFactory<Unit, String>("type"));
-		colUnitNumber.setCellValueFactory(new PropertyValueFactory<Unit, Integer>("number"));
+		colUnitType.setCellValueFactory(new PropertyValueFactory<>("type"));
+		colUnitNumber.setCellValueFactory(new PropertyValueFactory<>("number"));
 
 	}
 }

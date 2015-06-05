@@ -1,47 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import javafx.collections.*?>
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.layout.AnchorPane?>
-
-<AnchorPane prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ee.tkasekamp.vickywaranalyzer.controller.MainController">
-	<children>
-		<TabPane tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-			<tabs>
-				<Tab text="Settings">
-					<content>
-						<fx:include fx:id="settings" source="tab/Settings.fxml" />
-					</content>
-				</Tab>
-				<Tab fx:id="warListTab" disable="true" text="War List">
-					<content>
-						<fx:include fx:id="warList" source="tab/WarList.fxml" />
-					</content>
-				</Tab>
-				<Tab fx:id="warDetailsTab" disable="true" text="War Details">
-					<content>
-						<fx:include fx:id="warDetails" source="tab/WarDetails.fxml" />
-					</content>
-				</Tab>
-				<Tab fx:id="battleTab" disable="true" text="Battle">
-					<content>
-						<fx:include fx:id="battle" source="tab/Battle.fxml" />
-					</content>
-				</Tab>
-				<Tab fx:id="wargoalTab" disable="true" text="Wargoal">
-					<content>
-						<fx:include fx:id="wargoal" source="tab/Wargoal.fxml" />
-					</content>
-				</Tab>
-			</tabs>
-		</TabPane>
-	</children>
+<?import java.net.URL?>
+<AnchorPane prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.40"
+			xmlns:fx="http://javafx.com/fxml/1"
+			fx:controller="ee.tkasekamp.vickywaranalyzer.controller.MainController">
 	<stylesheets>
-		<URL value="@GUI.css" />
+		<URL value="@GUI.css"/>
 	</stylesheets>
+	<TabPane tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0"
+			 AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+		<tabs>
+			<Tab text="Settings">
+				<content>
+					<fx:include fx:id="settings" source="tab/Settings.fxml"/>
+				</content>
+			</Tab>
+			<Tab fx:id="warListTab" disable="true" text="War List">
+				<content>
+					<fx:include fx:id="warList" source="tab/WarList.fxml"/>
+				</content>
+			</Tab>
+			<Tab fx:id="warDetailsTab" disable="true" text="War Details">
+				<content>
+					<fx:include fx:id="warDetails" source="tab/WarDetails.fxml"/>
+				</content>
+			</Tab>
+			<Tab fx:id="battleTab" disable="true" text="Battle">
+				<content>
+					<fx:include fx:id="battle" source="tab/Battle.fxml"/>
+				</content>
+			</Tab>
+			<Tab fx:id="wargoalTab" disable="true" text="Wargoal">
+				<content>
+					<fx:include fx:id="wargoal" source="tab/Wargoal.fxml"/>
+				</content>
+			</Tab>
+		</tabs>
+	</TabPane>
 </AnchorPane>

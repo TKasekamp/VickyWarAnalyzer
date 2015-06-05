@@ -1,13 +1,6 @@
 package ee.tkasekamp.vickywaranalyzer.util;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.*;
 
 public class FolderHandler {
 	public static final String PROGRAM_FILES_X86 = "C:/Program Files (x86)";
@@ -18,14 +11,14 @@ public class FolderHandler {
 	public static final String VICTORIA_AHD = "Victoria 2 A House Divided";
 	public static final String VICTORIA_HOD = "Victoria II - A Heart of Darkness";
 	public static final String SLASH = "/";
-	
+
 	public static final String PATHS = "./paths.txt";
+
 	/**
 	 * Checking if the path file exists. If not, attempts to guess the default
 	 * save game and install folders.
-	 * 
+	 *
 	 * @throws IOException
-	 * 
 	 */
 	public static String[] getFolders() throws IOException {
 		String[] paths = new String[2];
@@ -112,7 +105,7 @@ public class FolderHandler {
 	/**
 	 * Takes the path of the full path of the savegame and return the directory
 	 * it was in
-	 * 
+	 *
 	 * @param path
 	 */
 	public static String getDirectoryOnly(String path) {
@@ -126,7 +119,7 @@ public class FolderHandler {
 	/**
 	 * This method saves the paths so the user does not have to choose the file
 	 * every time.
-	 * 
+	 *
 	 * @throws IOException
 	 */
 	public static void savePaths(String saveGameFolder, String installFolder) throws IOException {
@@ -147,7 +140,7 @@ public class FolderHandler {
 	/**
 	 * Reads file {@link Constants#PATHS}. First line is the SAVEGAMEPATH,
 	 * second the INSTALLPATH
-	 * 
+	 *
 	 * @throws IOException
 	 */
 	private static String[] readPaths() throws IOException {

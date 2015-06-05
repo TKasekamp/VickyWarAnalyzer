@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Button?>
-
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="ee.tkasekamp.vickywaranalyzer.controller.ErrorController">
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+			fx:controller="ee.tkasekamp.vickywaranalyzer.controller.ErrorController">
 	<center>
 		<ScrollPane>
 			<content>
-				<Label fx:id="errorMessage" wrapText="true" />
+				<Label fx:id="errorMessage" wrapText="true"/>
 			</content>
 		</ScrollPane>
 	</center>
 	<bottom>
 		<HBox alignment="CENTER">
-			<Button text="OK" onAction="#close" />
+			<Button text="OK" onAction="#close"/>
 		</HBox>
 	</bottom>
 </BorderPane>

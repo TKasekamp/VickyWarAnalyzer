@@ -1,25 +1,20 @@
 package ee.tkasekamp.vickywaranalyzer.controller.tab;
 
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
 import ee.tkasekamp.vickywaranalyzer.controller.MainController;
 import ee.tkasekamp.vickywaranalyzer.core.Country;
 import ee.tkasekamp.vickywaranalyzer.core.JoinedCountry;
 import ee.tkasekamp.vickywaranalyzer.core.War;
 import ee.tkasekamp.vickywaranalyzer.service.ModelService;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
+
+import java.util.stream.Collectors;
 
 public class WarListController extends AbstractController {
 
@@ -81,13 +76,8 @@ public class WarListController extends AbstractController {
 		warTableContent = FXCollections.observableArrayList();
 
 		selectCountryIssue.getSelectionModel().selectedItemProperty()
-				.addListener(new javafx.beans.value.ChangeListener<Label>() {
-
-					@Override
-					public void changed(ObservableValue<? extends Label> arg0,
-							Label arg1, Label arg2) {
-						warTableShowCountry(arg2.getText());
-					}
+				.addListener((arg0, arg1, arg2) -> {
+					warTableShowCountry(arg2.getText());
 				});
 		/* Listening to selections in warTable */
 		final ObservableList<War> warTableSelection = warTable
@@ -142,51 +132,39 @@ public class WarListController extends AbstractController {
 
 	private void setColumnValues() {
 		/* Connecting the War fields with warTable columns */
-		colNameWar.setCellValueFactory(new PropertyValueFactory<War, String>(
+		colNameWar.setCellValueFactory(new PropertyValueFactory<>(
 				"name"));
 		colAttackerWar
-				.setCellValueFactory(new PropertyValueFactory<War, String>(
+				.setCellValueFactory(new PropertyValueFactory<>(
 						"originalAttackerOfficial"));
 		colDefenderWar
-				.setCellValueFactory(new PropertyValueFactory<War, String>(
+				.setCellValueFactory(new PropertyValueFactory<>(
 						"originalDefenderOfficial"));
 		colCasusBelliWar
-				.setCellValueFactory(new PropertyValueFactory<War, String>(
+				.setCellValueFactory(new PropertyValueFactory<>(
 						"casus_belli"));
 		colStartDateWar
-				.setCellValueFactory(new PropertyValueFactory<War, String>(
+				.setCellValueFactory(new PropertyValueFactory<>(
 						"startDate"));
 		colEndDateWar
-				.setCellValueFactory(new PropertyValueFactory<War, String>(
+				.setCellValueFactory(new PropertyValueFactory<>(
 						"endDate"));
 	}
 
 	private void warTablePopulateAll() {
 		warTableContent.clear();
-		for (War item : modelServ.getWars()) {
-			warTableContent.add(item);
-		}
+		warTableContent.addAll(modelServ.getWars());
 
 	}
 
 	private void warTableShowActive() {
 		warTableContent.clear();
-		for (War item : modelServ.getWars()) {
-			if (item.isActive()) {
-				warTableContent.add(item);
-			}
-
-		}
+		warTableContent.addAll(modelServ.getWars().stream().filter(item -> item.isActive()).collect(Collectors.toList()));
 	}
 
 	private void warTableShowPrevious() {
 		warTableContent.clear();
-		for (War item : modelServ.getWars()) {
-			if (!item.isActive()) {
-				warTableContent.add(item);
-			}
-
-		}
+		warTableContent.addAll(modelServ.getWars().stream().filter(item -> !item.isActive()).collect(Collectors.toList()));
 	}
 
 	private void warTableShowMyWars() {
@@ -235,7 +213,7 @@ public class WarListController extends AbstractController {
 		@Override
 		public void onChanged(Change<? extends War> c) {
 			if (!warTable.getSelectionModel().getSelectedItems().isEmpty()) {
-				 main.populateWarTab((War)warTable.getSelectionModel().getSelectedItems().toArray()[0]);
+				main.populateWarTab((War) warTable.getSelectionModel().getSelectedItems().toArray()[0]);
 			}
 		}
 
