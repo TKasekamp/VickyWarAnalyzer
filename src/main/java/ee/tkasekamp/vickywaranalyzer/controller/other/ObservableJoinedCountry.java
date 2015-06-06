@@ -1,4 +1,4 @@
-package ee.tkasekamp.vickywaranalyzer.controller;
+package ee.tkasekamp.vickywaranalyzer.controller.other;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

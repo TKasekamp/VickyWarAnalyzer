@@ -2,7 +2,7 @@ package ee.tkasekamp.vickywaranalyzer.controller.tab;
 
 import java.util.stream.Collectors;
 
-import ee.tkasekamp.vickywaranalyzer.controller.CountryLabel;
+import ee.tkasekamp.vickywaranalyzer.controller.other.CountryLabel;
 import ee.tkasekamp.vickywaranalyzer.controller.MainController;
 import ee.tkasekamp.vickywaranalyzer.core.JoinedCountry;
 import ee.tkasekamp.vickywaranalyzer.core.War;
@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -137,8 +138,10 @@ public class WarListController extends AbstractController {
 	private void setColumnValues() {
 		/* Connecting the War fields with warTable columns */
 		colNameWar.setCellValueFactory(new PropertyValueFactory<>("name"));
-		colAttackerWar.setCellValueFactory(new PropertyValueFactory<>("originalAttackerOfficial"));
-		colDefenderWar.setCellValueFactory(new PropertyValueFactory<>("originalDefenderOfficial"));
+		colAttackerWar.setCellValueFactory(new PropertyValueFactory<>("originalAttacker"));
+		colAttackerWar.setCellFactory(cell -> getCell());
+		colDefenderWar.setCellValueFactory(new PropertyValueFactory<>("originalDefender"));
+		colDefenderWar.setCellFactory(cell-> getCell());
 		colCasusBelliWar.setCellValueFactory(new PropertyValueFactory<>("casus_belli"));
 		colStartDateWar.setCellValueFactory(new PropertyValueFactory<>("startDate"));
 		colEndDateWar.setCellValueFactory(new PropertyValueFactory<>("endDate"));
@@ -202,5 +205,15 @@ public class WarListController extends AbstractController {
 		}
 
 	};
+	private TableCell<War, String> getCell() {
+		return new TableCell<War, String>() {
+
+			@Override
+			protected void updateItem(String item, boolean empty) {
+				super.updateItem(item, empty);
+				setText(modelServ.getOfficialName(item));
+			}
+		};
+	}
 
 }

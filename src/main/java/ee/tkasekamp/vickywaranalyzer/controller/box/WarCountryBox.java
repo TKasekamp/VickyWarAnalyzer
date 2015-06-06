@@ -2,7 +2,7 @@ package ee.tkasekamp.vickywaranalyzer.controller.box;
 
 import java.util.Arrays;
 
-import ee.tkasekamp.vickywaranalyzer.controller.ObservableJoinedCountry;
+import ee.tkasekamp.vickywaranalyzer.controller.other.ObservableJoinedCountry;
 import ee.tkasekamp.vickywaranalyzer.controller.tab.AbstractController;
 import ee.tkasekamp.vickywaranalyzer.core.JoinedCountry;
 import ee.tkasekamp.vickywaranalyzer.core.War;

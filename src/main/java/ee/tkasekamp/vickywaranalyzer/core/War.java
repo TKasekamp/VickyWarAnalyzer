@@ -9,10 +9,8 @@ public class War {
 
 	private String name = "";
 	private String originalAttacker = ""; // like EST
-	private String originalAttackerOfficial = ""; // Like Estonia
 	private String attacker = "";
 	private String originalDefender = "";
-	private String originalDefenderOfficial = "";
 	private String defender = "";
 	private String action = ""; // Date
 	private boolean isActive;
@@ -46,11 +44,6 @@ public class War {
 			this.casus_belli = warGoalList[0].getCasus_belli();
 		}
 
-	}
-
-	public void setOfficialNames(String attacker, String defender) {
-		originalAttackerOfficial = attacker;
-		originalDefenderOfficial = defender;
 	}
 
 	public String getName() {
@@ -171,15 +164,5 @@ public class War {
 	public WarGoal getOriginalWarGoal() {
 		return originalWarGoal;
 	}
-
-
-	public String getOriginalAttackerOfficial() {
-		return originalAttackerOfficial;
-	}
-
-	public String getOriginalDefenderOfficial() {
-		return originalDefenderOfficial;
-	}
-
 
 }

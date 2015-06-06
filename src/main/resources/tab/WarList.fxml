@@ -135,9 +135,9 @@
 													 prefWidth="300.0" text="Name"
 													 fx:id="colNameWar"/>
 										<TableColumn minWidth="50.0" prefWidth="120.0"
-													 text="Attacker" fx:id="colAttackerWar"/>
+													 text="Original attacker" fx:id="colAttackerWar"/>
 										<TableColumn minWidth="50.0" prefWidth="120.0"
-													 text="Defender" fx:id="colDefenderWar"/>
+													 text="Original defender" fx:id="colDefenderWar"/>
 										<TableColumn minWidth="50.0" prefWidth="120.0"
 													 text="Casus belli" fx:id="colCasusBelliWar"/>
 										<TableColumn prefWidth="120.0" text="Start date"

@@ -14,6 +14,7 @@ import ee.tkasekamp.vickywaranalyzer.util.Localisation;
 import javafx.scene.image.Image;
 
 public class ModelServiceImpl implements ModelService {
+
 	private String date = "";
 	private String player = "";
 	private String startDate = "";
@@ -42,12 +43,8 @@ public class ModelServiceImpl implements ModelService {
 
 		/* Localisation */
 		// TODO multithreading
-		if (useLocalisation)
+		if (useLocalisation) {
 			Localisation.readLocalisation(utilServ.getInstallFolder(), countryTreeMap);
-		/* Finding official names for every country and battle */
-		// TODO try to optimise
-		for (War war : warList) {
-			setWarOfficialNames(war);
 		}
 		// TODO multithreading
 		try {
@@ -71,13 +68,12 @@ public class ModelServiceImpl implements ModelService {
 
 	@Override
 	public String getOfficialName(String tag) {
-		return countryTreeMap.get(tag).getOfficialName();
+		try {
+			return countryTreeMap.get(tag).getOfficialName();
+		} catch (NullPointerException e) {
+			return tag;
+		}
 
-	}
-
-	private void setWarOfficialNames(War war) {
-		war.setOfficialNames(getOfficialName(war.getOriginalAttacker()),
-				getOfficialName(war.getOriginalDefender()));
 	}
 
 	/**

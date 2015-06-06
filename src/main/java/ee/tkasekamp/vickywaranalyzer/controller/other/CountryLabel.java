@@ -1,4 +1,4 @@
-package ee.tkasekamp.vickywaranalyzer.controller;
+package ee.tkasekamp.vickywaranalyzer.controller.other;
 
 import ee.tkasekamp.vickywaranalyzer.core.Country;
 import javafx.scene.control.ContentDisplay;
