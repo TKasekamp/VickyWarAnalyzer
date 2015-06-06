@@ -1,5 +1,11 @@
 package ee.tkasekamp.vickywaranalyzer.service;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeMap;
+
 import ee.tkasekamp.vickywaranalyzer.core.Country;
 import ee.tkasekamp.vickywaranalyzer.core.JoinedCountry;
 import ee.tkasekamp.vickywaranalyzer.core.War;
@@ -7,14 +13,11 @@ import ee.tkasekamp.vickywaranalyzer.parser.Parser;
 import ee.tkasekamp.vickywaranalyzer.util.Localisation;
 import javafx.scene.image.Image;
 
-import java.io.IOException;
-import java.util.*;
-
 public class ModelServiceImpl implements ModelService {
 	private String date = "";
 	private String player = "";
 	private String startDate = "";
-	private ArrayList<Country> countryList;
+	private TreeMap<String, Country> countryTreeMap;
 	private ArrayList<War> warList;
 
 	private UtilService utilServ;
@@ -23,7 +26,7 @@ public class ModelServiceImpl implements ModelService {
 	public ModelServiceImpl(UtilService utilServ) {
 		this.utilServ = utilServ;
 		parser = new Parser(this);
-		countryList = new ArrayList<>();
+		countryTreeMap = new TreeMap();
 	}
 
 	@Override
@@ -40,7 +43,7 @@ public class ModelServiceImpl implements ModelService {
 		/* Localisation */
 		// TODO multithreading
 		if (useLocalisation)
-			Localisation.readLocalisation(utilServ.getInstallFolder(), countryList);
+			Localisation.readLocalisation(utilServ.getInstallFolder(), countryTreeMap);
 		/* Finding official names for every country and battle */
 		// TODO try to optimise
 		for (War war : warList) {
@@ -53,9 +56,8 @@ public class ModelServiceImpl implements ModelService {
 			return "Couldn't write to file";
 		}
 		// TODO multithreading
-		for (Country country : countryList) {
-			country.setFlag(utilServ.loadFlag(country.getTag()));
-		}
+		countryTreeMap.forEach((tag, country) -> country.setFlag(utilServ.loadFlag(tag)));
+
 		return "Everything is OK";
 	}
 
@@ -64,17 +66,12 @@ public class ModelServiceImpl implements ModelService {
 		date = "";
 		player = "";
 		startDate = "";
-		countryList.clear();
+		countryTreeMap.clear();
 	}
 
 	@Override
 	public String getOfficialName(String tag) {
-		for (Country country : countryList) {
-			if (country.getTag().equals(tag)) {
-				return country.getOfficialName();
-			}
-		}
-		return tag;
+		return countryTreeMap.get(tag).getOfficialName();
 
 	}
 
@@ -87,26 +84,13 @@ public class ModelServiceImpl implements ModelService {
 	 * Creating a list that will contain every unique country.
 	 */
 	private void createUniqueCountryList() {
-		// TODO try to optimise
-		/* Adding all countries to a set to get only unique ones */
 		Set<String> set = new HashSet<>();
 		for (War item : warList) {
 			for (JoinedCountry country : item.getCountryList()) {
 				set.add(country.getTag());
 			}
 		}
-		/* This list is used to arrange the countries alphabetically */
-		List<String> tempcountrylist = new ArrayList<>();
-		/* From set to list */
-		for (String strin : set) {
-			tempcountrylist.add(strin);
-		}
-		Collections.sort(tempcountrylist);
-
-		// Adding to countryList
-		for (String tag : tempcountrylist) {
-			countryList.add(new Country(tag));
-		}
+		set.forEach(x -> countryTreeMap.put(x, new Country(x)));
 
 	}
 
@@ -149,8 +133,8 @@ public class ModelServiceImpl implements ModelService {
 	}
 
 	@Override
-	public ArrayList<Country> getCountries() {
-		return countryList;
+	public TreeMap<String, Country> getCountries() {
+		return countryTreeMap;
 	}
 
 	@Override
@@ -170,12 +154,7 @@ public class ModelServiceImpl implements ModelService {
 
 	@Override
 	public Image getFlag(String tag) {
-		for (Country country : countryList) {
-			if (country.getTag().equals(tag)) {
-				return country.getFlag();
-			}
-		}
-		return null;
+		return countryTreeMap.get(tag).getFlag();
 	}
 
 }

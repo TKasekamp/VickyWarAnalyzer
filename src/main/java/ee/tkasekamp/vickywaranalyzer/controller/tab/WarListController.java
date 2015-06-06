@@ -1,7 +1,9 @@
 package ee.tkasekamp.vickywaranalyzer.controller.tab;
 
+import java.util.stream.Collectors;
+
+import ee.tkasekamp.vickywaranalyzer.controller.CountryLabel;
 import ee.tkasekamp.vickywaranalyzer.controller.MainController;
-import ee.tkasekamp.vickywaranalyzer.core.Country;
 import ee.tkasekamp.vickywaranalyzer.core.JoinedCountry;
 import ee.tkasekamp.vickywaranalyzer.core.War;
 import ee.tkasekamp.vickywaranalyzer.service.ModelService;
@@ -10,11 +12,13 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
-
-import java.util.stream.Collectors;
 
 public class WarListController extends AbstractController {
 
@@ -28,7 +32,7 @@ public class WarListController extends AbstractController {
 	private Label currentDateLabel;
 
 	@FXML
-	private ListView<Label> selectCountryIssue;
+	private ListView<CountryLabel> selectCountryIssue;
 
 	@FXML
 	private Button showAllWarsIssue;
@@ -77,11 +81,11 @@ public class WarListController extends AbstractController {
 
 		selectCountryIssue.getSelectionModel().selectedItemProperty()
 				.addListener((arg0, arg1, arg2) -> {
-					warTableShowCountry(arg2.getText());
+					warTableShowCountry(arg2.getTag());
 				});
 		/* Listening to selections in warTable */
-		final ObservableList<War> warTableSelection = warTable
-				.getSelectionModel().getSelectedItems();
+		final ObservableList<War> warTableSelection =
+				warTable.getSelectionModel().getSelectedItems();
 		warTableSelection.addListener(tableSelectionChanged);
 
 		warTable.setItems(warTableContent);
@@ -132,23 +136,12 @@ public class WarListController extends AbstractController {
 
 	private void setColumnValues() {
 		/* Connecting the War fields with warTable columns */
-		colNameWar.setCellValueFactory(new PropertyValueFactory<>(
-				"name"));
-		colAttackerWar
-				.setCellValueFactory(new PropertyValueFactory<>(
-						"originalAttackerOfficial"));
-		colDefenderWar
-				.setCellValueFactory(new PropertyValueFactory<>(
-						"originalDefenderOfficial"));
-		colCasusBelliWar
-				.setCellValueFactory(new PropertyValueFactory<>(
-						"casus_belli"));
-		colStartDateWar
-				.setCellValueFactory(new PropertyValueFactory<>(
-						"startDate"));
-		colEndDateWar
-				.setCellValueFactory(new PropertyValueFactory<>(
-						"endDate"));
+		colNameWar.setCellValueFactory(new PropertyValueFactory<>("name"));
+		colAttackerWar.setCellValueFactory(new PropertyValueFactory<>("originalAttackerOfficial"));
+		colDefenderWar.setCellValueFactory(new PropertyValueFactory<>("originalDefenderOfficial"));
+		colCasusBelliWar.setCellValueFactory(new PropertyValueFactory<>("casus_belli"));
+		colStartDateWar.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+		colEndDateWar.setCellValueFactory(new PropertyValueFactory<>("endDate"));
 	}
 
 	private void warTablePopulateAll() {
@@ -159,12 +152,14 @@ public class WarListController extends AbstractController {
 
 	private void warTableShowActive() {
 		warTableContent.clear();
-		warTableContent.addAll(modelServ.getWars().stream().filter(item -> item.isActive()).collect(Collectors.toList()));
+		warTableContent.addAll(modelServ.getWars().stream().filter(item -> item.isActive())
+				.collect(Collectors.toList()));
 	}
 
 	private void warTableShowPrevious() {
 		warTableContent.clear();
-		warTableContent.addAll(modelServ.getWars().stream().filter(item -> !item.isActive()).collect(Collectors.toList()));
+		warTableContent.addAll(modelServ.getWars().stream().filter(item -> !item.isActive())
+				.collect(Collectors.toList()));
 	}
 
 	private void warTableShowMyWars() {
@@ -183,9 +178,7 @@ public class WarListController extends AbstractController {
 		warTableContent.clear();
 		for (War item : modelServ.getWars()) {
 			for (JoinedCountry country : item.getCountryList()) {
-				if (modelServ.getOfficialName(country.getTag()).equals(tag)) {
-					warTableContent.add(item);
-				} else if (country.getTag().equals(tag)) {
+				if (country.getTag().equals(tag)) {
 					warTableContent.add(item);
 				}
 			}
@@ -194,26 +187,17 @@ public class WarListController extends AbstractController {
 	}
 
 	private void populateCountryList() {
+		modelServ.getCountries()
+				.forEach((tag, x) -> selectCountryIssue.getItems().add(new CountryLabel(x)));
 
-		for (Country country : modelServ.getCountries()) {
-			ImageView iv2 = new ImageView(country.getFlag());
-
-			iv2.setFitWidth(32); // 30 to 35 looks good
-			iv2.setPreserveRatio(true);
-			iv2.setSmooth(true);
-			iv2.setCache(true);
-
-			Label label = new Label(country.getOfficialName(), iv2);
-			label.setContentDisplay(ContentDisplay.LEFT);
-			selectCountryIssue.getItems().add(label);
-		}
 	}
 
 	private ListChangeListener<War> tableSelectionChanged = new ListChangeListener<War>() {
 		@Override
 		public void onChanged(Change<? extends War> c) {
 			if (!warTable.getSelectionModel().getSelectedItems().isEmpty()) {
-				main.populateWarTab((War) warTable.getSelectionModel().getSelectedItems().toArray()[0]);
+				main.populateWarTab(
+						(War) warTable.getSelectionModel().getSelectedItems().toArray()[0]);
 			}
 		}
 

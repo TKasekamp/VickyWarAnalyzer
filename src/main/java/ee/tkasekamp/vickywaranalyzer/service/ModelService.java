@@ -1,11 +1,12 @@
 package ee.tkasekamp.vickywaranalyzer.service;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.TreeMap;
+
 import ee.tkasekamp.vickywaranalyzer.core.Country;
 import ee.tkasekamp.vickywaranalyzer.core.War;
 import javafx.scene.image.Image;
-
-import java.io.IOException;
-import java.util.ArrayList;
 
 public interface ModelService {
 	/**
@@ -43,7 +44,7 @@ public interface ModelService {
 
 	public Image getFlag(String tag);
 
-	public ArrayList<Country> getCountries();
+	public TreeMap<String, Country> getCountries();
 
 	public ArrayList<War> getWars();
 
