@@ -46,6 +46,67 @@ public class War {
 
 	}
 
+	/**
+	 * Calculate the losses for this war. Iterates through every battle and adds the losses for the
+	 * war's attacker and defender.
+	 *
+	 * @return <code>int[]{attackerTotalLosses, attackerTotalShipLosses, defenderTotalLosses,
+	 * defenderTotalShipLosses}</code>
+	 */
+	public int[] getLosses() {
+
+		int attackerTotalLosses = 0;
+		int attackerTotalShipLosses = 0;
+		int defenderTotalLosses = 0;
+		int defenderTotalShipLosses = 0;
+
+		/*
+		 * The most complicated for loop EVER. If you want to change it, good
+		 * luck. Basically it looks at the battleList and compares the attacker
+		 * and defender to the countryList. It also checks if the battle was
+		 * land or naval and adds them to the total.
+		 */
+		for (Battle battle : battleList) {
+			for (JoinedCountry joinedCountry : joinedCountryList) {
+				if (battle.getAttacker().equals(joinedCountry.getTag())) {
+					if (joinedCountry.isJoinType()) {
+						if (battle.getBattleType() == Battle.Type.LAND) {
+							attackerTotalLosses += battle.getAttackerLosses();
+						} else {
+							attackerTotalShipLosses += battle.getAttackerLosses();
+						}
+					} else {
+						if (battle.getBattleType() == Battle.Type.LAND) {
+							defenderTotalLosses += battle.getDefenderLosses();
+						} else {
+							defenderTotalShipLosses += battle.getDefenderLosses();
+						}
+					}
+
+				}
+
+				if (battle.getDefender().equals(joinedCountry.getTag())) {
+					if (joinedCountry.isJoinType()) {
+						if (battle.getBattleType() == Battle.Type.LAND) {
+							attackerTotalLosses += battle.getAttackerLosses();
+						} else {
+							attackerTotalShipLosses += battle.getAttackerLosses();
+						}
+					} else {
+						if (battle.getBattleType() == Battle.Type.LAND) {
+							defenderTotalLosses += battle.getDefenderLosses();
+						} else {
+							defenderTotalShipLosses += battle.getDefenderLosses();
+						}
+					}
+				}
+			}
+		}
+
+		return new int[]{attackerTotalLosses, attackerTotalShipLosses, defenderTotalLosses,
+				defenderTotalShipLosses};
+	}
+
 	public String getName() {
 		return name;
 	}

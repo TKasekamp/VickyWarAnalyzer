@@ -214,77 +214,19 @@ public class WarDetailsController extends AbstractController {
 	 * Sets labels for losses
 	 */
 	private void lossesPopulate(War war) {
-
-		int attackerTotalLosses = 0;
-		int attackerTotalShipLosses = 0;
-		int defenderTotalLosses = 0;
-		int defenderTotalShipLosses = 0;
-
-		/*
-		 * The most complicated for loop EVER. If you want to change it, good
-		 * luck. Basically it looks at the battleList and compares the attacker
-		 * and defender to the countryList. It also checks if the battle was
-		 * land or naval and adds them to the total.
-		 */
-		for (Battle battle : war.getBattleList()) {
-			for (int i = 0; i < war.getCountryList().length; i++) {
-				if (battle.getAttacker().equals(
-						war.getCountryList()[i].getTag())) {
-					if (war.getCountryList()[i].isJoinType()) {
-						if (battle.getBattleType() == Type.LAND) {
-							attackerTotalLosses = attackerTotalLosses
-									+ battle.getAttackerLosses();
-						} else {
-							attackerTotalShipLosses = attackerTotalShipLosses
-									+ battle.getAttackerLosses();
-						}
-					} else {
-						if (battle.getBattleType() == Type.LAND) {
-							defenderTotalLosses = defenderTotalLosses
-									+ battle.getDefenderLosses();
-						} else {
-							defenderTotalShipLosses = defenderTotalShipLosses
-									+ battle.getDefenderLosses();
-						}
-					}
-
-				}
-
-				if (battle.getDefender().equals(
-						war.getCountryList()[i].getTag())) {
-					if (war.getCountryList()[i].isJoinType()) {
-						if (battle.getBattleType() == Type.LAND) {
-							attackerTotalLosses = attackerTotalLosses
-									+ battle.getAttackerLosses();
-						} else {
-							attackerTotalShipLosses = attackerTotalShipLosses
-									+ battle.getAttackerLosses();
-						}
-					} else {
-						if (battle.getBattleType() == Type.LAND) {
-							defenderTotalLosses = defenderTotalLosses
-									+ battle.getDefenderLosses();
-						} else {
-							defenderTotalShipLosses = defenderTotalShipLosses
-									+ battle.getDefenderLosses();
-						}
-					}
-				}
-			}
-
-		}
+		int [] losses = war.getLosses();
 
 		/* Attacker losses */
-		attackerBoxController.setTotalLosses(attackerTotalLosses,
-				attackerTotalShipLosses);
+		attackerBoxController.setTotalLosses(losses[0],
+				losses[1]);
 		/* Defender losses */
-		defenderBoxController.setTotalLosses(defenderTotalLosses,
-				defenderTotalShipLosses);
+		defenderBoxController.setTotalLosses(losses[2],
+				losses[3]);
 		/* Total losses */
-		warTotalLossesLabel.setText(Integer.toString(attackerTotalLosses
-				+ defenderTotalLosses));
+		warTotalLossesLabel.setText(Integer.toString(losses[0]
+				+ losses[2]));
 		warTotalShipLossesLabel.setText(Integer
-				.toString(attackerTotalShipLosses + defenderTotalShipLosses));
+				.toString(losses[1] + losses[3]));
 
 	}
 
