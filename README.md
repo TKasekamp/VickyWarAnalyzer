@@ -5,8 +5,8 @@ Or the full name Victoria II save game war analyzer. Naming stuff is hard.
 Paradox forum thread: [link](https://forum.paradoxplaza.com/forum/index.php?threads/tool-victoria-ii-save-game-war-analyzer.689055/)
 
 ## Download links
-* Version 1.0.1 that works with Java 7 [link](http://bit.ly/1Q9VicX)
-* New version 1.2.1 that works with Java 8 [link](http://bit.ly/1aKLrtk)
+* Version 1.0.1 that works with Java 7 [link](http://bit.ly/2iMy2L0)
+* New version 1.2.1 that works with Java 8 [link](http://bit.ly/2esre3N)
 * Or you can look inside the dist folder for all the versions. 
 
 ## What is it
