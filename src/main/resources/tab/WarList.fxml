@@ -144,6 +144,8 @@
 													 fx:id="colStartDateWar"/>
 										<TableColumn minWidth="50.0" prefWidth="120.0"
 													 text="End date" fx:id="colEndDateWar"/>
+										<TableColumn minWidth="50.0" prefWidth="120.0"
+													 text="Total losses" fx:id="colCasualtiesWar"/>
 									</columns>
 									<HBox.margin>
 										<Insets bottom="5.0" left="5.0" right="5.0" top="5.0"

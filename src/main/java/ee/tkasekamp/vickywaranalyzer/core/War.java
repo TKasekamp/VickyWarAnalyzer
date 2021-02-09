@@ -230,4 +230,8 @@ public class War {
 		return originalWarGoal;
 	}
 
+	public int getCasualties() {
+		int[] casualties = this.getLosses();
+		return casualties[0] + casualties[2];
+	}
 }

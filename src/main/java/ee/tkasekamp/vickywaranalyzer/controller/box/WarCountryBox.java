@@ -49,6 +49,9 @@ public class WarCountryBox extends AbstractController {
 	private TableColumn<ObservableJoinedCountry, String> colEndDate;
 
 	@FXML
+	private TableColumn<ObservableJoinedCountry, String> colLossesUnderCommand;
+
+	@FXML
 	private Label warHelper;
 
 	@FXML
@@ -69,6 +72,7 @@ public class WarCountryBox extends AbstractController {
 		colFlag.setCellValueFactory(new PropertyValueFactory<>("flag"));
 		colStartDate.setCellValueFactory(new PropertyValueFactory<>("joinDate"));
 		colEndDate.setCellValueFactory(new PropertyValueFactory<>("endDate"));
+		colLossesUnderCommand.setCellValueFactory(new PropertyValueFactory<>("lossesUnderCommand"));
 		setHelperLabels(side);
 	}
 
@@ -109,7 +113,6 @@ public class WarCountryBox extends AbstractController {
 			warHelper.setVisible(true);
 		}
 	}
-
 	/**
 	 * Filters all countries in joinedCountries that have a specific joinType. Then adds them to the
 	 * table.
