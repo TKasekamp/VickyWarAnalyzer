@@ -83,12 +83,12 @@ public class WarCountryBox extends AbstractController {
 
 	public void populate(War war) {
 		reset();
-		if (side == "Attacker") {
+		if (side.equals("Attacker")) {
 			populateHelper(war.getAttacker(), war.getOriginalAttacker());
-			populateTable(war.getCountryList(), true);
+			populateTable(war.getCountryList(), true, war);
 		} else {
 			populateHelper(war.getDefender(), war.getOriginalDefender());
-			populateTable(war.getCountryList(), false);
+			populateTable(war.getCountryList(), false, war);
 		}
 	}
 
@@ -119,12 +119,14 @@ public class WarCountryBox extends AbstractController {
 	 * @param joinType
 	 * 		true for attacker, false for defender.
 	 */
-	private void populateTable(JoinedCountry[] joinedCountries, boolean joinType) {
+	private void populateTable(JoinedCountry[] joinedCountries, boolean joinType, War war) {
 		Arrays.stream(joinedCountries).filter(x -> joinType == x.isAttacker()).forEach(
 				x -> tableContent
 						.add(new ObservableJoinedCountry(modelService.getOfficialName(x.getTag()),
-								modelService.getFlag(x.getTag()), x.getStartDate(),
-								x.getEndDate())));
+								modelService.getFlag(x.getTag()),
+								x.getStartDate(),
+								x.getEndDate(),
+								war.getCountryLosses(x))));
 
 		/* Adding the countries to table */
 		table.setItems(tableContent);

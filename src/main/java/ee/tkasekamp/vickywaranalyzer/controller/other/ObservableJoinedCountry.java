@@ -8,13 +8,14 @@ public class ObservableJoinedCountry {
 	private ImageView flag;
 	private String joinDate = "";
 	private String endDate = "";
-
-	public ObservableJoinedCountry(String officialName, Image flag, String joinDate, String endDate) {
+	private int[] lossesUnderCommand;
+	public ObservableJoinedCountry(String officialName, Image flag, String joinDate, String endDate, int[] losses) {
 		super();
 		this.officialName = officialName;
 		this.flag = new ImageView(flag);
 		this.joinDate = joinDate;
 		this.endDate = endDate;
+		this.lossesUnderCommand = losses;
 		this.flag.setFitWidth(32); // 30 to 35 look good
 		this.flag.setPreserveRatio(true);
 		this.flag.setSmooth(true);
@@ -35,5 +36,13 @@ public class ObservableJoinedCountry {
 
 	public String getEndDate() {
 		return endDate;
+	}
+
+	public long getLossesUnderCommand() {
+		return lossesUnderCommand[0];
+	}
+
+	public int getShipLossesUnderCommand() {
+		return lossesUnderCommand[1];
 	}
 }
