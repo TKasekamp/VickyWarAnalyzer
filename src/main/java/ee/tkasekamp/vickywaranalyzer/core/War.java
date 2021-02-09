@@ -69,7 +69,7 @@ public class War {
 		for (Battle battle : battleList) {
 			for (JoinedCountry joinedCountry : joinedCountryList) {
 				if (battle.getAttacker().equals(joinedCountry.getTag())) {
-					if (joinedCountry.isJoinType()) {
+					if (joinedCountry.isAttacker()) {
 						if (battle.getBattleType() == Battle.Type.LAND) {
 							attackerTotalLosses += battle.getAttackerLosses();
 						} else {
@@ -86,7 +86,7 @@ public class War {
 				}
 
 				if (battle.getDefender().equals(joinedCountry.getTag())) {
-					if (joinedCountry.isJoinType()) {
+					if (joinedCountry.isAttacker()) {
 						if (battle.getBattleType() == Battle.Type.LAND) {
 							attackerTotalLosses += battle.getAttackerLosses();
 						} else {

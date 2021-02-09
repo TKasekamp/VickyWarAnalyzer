@@ -5,22 +5,22 @@ package ee.tkasekamp.vickywaranalyzer.core;
  */
 public class JoinedCountry {
 	private String tag = "";
-	private boolean joinType; // True is attacker, false is defender
+	private boolean isAttacker; // True is attacker, false is defender
 	private String startDate = "";
 	private String endDate = "";
 
 
-	public JoinedCountry(String tag, boolean joinType, String startDate) {
+	public JoinedCountry(String tag, boolean isAttacker, String startDate) {
 		super();
 		this.tag = tag;
-		this.joinType = joinType;
+		this.isAttacker = isAttacker;
 		this.startDate = startDate;
 	}
 
 
 	@Override
 	public String toString() {
-		return "JoinedCountry [tag=" + tag + ", joinType=" + joinType
+		return "JoinedCountry [tag=" + tag + ", joinType=" + isAttacker
 				+ ", startDate=" + startDate + ", endDate=" + endDate + "]";
 	}
 
@@ -35,13 +35,13 @@ public class JoinedCountry {
 	}
 
 
-	public boolean isJoinType() {
-		return joinType;
+	public boolean isAttacker() {
+		return isAttacker;
 	}
 
 
-	public void setJoinType(boolean joinType) {
-		this.joinType = joinType;
+	public void setAttacker(boolean attacker) {
+		this.isAttacker = attacker;
 	}
 
 

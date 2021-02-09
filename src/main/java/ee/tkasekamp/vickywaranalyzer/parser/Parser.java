@@ -215,7 +215,7 @@ public class Parser {
 			/* Checking required for some older wars */
 			if (line.equals("---")) {
 				for (JoinedCountry country : countryList) {
-					if (country.isJoinType()) {
+					if (country.isAttacker()) {
 						warList.get(WAR_COUNTER).setOriginalAttacker(country.getTag());
 						break;
 					}
@@ -229,7 +229,7 @@ public class Parser {
 			/* Checking required for some older wars */
 			if (line.equals("---")) {
 				for (JoinedCountry country : countryList) {
-					if (!country.isJoinType()) {
+					if (!country.isAttacker()) {
 						warList.get(WAR_COUNTER).setOriginalDefender(country.getTag());
 						break;
 					}

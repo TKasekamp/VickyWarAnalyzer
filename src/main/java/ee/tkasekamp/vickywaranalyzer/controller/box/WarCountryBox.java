@@ -120,7 +120,7 @@ public class WarCountryBox extends AbstractController {
 	 * 		true for attacker, false for defender.
 	 */
 	private void populateTable(JoinedCountry[] joinedCountries, boolean joinType) {
-		Arrays.stream(joinedCountries).filter(x -> joinType == x.isJoinType()).forEach(
+		Arrays.stream(joinedCountries).filter(x -> joinType == x.isAttacker()).forEach(
 				x -> tableContent
 						.add(new ObservableJoinedCountry(modelService.getOfficialName(x.getTag()),
 								modelService.getFlag(x.getTag()), x.getStartDate(),
