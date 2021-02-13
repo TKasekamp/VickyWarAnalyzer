@@ -68,6 +68,9 @@ public class WarListController extends AbstractController {
 	@FXML
 	private TableColumn<War, String> colEndDateWar;
 
+	@FXML
+	private TableColumn<War, String> colCasualtiesWar;
+
 	private Tab tab;
 
 	private MainController main;
@@ -145,6 +148,7 @@ public class WarListController extends AbstractController {
 		colCasusBelliWar.setCellValueFactory(new PropertyValueFactory<>("casus_belli"));
 		colStartDateWar.setCellValueFactory(new PropertyValueFactory<>("startDate"));
 		colEndDateWar.setCellValueFactory(new PropertyValueFactory<>("endDate"));
+		colCasualtiesWar.setCellValueFactory(new PropertyValueFactory<>("casualties"));
 	}
 
 	private void warTablePopulateAll() {

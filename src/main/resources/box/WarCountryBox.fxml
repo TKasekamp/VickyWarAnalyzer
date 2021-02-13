@@ -45,9 +45,10 @@
 				   GridPane.rowIndex="5">
 			<columns>
 				<TableColumn fx:id="colFlag" prefWidth="50.0" text="Flag"/>
-				<TableColumn fx:id="colName" prefWidth="90.0" text="Country"/>
-				<TableColumn fx:id="colStartDate" prefWidth="88.0" text="Join date"/>
-				<TableColumn fx:id="colEndDate" prefWidth="88.0" text="End Date"/>
+				<TableColumn fx:id="colName" prefWidth="50.0" text="Country"/>
+				<TableColumn fx:id="colStartDate" prefWidth="63.0" text="Join date"/>
+				<TableColumn fx:id="colEndDate" prefWidth="63.0" text="End Date"/>
+				<TableColumn fx:id="colLossesUnderCommand" prefWidth="88.0" text="Losses"/>
 			</columns>
 		</TableView>
 		<HBox id="HBox" alignment="CENTER" prefHeight="30.0" prefWidth="207.0" spacing="5.0"

@@ -47,8 +47,41 @@ public class War {
 	}
 
 	/**
-	 * Calculate the losses for this war. Iterates through every battle and adds the losses for the
-	 * war's attacker and defender.
+	 * Calculate the losses for a country in this war.
+	 * Iterates through every battle and returns a sum of the total man and ship losses.
+	 *
+	 * @return <code>int[]{countryTotalLosses, countryTotalShipLosses}</code>
+	 */
+	public int[] getCountryLosses(JoinedCountry joinedCountry) {
+		int countryTotalLosses = 0;
+		int countryTotalShipLosses = 0;
+
+		/* Goes through each battle in the war and calculates the total losses for the given country */
+
+		for (Battle battle : battleList) { //for each battle
+			if (battle.getAttacker().equals(joinedCountry.getTag())) { //checks if said country attacked in the battle
+				if (battle.getBattleType() == Battle.Type.LAND) {
+					countryTotalLosses += battle.getAttackerLosses();
+				} else {
+					countryTotalShipLosses += battle.getAttackerLosses();
+				}
+			}
+
+			if (battle.getDefender().equals(joinedCountry.getTag())) { // (missing else?) checks if said country is a defender in the battle
+				if (battle.getBattleType() == Battle.Type.LAND) {
+					countryTotalLosses += battle.getDefenderLosses();
+				} else {
+					countryTotalShipLosses += battle.getDefenderLosses();
+				}
+			}
+		}
+
+		return new int[]{countryTotalLosses, countryTotalShipLosses};
+	}
+
+	/**
+	 * Calculate the losses for this war.
+	 * Iterates through every country and adds its losses to the attacking or defending side.
 	 *
 	 * @return <code>int[]{attackerTotalLosses, attackerTotalShipLosses, defenderTotalLosses,
 	 * defenderTotalShipLosses}</code>
@@ -61,48 +94,19 @@ public class War {
 		int defenderTotalShipLosses = 0;
 
 		/*
-		 * The most complicated for loop EVER. If you want to change it, good
-		 * luck. Basically it looks at the battleList and compares the attacker
-		 * and defender to the countryList. It also checks if the battle was
-		 * land or naval and adds them to the total.
-		 */
-		for (Battle battle : battleList) {
-			for (JoinedCountry joinedCountry : joinedCountryList) {
-				if (battle.getAttacker().equals(joinedCountry.getTag())) {
-					if (joinedCountry.isJoinType()) {
-						if (battle.getBattleType() == Battle.Type.LAND) {
-							attackerTotalLosses += battle.getAttackerLosses();
-						} else {
-							attackerTotalShipLosses += battle.getAttackerLosses();
-						}
-					} else {
-						if (battle.getBattleType() == Battle.Type.LAND) {
-							defenderTotalLosses += battle.getDefenderLosses();
-						} else {
-							defenderTotalShipLosses += battle.getDefenderLosses();
-						}
-					}
-
-				}
-
-				if (battle.getDefender().equals(joinedCountry.getTag())) {
-					if (joinedCountry.isJoinType()) {
-						if (battle.getBattleType() == Battle.Type.LAND) {
-							attackerTotalLosses += battle.getAttackerLosses();
-						} else {
-							attackerTotalShipLosses += battle.getAttackerLosses();
-						}
-					} else {
-						if (battle.getBattleType() == Battle.Type.LAND) {
-							defenderTotalLosses += battle.getDefenderLosses();
-						} else {
-							defenderTotalShipLosses += battle.getDefenderLosses();
-						}
-					}
-				}
+		Goes through each country that participated in the war and adds its losses to either the attacking
+		or the defending side, depending on which side it was on
+		*/
+		for (JoinedCountry joinedCountry : joinedCountryList) {
+			int[] countryLosses = getCountryLosses(joinedCountry);
+			if (joinedCountry.isAttacker()) {
+				attackerTotalLosses += countryLosses[0];
+				attackerTotalShipLosses += countryLosses[1];
+			} else {
+				defenderTotalLosses += countryLosses[0];
+				defenderTotalShipLosses += countryLosses[1];
 			}
 		}
-
 		return new int[]{attackerTotalLosses, attackerTotalShipLosses, defenderTotalLosses,
 				defenderTotalShipLosses};
 	}
@@ -226,4 +230,8 @@ public class War {
 		return originalWarGoal;
 	}
 
+	public int getCasualties() {
+		int[] casualties = this.getLosses();
+		return casualties[0] + casualties[2];
+	}
 }
