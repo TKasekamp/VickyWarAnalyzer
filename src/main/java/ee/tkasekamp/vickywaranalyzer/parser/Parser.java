@@ -79,7 +79,7 @@ public class Parser {
 		WARGOAL_COUNTER = 0;
 		bracketCounter = 0;
 
-		InputStreamReader reader = new InputStreamReader(new FileInputStream(saveGamePath), "ISO8859_1"); // This encoding seems to work for ö
+		InputStreamReader reader = new InputStreamReader(new FileInputStream(saveGamePath), "windows-1251"); // This encoding seems to work for ö
 		BufferedReader scanner = new BufferedReader(reader);
 
 		String line;

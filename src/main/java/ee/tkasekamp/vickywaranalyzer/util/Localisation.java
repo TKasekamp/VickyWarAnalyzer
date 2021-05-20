@@ -39,7 +39,7 @@ public class Localisation {
 			throws IOException {
 		/* The same reader as in SaveGameReader */
 		InputStreamReader reader = new InputStreamReader(new FileInputStream(filename),
-				"ISO8859_1"); // This encoding seems to work for ö
+				"windows-1251"); // This encoding seems to work for ö
 		// and ü
 		BufferedReader scanner = new BufferedReader(reader);
 
